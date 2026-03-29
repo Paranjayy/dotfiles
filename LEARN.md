@@ -4,6 +4,76 @@
 
 ---
 
+## 🤔 What Is What?
+
+Before diving in, here's what each tool actually does in plain English:
+
+### Shell Layer
+
+| What | What It Does | Why You Have It |
+|------|--------------|-----------------|
+| **Zsh** | Your terminal shell - the thing that runs commands | Better than bash: plugins, smarter completions, history |
+| **Zinit** | Installs Zsh plugins | Fast plugin loader, lazy loads everything |
+| **Starship** | Pretty prompt with info | Shows git branch, exit codes, language versions |
+| **FZF** | Fuzzy search anything | Ctrl+R to find any command, Ctrl+T to find any file |
+| **Zoxide** | Smarter `cd` | Remembers where you go, `z proj` jumps to ~/projects |
+| **direnv** | Per-directory env vars | Load `.env` files automatically per project |
+
+### Terminal Layer
+
+| What | What It Does | Why You Have It |
+|------|--------------|-----------------|
+| **Ghostty** | Terminal app (renders text) | Fast, GPU-accelerated, starts tmux automatically |
+| **Tmux** | Terminal multiplexer | Multiple panes/windows, sessions persist after close |
+| **Tmux TPM** | Tmux plugin manager | Installs resurrect, continuum, cpu plugins |
+| **Tmux Resurrect** | Save/restore sessions | Close laptop, reopen tmux, everything's back |
+| **Tmux Continuum** | Auto-save sessions | Never lose your work |
+
+### Editor Layer
+
+| What | What It Does | Why You Have It |
+|------|--------------|-----------------|
+| **Neovim** | Terminal text editor | Like Vim but modern, plugins, LSP, etc. |
+| **LazyVim** | Neovim config framework | Pre-configured plugins, no manual setup |
+| **Zed** | GUI editor | Fast, native, vim mode |
+| **Copilot** | AI code completion | Autocomplete powered by AI |
+
+### CLI Tools
+
+| What | What It Does | Replaces |
+|------|--------------|----------|
+| **eza** | Lists files with icons/colors | `ls` |
+| **bat** | Cat with syntax highlighting | `cat` |
+| **fd** | Fast file finder | `find` |
+| **ripgrep** | Blazing fast text search | `grep` |
+| **delta** | Better git diffs | `diff` |
+| **lazygit** | Git TUI (terminal UI) | Complex git commands |
+| **dust** | Visual disk usage | `du` |
+| **duf** | Pretty disk space | `df` |
+| **hyperfine** | Benchmark commands | `time` |
+| **httpie** | Pretty HTTP client | `curl` |
+
+### System Tools
+
+| What | What It Does | Why You Have It |
+|------|--------------|-----------------|
+| **Fastfetch** | Shows system info on startup | Cool + useful (see RAM, CPU, uptime) |
+| **Karabiner** | Remap keyboard keys | Hyper key (Caps→Ctrl+Opt+Shift+Cmd) |
+| **OmniWM** | Tiling window manager | Auto-arranges windows, keyboard-driven |
+| **Wakatime** | Time tracking | Tracks coding time automatically |
+| **Gopass** | Password manager | CLI-based, Git-backed, encrypted |
+
+### AI Tools
+
+| What | What It Does | Why You Have It |
+|------|--------------|-----------------|
+| **OpenCode** | AI coding assistant | Like Cursor but terminal-based |
+| **Antigravity Auth** | OpenCode ↔ Google OAuth | Access Gemini, Claude via Google |
+| **Gemini CLI** | Google's AI in terminal | Alternative to ChatGPT |
+| **Agents (.agents/)** | Design skill pack | 20 skills for UI/UX improvements |
+
+---
+
 ## Zsh Shell
 
 ### Custom Functions
@@ -18,13 +88,13 @@ extract archive.tar.gz
 extract file.zip
 extract package.deb
 
-# Countdown to date
-remaining_days 2026-08-13
-# → Shows "47 days --> Saturday, August 13, 2026"
-
 # Check if command exists
 command_exists docker
 # → returns 0 if exists, 1 if not
+
+# Countdown to date
+remaining_days 2026-08-13
+# → Shows "47 days --> Saturday, August 13, 2026"
 ```
 
 ### Adding Aliases
@@ -49,6 +119,10 @@ Then: `source ~/.zshrc`
 ---
 
 ## FZF (Fuzzy Finder)
+
+### What Is FZF?
+
+FZF lets you fuzzy-find anything. Type partial names and it shows matches. Used everywhere in this setup.
 
 ### Built-in Shortcuts
 
@@ -75,6 +149,13 @@ cd src/**<Tab>
 ---
 
 ## Tmux
+
+### What Is Tmux?
+
+Tmux = Terminal Multiplexer. Lets you:
+- Split terminal into panes (like VS Code panels)
+- Have multiple windows (like browser tabs)
+- **Detach and reattach** (close laptop, reopen tmux, everything's still there)
 
 ### Daily Commands
 
@@ -143,45 +224,59 @@ tl             # List all sessions
 
 ---
 
-## Git
-
-### Aliases (in .gitconfig)
-
-```bash
-git st     # status
-git co     # checkout
-git br     # branch
-git ci     # commit
-git lg     # log --oneline --graph --decorate
-```
-
-### Commit Signing
-
-All commits are GPG signed. Make sure your GPG key is configured:
-
-```bash
-gpg --list-secret-keys
-# Should show key 35A408247C801F80
-```
-
----
-
 ## Neovim (LazyVim)
+
+### What Is Neovim?
+
+Neovim = Modern version of Vim. Terminal-based text editor with plugins, LSP (code intelligence), treesitter (better syntax).
+
+### What Is LazyVim?
+
+LazyVim = Pre-configured Neovim. Instead of spending days configuring, you get:
+- Auto-completion
+- Git integration
+- File tree
+- Fuzzy finder
+- LSP (go-to-definition, hover docs, etc.)
+- 100+ plugins managed by `lazy.nvim`
+
+### First Time Setup
+
+```bash
+# Open nvim - it will auto-install plugins
+nvim
+
+# Wait for Lazy to sync plugins
+# Press any key when done
+
+# Open file tree
+<Space> e
+
+# Find files
+<Space> ff
+
+# Search in project
+<Space> sg
+
+# Find references
+<Space> gr
+```
 
 ### Key Mappings
 
 | Key | Action |
 |-----|--------|
-| `Space` | Leader key |
+| `Space` | Leader key (opens command palette) |
 | `Space ff` | Find files |
 | `Space fb` | Find buffers |
-| `Space sg` | Search grep |
-| `Space /` | Search in file |
+| `Space sg` | Search grep (in project) |
+| `Space /` | Search in current file |
 | `Space ee` | File explorer |
 | `Space gd` | Go to definition |
-| `Space gr` | References |
+| `Space gr` | Find references |
 | `Space ca` | Code actions |
-| `Space rr` | Rename |
+| `Space rr` | Rename symbol |
+| `Space ff` | Format file |
 
 ### Common Tasks
 
@@ -204,12 +299,20 @@ nvim .           # or Space ee
 
 ## Ghostty Terminal
 
+### What Is Ghostty?
+
+Ghostty = Terminal emulator (the app window that shows text). Yours is configured to:
+- Use JetBrainsMono Nerd Font (13pt)
+- Auto-start tmux session on launch
+
 ### Settings
+
+**File:** `~/.config/ghostty/config`
 
 ```toml
 font-family = "JetBrainsMono Nerd Font"
 font-size = 13
-command = tmux new-session -A -s main  # Auto-tmux
+command = /opt/homebrew/bin/tmux new-session -A -s main
 ```
 
 ### Customization
@@ -250,11 +353,47 @@ Hyper + L = Move window right
 
 ---
 
+## OmniWM (Window Manager)
+
+### What Is OmniWM?
+
+OmniWM = Tiling window manager for macOS. It automatically arranges windows and lets you control them with keyboard.
+
+### Features
+
+- **Smart split** - Auto-arranges windows in tiles
+- **Focus follows mouse** - Click to focus
+- **No gaps** - Windows fill screen
+- **Command palette** - `Ctrl+Space` to open
+
+### Config Location
+
+`~/.config/omniwm/settings.json`
+
+```json
+{
+  "smart_split": true,
+  "focus_follows_mouse": true,
+  "gaps": false,
+  "command_palette_hotkey": "Ctrl+Space",
+  "prevent_sleep": true
+}
+```
+
+### Usage
+
+```
+Hyper + H/J/K/L    Move windows
+Ctrl+Space         Command palette
+```
+
+---
+
 ## Fastfetch
 
 Customizes the system info shown on shell startup.
 
-Edit `~/.config/fastfetch/config.jsonc` to add/remove modules.
+**File:** `~/.config/fastfetch/config.jsonc`
 
 Edit `~/.config/shell/zshrc.local` for:
 - Countdown date
@@ -297,6 +436,13 @@ source ~/.zshrc  # Reinstalls automatically
 Ctrl+b I    # (Shift+i) to install plugins
 ```
 
+### Neovim plugins not loading
+
+```bash
+# Open nvim, then:
+:Lazy sync
+```
+
 ### FZF not working
 
 ```bash
@@ -308,6 +454,13 @@ $(brew --prefix)/opt/fzf/install
 
 ```bash
 cd ~/.config && ./install.sh
+```
+
+### Fastfetch not showing
+
+```bash
+# Make sure it's installed
+brew install fastfetch
 ```
 
 ---
