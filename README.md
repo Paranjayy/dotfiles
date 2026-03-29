@@ -1,61 +1,140 @@
 # 🛠️ Paranjay's Dotfiles
 
-> macOS development environment - shell, tmux, editors, CLI tools
+> Personal macOS development environment — shell, editors, tools, everything.
 
-## 📁 Structure
+## What's This?
 
-```
-~/.config/  (this repo)
-├── install.sh          # Symlink installer
-├── shell/              # Zsh configs → ~/.zshrc, etc.
-├── git/config          # → ~/.gitconfig
-├── tmux/               # → ~/.tmux.conf
-├── nvim/               # Neovim (LazyVim)
-├── ghostty/            # Terminal
-├── fastfetch/          # System info
-├── gh/                 # GitHub CLI
-├── karabiner/          # Keyboard (Hyper key)
-├── zed/                # Zed editor
-└── ... (more tools)
-```
+This is my **`~/.config/`** folder — a git repo that stores all my dotfiles. One `git push` backs up my entire dev setup. One `git pull` + `./install.sh` on a new Mac and I'm ready to go.
 
-## 🚀 Install on New Mac
+## Quick Start
 
 ```bash
+# On a new machine
 git clone https://github.com/Paranjayy/dotfiles.git ~/.config
-cd ~/.config && ./install.sh
+cd ~/.config
+./install.sh          # Creates symlinks
+source ~/.zshrc       # Reload shell
 ```
 
-## 📦 Homebrew
+## Structure
+
+```
+~/.config/  ← (this repo, git tracked)
+│
+├── shell/
+│   ├── zshrc              # Main shell config
+│   ├── zshrc.local        # Machine-specific (not synced)
+│   ├── zprofile           # Login shell paths
+│   ├── zshenv             # Environment vars
+│   ├── profile            # Generic profile
+│   └── bashrc             # Bash config
+│
+├── git/
+│   └── config             # Git config
+│
+├── tmux/
+│   ├── tmux.conf          # Terminal multiplexer
+│   └── scripts/           # Battery, CPU, workspace scripts
+│
+├── nvim/                  # Neovim (LazyVim)
+├── ghostty/               # Ghostty terminal
+├── fastfetch/             # System info
+├── gh/                    # GitHub CLI
+├── karabiner/             # Keyboard (Hyper key)
+├── zed/                   # Zed editor
+├── omniwm/                # Tiling WM
+├── fzf/, fd/, pnpm/       # Tools
+│
+├── install.sh             # Symlink installer
+└── .gitignore             # Excludes junk
+```
+
+## What's Installed
+
+### Shell (Zsh)
+
+| Feature | Tool |
+|---------|------|
+| Plugin manager | Zinit |
+| Prompt | Starship |
+| Fuzzy finder | FZF |
+| Directory jumping | Zoxide |
+| Autosuggestions | zsh-autosuggestions |
+| Syntax highlighting | zsh-syntax-highlighting |
+
+### Modern CLI Tools
+
+| Old | New | Why |
+|-----|-----|-----|
+| `ls` | `eza` | Icons, git status |
+| `cat` | `bat` | Syntax highlighting |
+| `find` | `fd` | Simpler, faster |
+| `grep` | `ripgrep` | Blazing fast |
+| `cd` | `zoxide` | Learns habits |
+
+## Key Shortcuts
+
+### Shell Aliases
 
 ```bash
-brew install git gh curl wget jq yq htop tree watch
-brew install eza bat ripgrep fd fzf zoxide dust duf dog httpie hyperfine tldr lazygit git-delta
-brew install make cmake openssl gnupg sqlite postgresql@16 redis
-brew install starship
-brew install --cask ghostty font-jetbrains-mono-nerd-font zed
+.., ..., ~        # Navigation
+ll, lt            # Listing (eza)
+gst, gco, gp, gl  # Git
+tms, dev, work    # Tmux workspaces
+bi, ba, bro       # Bun
 ```
 
-## 🔗 Key Aliases
+### Tmux (Prefix: Ctrl+b)
 
-| Alias | Command |
-|-------|---------|
-| `gst` | git status |
-| `gco` | git checkout |
-| `gp` | git push |
-| `ll` | eza -la --icons --git |
-| `tms` | tmux new-session -As main |
-| `dev` | cd ~/Developer && tms |
+```
+Ctrl+b |     Split vertical
+Ctrl+b -     Split horizontal
+Ctrl+b h/j/k/l   Navigate
+Ctrl+b z     Zoom
+Ctrl+b g     Lazygit
+```
 
-## 🔑 Tmux Prefix: `Ctrl+b`
+## Daily Workflow
 
-| Key | Action |
-|-----|--------|
-| `\|` | Vertical split |
-| `-` | Horizontal split |
-| `h/j/k/l` | Navigate panes |
-| `z` | Zoom pane |
-| `g` | Open lazygit |
+```bash
+# 1. Edit config
+nano ~/.config/shell/zshrc
+
+# 2. Test it
+source ~/.zshrc
+
+# 3. Save & push
+cd ~/.config
+git add -A
+git commit -m "add new alias"
+git push
+```
+
+## Customization
+
+### Machine-Specific (`zshrc.local` — not synced)
+
+```bash
+export FASTFETCH_COUNTDOWN_DATE="2026-08-13"
+export FASTFETCH_QUOTE="Build something that matters today."
+```
+
+### Adding Tools
+
+1. Add config to `~/.config/toolname/`
+2. Update `.gitignore` if needed
+3. `git add -A && git commit && git push`
+
+## FAQ
+
+**Where are secrets?**
+→ In `.gitignore`. Never committed.
+
+**What about machine-specific stuff?**
+→ `shell/zshrc.local` (gitignored). Use `zshrc.local.template`.
+
+**How to restore on new Mac?**
+→ `git clone` → `./install.sh` → `source ~/.zshrc`
 
 ---
 

@@ -1,0 +1,36 @@
+# === OS ===
+.DS_Store
+Thumbs.db
+
+# === CACHES ===
+.android/
+htop/
+
+# === BACKUPS ===
+nvim.backup*/
+nvim.bak*/
+karabiner/automatic_backups/
+karabiner/*.bak.*
+*.bak
+*.orig
+
+# === LARGE / BINARY ===
+raycast/extensions/
+
+# === SENSITIVE ===
+**/oauth_creds.json
+**/google_accounts.json
+**/auth.json
+**/*token*.json
+**/*token*.jsonl
+**/platform-token
+**/guardian-token.json
+**/antigravity-accounts.json
+**/private-key*
+*.asc
+*.gpg
+
+# === MISC ===
+Milady/
+swiftpm/
+opencode/*.bak.*
