@@ -1,0 +1,2 @@
+# Cargo env (only if rustup is installed)
+[[ -f "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"

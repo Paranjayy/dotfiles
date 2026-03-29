@@ -1,0 +1,10 @@
+# Zprofile - loads for login shells (Ghostty, Terminal.app, etc.)
+
+# Add local bin to PATH
+export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.bun/bin:$PATH"
+
+# OrbStack
+source ~/.orbstack/shell/init.zsh 2>/dev/null || :
+
+# Homebrew
+eval "$(/opt/homebrew/bin/brew shellenv)"

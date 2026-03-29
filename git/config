@@ -1,0 +1,8 @@
+[user]
+	name = paranjay
+	email = kparanjay245@gmail.com
+	signingkey = 35A408247C801F80
+[safe]
+	directory = *
+[commit]
+	gpgsign = true
