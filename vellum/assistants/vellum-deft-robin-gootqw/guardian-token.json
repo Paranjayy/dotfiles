@@ -1,0 +1,11 @@
+{
+  "guardianPrincipalId": "vellum-principal-4e5153a3-343b-4a52-8b56-5a28461bad33",
+  "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ2ZWxsdW0tYXV0aCIsImF1ZCI6InZlbGx1bS1nYXRld2F5Iiwic3ViIjoiYWN0b3I6c2VsZjp2ZWxsdW0tcHJpbmNpcGFsLTRlNTE1M2EzLTM0M2ItNGE1Mi04YjU2LTVhMjg0NjFiYWQzMyIsInNjb3BlX3Byb2ZpbGUiOiJhY3Rvcl9jbGllbnRfdjEiLCJleHAiOjE3NzY1NzkwNDAsInBvbGljeV9lcG9jaCI6MSwiaWF0IjoxNzczOTg3MDQwLCJqdGkiOiJkYzdlYjY3NTFmMGVhZmU1M2NlMzYxMGRkODE2NWJkZSJ9.CNvcb3ME1VTo8eJjOlgXxYJkNUiQyj_ZUBrKWtmoWts",
+  "accessTokenExpiresAt": 1776579040847,
+  "refreshToken": "FwrnEDrYxnrdCqJGdCvPOLU9gk1FDCDBMVEnFLMjgvI",
+  "refreshTokenExpiresAt": 1781763040852,
+  "refreshAfter": 1776060640852,
+  "isNew": false,
+  "deviceId": "5084b2a93e6a2cb9188ad5d2ad40fc8f0546ed0627a254353dcf00731d0ee26f",
+  "leasedAt": "2026-03-20T06:10:40.917Z"
+}

@@ -1,0 +1,11 @@
+{
+  "google_auth": false,
+  "agents": {
+    "frontend-ui-ux-engineer": { "model": "google/gemini-3-pro-high" },
+    "document-writer": { "model": "google/gemini-3-flash" },
+    "multimodal-looker": { "model": "google/gemini-2.5-flash" },
+    "Sisyphus": { "model": "google/gemini-3-pro-high" },
+    "oracle": { "model": "google/gemini-3-pro-high" },
+    "librarian": { "model": "google/gemini-3-pro-high" }
+  }
+}

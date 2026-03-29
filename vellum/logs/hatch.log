@@ -1,0 +1,73 @@
+2026-03-20T06:15:35.333Z [gateway] INFO (gateway/59461): Configuration loaded
+2026-03-20T06:15:35.333Z [gateway]     module: "config"
+2026-03-20T06:15:35.333Z [gateway]     assistantRuntimeBaseUrl: "http://localhost:7821"
+2026-03-20T06:15:35.333Z [gateway]     gatewayInternalBaseUrl: "http://127.0.0.1:7830"
+2026-03-20T06:15:35.333Z [gateway]     routingEntryCount: 0
+2026-03-20T06:15:35.333Z [gateway]     unmappedPolicy: "default"
+2026-03-20T06:15:35.333Z [gateway]     hasDefaultAssistant: true
+2026-03-20T06:15:35.333Z [gateway]     port: 7830
+2026-03-20T06:15:35.333Z [gateway]     runtimeProxyEnabled: true
+2026-03-20T06:15:35.333Z [gateway]     runtimeProxyRequireAuth: true
+2026-03-20T06:15:35.333Z [gateway]     trustProxy: false
+2026-03-20T06:15:35.346Z [gateway] INFO (gateway/59461): Starting Vellum Gateway...
+2026-03-20T06:15:35.346Z [gateway]     module: "main"
+2026-03-20T06:15:35.346Z [gateway] INFO (gateway/59461): Auth signing key loaded from disk
+2026-03-20T06:15:35.347Z [gateway]     module: "auth-token-service"
+2026-03-20T06:15:35.347Z [gateway] INFO (gateway/59461): JWT signing key initialized
+2026-03-20T06:15:35.347Z [gateway]     module: "main"
+2026-03-20T06:15:35.347Z [gateway] INFO (gateway/59461): Gateway HTTP server listening
+2026-03-20T06:15:35.347Z [gateway]     module: "main"
+2026-03-20T06:15:35.347Z [gateway]     port: 7830
+2026-03-20T06:15:35.347Z [gateway] INFO (gateway/59461): Watching for credential changes
+2026-03-20T06:15:35.347Z [gateway]     module: "credential-watcher"
+2026-03-20T06:15:35.347Z [gateway]     path: "/Users/paranjay/.vellum/workspace/data/credentials"
+2026-03-20T06:15:35.347Z [gateway]     file: "metadata.json"
+2026-03-20T06:15:35.347Z [gateway] INFO (gateway/59461): Watching for credential changes
+2026-03-20T06:15:35.347Z [gateway]     module: "credential-watcher"
+2026-03-20T06:15:35.347Z [gateway]     path: "/Users/paranjay/.vellum/protected"
+2026-03-20T06:15:35.347Z [gateway]     file: "store.key"
+2026-03-20T06:15:35.347Z [gateway] INFO (gateway/59461): Config file changed
+2026-03-20T06:15:35.347Z [gateway]     module: "config-file-watcher"
+2026-03-20T06:15:35.347Z [gateway]     changedKeys: [
+2026-03-20T06:15:35.347Z [gateway]       "acp",
+2026-03-20T06:15:35.347Z [gateway]       "auditLog",
+2026-03-20T06:15:35.347Z [gateway]       "calls",
+2026-03-20T06:15:35.347Z [gateway]       "collectUsageData",
+2026-03-20T06:15:35.347Z [gateway]       "contextWindow",
+2026-03-20T06:15:35.347Z [gateway]       "daemon",
+2026-03-20T06:15:35.347Z [gateway]       "effort",
+2026-03-20T06:15:35.347Z [gateway]       "elevenlabs",
+2026-03-20T06:15:35.347Z [gateway]       "gateway",
+2026-03-20T06:15:35.347Z [gateway]       "heartbeat",
+2026-03-20T06:15:35.347Z [gateway]       "ingress",
+2026-03-20T06:15:35.347Z [gateway]       "logFile",
+2026-03-20T06:15:35.347Z [gateway]       "maxStepsPerSession",
+2026-03-20T06:15:35.347Z [gateway]       "maxTokens",
+2026-03-20T06:15:35.347Z [gateway]       "mcp",
+2026-03-20T06:15:35.347Z [gateway]       "memory",
+2026-03-20T06:15:35.347Z [gateway]       "notifications",
+2026-03-20T06:15:35.347Z [gateway]       "permissions",
+2026-03-20T06:15:35.347Z [gateway]       "platform",
+2026-03-20T06:15:35.347Z [gateway]       "pricingOverrides",
+2026-03-20T06:15:35.347Z [gateway]       "providerOrder",
+2026-03-20T06:15:35.347Z [gateway]       "rateLimit",
+2026-03-20T06:15:35.347Z [gateway]       "sandbox",
+2026-03-20T06:15:35.347Z [gateway]       "secretDetection",
+2026-03-20T06:15:35.347Z [gateway]       "sendDiagnostics",
+2026-03-20T06:15:35.347Z [gateway]       "services",
+2026-03-20T06:15:35.347Z [gateway]       "skills",
+2026-03-20T06:15:35.347Z [gateway]       "slack",
+2026-03-20T06:15:35.347Z [gateway]       "swarm",
+2026-03-20T06:15:35.347Z [gateway]       "telegram",
+2026-03-20T06:15:35.347Z [gateway]       "thinking",
+2026-03-20T06:15:35.347Z [gateway]       "timeouts",
+2026-03-20T06:15:35.347Z [gateway]       "twilio",
+2026-03-20T06:15:35.347Z [gateway]       "ui",
+2026-03-20T06:15:35.347Z [gateway]       "whatsapp",
+2026-03-20T06:15:35.347Z [gateway]       "workspaceGit"
+2026-03-20T06:15:35.347Z [gateway]     ]
+2026-03-20T06:15:35.347Z [gateway] INFO (gateway/59461): Watching for config file changes
+2026-03-20T06:15:35.347Z [gateway]     module: "config-file-watcher"
+2026-03-20T06:15:35.347Z [gateway]     path: "/Users/paranjay/.vellum/workspace/config.json"
+2026-03-20T06:15:35.405Z [gateway] WARN (gateway/59461): Guardian init rejected — already bootstrapped
+2026-03-20T06:15:35.405Z [gateway]     module: "channel-verification-session-proxy"

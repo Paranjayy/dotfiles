@@ -1,0 +1,608 @@
+[2026-03-21T05:23:14.844Z] [Agent] start() called, current state: not_started
+[2026-03-21T05:23:14.936Z] [Agent] Diagnostic log file: /Users/paranjay/.config/Milady/milady-startup.log
+[2026-03-21T05:23:14.968Z] [Agent] Resolved milady dist: /Volumes/Milady-canary/Milady-canary.app/Contents/Resources/app/milady-dist
+[2026-03-21T05:23:14.968Z] [Agent] eliza entry: exists (/Volumes/Milady-canary/Milady-canary.app/Contents/Resources/app/milady-dist/eliza.js)
+[2026-03-21T05:23:14.968Z] [Agent] Starting child process on port 2138...
+[2026-03-21T05:23:14.968Z] [Agent] Child NODE_PATH: /Volumes/Milady-canary/Milady-canary.app/Contents/Resources/app/milady-dist/node_modules
+[2026-03-21T05:23:14.969Z] [Agent] Using Bun executable: /Volumes/Milady-canary/Milady-canary.app/Contents/MacOS/bun
+[2026-03-21T05:23:14.969Z] [Agent] Bun exists on disk: true
+[2026-03-21T05:23:15.498Z] [Agent] Child spawned pid=45123 elapsed=529ms
+[2026-03-21T05:23:15.556Z] [Agent] Waiting for health endpoint at http://127.0.0.1:2138/api/health ...
+[2026-03-21T05:23:24.517Z] [Agent][stdout]  Info       Using local AI configuration: (LOCAL_EMBEDDING_MODEL=bge-small-en-v1.5.Q4_K_M.gguf, LOCAL_EMBEDDING_GPU_LAYERS=0, LOCAL_EMBEDDING_USE_MMAP=true)
+[2026-03-21T05:23:24.571Z] [Agent][stdout]  Info       CACHE_DIR environment variable not set, using default cache directory: /Users/paranjay/.eliza/cache
+[2026-03-21T05:23:24.729Z] [Agent][stdout]  Info       [milady] PGlite data dir: /Users/paranjay/.milady/workspace/.eliza/.elizadb (created)
+[2026-03-21T05:23:24.742Z] [Agent][stdout]  Info       [milady] Database provider: pglite | data dir: /Users/paranjay/.milady/workspace/.eliza/.elizadb
+[2026-03-21T05:23:24.747Z] [Agent][stdout]  Info       [milady] Generated random SECRET_SALT for this session
+[2026-03-21T05:23:25.213Z] [Agent][stdout]  Info       [milady] Resolving 17 plugins...
+[2026-03-21T05:23:25.224Z] [Agent][stdout]  Info       [milady] Plugin loading took 16ms
+[2026-03-21T05:23:25.225Z] [Agent][stdout]  Info       [milady] Plugin resolution complete: 17/17 loaded
+[2026-03-21T05:23:25.227Z] [Agent][stderr]  Error      [milady] No AI provider plugin was loaded. Set an API key environment variable (e.g. ANTHROPIC_API_KEY, OPENAI_API_KEY, OPENROUTER_API_KEY) or log in to Eliza Cloud (ELIZAOS_CLOUD_API_KEY) to enable at least one model provider.
+[2026-03-21T05:23:25.564Z] [Agent][stdout]  Info       [milady] Configured local embedding env: nomic-embed-text-v1.5.Q5_K_M.gguf (repo: auto, dims: auto, ctx: auto, GPU: auto, mmap: false)
+[2026-03-21T05:23:25.565Z] [Agent][stdout]  Info       Initializing local embedding plugin...
+[2026-03-21T05:23:25.565Z] [Agent][stdout]  Info       Initializing environment configuration...
+[2026-03-21T05:23:25.566Z] [Agent][stdout]  Info       Using local AI configuration: (LOCAL_EMBEDDING_MODEL=nomic-embed-text-v1.5.Q5_K_M.gguf, MODELS_DIR=/Users/paranjay/.eliza/models, LOCAL_EMBEDDING_GPU_LAYERS=-1, LOCAL_EMBEDDING_USE_MMAP=false)
+[2026-03-21T05:23:25.567Z] [Agent][stdout]  Info       Using models directory from MODELS_DIR environment variable: /Users/paranjay/.eliza/models
+[2026-03-21T05:23:25.567Z] [Agent][stdout]  Info       Using embedding model path: nomic-embed-text-v1.5.Q5_K_M.gguf
+[2026-03-21T05:23:25.567Z] [Agent][stdout]  Info       Resolved embedding model spec (model=nomic-embed-text-v1.5.Q5_K_M.gguf, repo=nomic-ai/nomic-embed-text-v1.5-GGUF, dimensions=768, contextSize=8192)
+[2026-03-21T05:23:25.567Z] [Agent][stdout]  Info       Environment configuration validated and model paths set
+[2026-03-21T05:23:25.568Z] [Agent][stdout]  Info       Initializing platform detection...
+[2026-03-21T05:23:25.730Z] [Agent][stdout]  Info       Platform capabilities detected (platform=darwin, gpu=metal, recommendedModel=small, supportedBackends=["cpu","metal"])
+[2026-03-21T05:23:25.732Z] [Agent][stdout]  Info       Using local AI configuration: (LOCAL_EMBEDDING_MODEL=nomic-embed-text-v1.5.Q5_K_M.gguf, MODELS_DIR=/Users/paranjay/.eliza/models, LOCAL_EMBEDDING_GPU_LAYERS=-1, LOCAL_EMBEDDING_USE_MMAP=false)
+[2026-03-21T05:23:25.734Z] [Agent][stdout]  Info       Embedding model file not present yet; it will be downloaded on first use (embeddingModelPath=nomic-embed-text-v1.5.Q5_K_M.gguf)
+[2026-03-21T05:23:25.750Z] [Agent][stdout]  Info       [milady] plugin-local-embedding pre-registered (TEXT_EMBEDDING ready)
+[2026-03-21T05:23:25.758Z] [Agent][stdout]  Info       [SecretsManagerPlugin] Initializing
+[2026-03-21T05:23:25.759Z] [Agent][stdout]  Info       [SecretsManagerPlugin] Initialized
+[2026-03-21T05:23:25.764Z] [Agent][stdout]  Info       [Rolodex] Plugin initialized with LLM-based extraction and entity resolution
+[2026-03-21T05:23:25.779Z] [Agent][stdout]  Info       [TrustPlugin] Initializing trust plugin. Services will be started by the runtime.
+[2026-03-21T05:23:25.787Z] [Agent][stdout]  Info       [TodoPlugin] Database adapter registered — ready for operation
+[2026-03-21T05:23:25.789Z] [Agent][stderr]  Warn       [TodoPlugin] Rolodex not available — only in-app notifications will work
+[2026-03-21T05:23:25.790Z] [Agent][stdout]  Info       [TodoPlugin] Initialized
+[2026-03-21T05:23:28.003Z] [Agent][stdout]  Info       [ExperiencePlugin] Initializing experience learning system
+[2026-03-21T05:23:28.006Z] [Agent][stdout]  Info       [ExperiencePlugin] Configuration:
+[2026-03-21T05:23:28.007Z] [Agent][stdout]     - AUTO_RECORD_THRESHOLD: 0.7
+[2026-03-21T05:23:28.037Z] [Agent][stdout]  Info       [Migration] Starting pre-1.6.5 → 1.6.5+ schema migration...
+[2026-03-21T05:23:28.175Z] [Agent][stdout]  Info       [Migration] ✓ Migration complete - pre-1.6.5 → 1.6.5+ schema migration finished
+[2026-03-21T05:23:28.175Z] [Agent][stdout]  Info       [PLUGIN:SQL] Initializing migration system
+[2026-03-21T05:23:28.186Z] [Agent][stdout]  Info       [PLUGIN:SQL] Migration system initialized
+[2026-03-21T05:23:28.187Z] [Agent][stdout]  Info       [PLUGIN:SQL] DatabaseMigrationService initialized
+[2026-03-21T05:23:28.187Z] [Agent][stdout]  Info       [PLUGIN:SQL] Starting migrations (environment=DEVELOPMENT, pluginCount=3, dryRun=false)
+[2026-03-21T05:23:28.189Z] [Agent][stdout]  Info       [PLUGIN:SQL] Starting migration for plugin (pluginName=@elizaos/plugin-sql)
+[2026-03-21T05:23:28.189Z] [Agent][stdout]  Info       [PLUGIN:SQL] Initializing migration system
+[2026-03-21T05:23:28.190Z] [Agent][stdout]  Info       [PLUGIN:SQL] Migration system initialized
+[2026-03-21T05:23:28.330Z] [Agent][stdout]  Info       [PLUGIN:SQL] Executing SQL statements (pluginName=@elizaos/plugin-sql, statementCount=70)
+[2026-03-21T05:23:28.652Z] [Agent][stdout]  Info       [PLUGIN:SQL] Recorded migration (pluginName=@elizaos/plugin-sql, tag=0000_@elizaos/plugin-sql_mmzvu2gv)
+[2026-03-21T05:23:28.654Z] [Agent][stdout]  Info       [PLUGIN:SQL] Migration completed successfully (pluginName=@elizaos/plugin-sql)
+[2026-03-21T05:23:28.654Z] [Agent][stdout]  Info       [PLUGIN:SQL] Migration completed (pluginName=@elizaos/plugin-sql)
+[2026-03-21T05:23:28.654Z] [Agent][stdout]  Info       [PLUGIN:SQL] Starting migration for plugin (pluginName=trust)
+[2026-03-21T05:23:28.655Z] [Agent][stdout]  Info       [PLUGIN:SQL] Initializing migration system
+[2026-03-21T05:23:28.656Z] [Agent][stdout]  Info       [PLUGIN:SQL] Migration system initialized
+[2026-03-21T05:23:28.659Z] [Agent][stderr]  Warn       [PLUGIN:SQL] Plugin table is using public schema - consider using pgSchema for better isolation (pluginName=trust, tableName=whistleblower_reports, expectedSchema=trust)
+[2026-03-21T05:23:28.659Z] [Agent][stderr]  Warn       [PLUGIN:SQL] Plugin table is using public schema - consider using pgSchema for better isolation (pluginName=trust, tableName=trust_profiles, expectedSchema=trust)
+[2026-03-21T05:23:28.659Z] [Agent][stderr]  Warn       [PLUGIN:SQL] Plugin table is using public schema - consider using pgSchema for better isolation (pluginName=trust, tableName=trust_evidence, expectedSchema=trust)
+[2026-03-21T05:23:28.659Z] [Agent][stderr]  Warn       [PLUGIN:SQL] Plugin table is using public schema - consider using pgSchema for better isolation (pluginName=trust, tableName=security_incidents, expectedSchema=trust)
+[2026-03-21T05:23:28.659Z] [Agent][stderr]  Warn       [PLUGIN:SQL] Plugin table is using public schema - consider using pgSchema for better isolation (pluginName=trust, tableName=permission_delegations, expectedSchema=trust)
+[2026-03-21T05:23:28.659Z] [Agent][stderr]  Warn       [PLUGIN:SQL] Plugin table is using public schema - consider using pgSchema for better isolation (pluginName=trust, tableName=identity_links, expectedSchema=trust)
+[2026-03-21T05:23:28.659Z] [Agent][stderr]  Warn       [PLUGIN:SQL] Plugin table is using public schema - consider using pgSchema for better isolation (pluginName=trust, tableName=contextual_roles, expectedSchema=trust)
+[2026-03-21T05:23:28.659Z] [Agent][stderr]  Warn       [PLUGIN:SQL] Plugin table is using public schema - consider using pgSchema for better isolation (pluginName=trust, tableName=behavioral_profiles, expectedSchema=trust)
+[2026-03-21T05:23:28.667Z] [Agent][stdout]  Info       [PLUGIN:SQL] Executing SQL statements (pluginName=trust, statementCount=8)
+[2026-03-21T05:23:28.706Z] [Agent][stdout]  Info       [PLUGIN:SQL] Recorded migration (pluginName=trust, tag=0000_trust_mmzvu2il)
+[2026-03-21T05:23:28.707Z] [Agent][stdout]  Info       [PLUGIN:SQL] Migration completed successfully (pluginName=trust)
+[2026-03-21T05:23:28.707Z] [Agent][stdout]  Info       [PLUGIN:SQL] Migration completed (pluginName=trust)
+[2026-03-21T05:23:28.707Z] [Agent][stdout]  Info       [PLUGIN:SQL] Starting migration for plugin (pluginName=todo)
+[2026-03-21T05:23:28.707Z] [Agent][stdout]  Info       [PLUGIN:SQL] Initializing migration system
+[2026-03-21T05:23:28.708Z] [Agent][stdout]  Info       [PLUGIN:SQL] Migration system initialized
+[2026-03-21T05:23:28.709Z] [Agent][stderr]  Warn       [PLUGIN:SQL] Plugin table is using public schema - consider using pgSchema for better isolation (pluginName=todo, tableName=todos, expectedSchema=todo)
+[2026-03-21T05:23:28.709Z] [Agent][stderr]  Warn       [PLUGIN:SQL] Plugin table is using public schema - consider using pgSchema for better isolation (pluginName=todo, tableName=todo_tags, expectedSchema=todo)
+[2026-03-21T05:23:28.712Z] [Agent][stdout]  Info       [PLUGIN:SQL] Executing SQL statements (pluginName=todo, statementCount=3)
+[2026-03-21T05:23:28.721Z] [Agent][stdout]  Info       [PLUGIN:SQL] Recorded migration (pluginName=todo, tag=0000_todo_mmzvu2j4)
+[2026-03-21T05:23:28.721Z] [Agent][stdout]  Info       [PLUGIN:SQL] Migration completed successfully (pluginName=todo)
+[2026-03-21T05:23:28.721Z] [Agent][stdout]  Info       [PLUGIN:SQL] Migration completed (pluginName=todo)
+[2026-03-21T05:23:28.722Z] [Agent][stdout]  Info       [PLUGIN:SQL] All migrations completed successfully (successCount=3)
+[2026-03-21T05:23:28.722Z] [Agent][stdout]  Info       [PLUGIN:SQL] Skipping RLS re-application (ENABLE_DATA_ISOLATION is not true)
+[2026-03-21T05:23:28.744Z] [Agent][stdout]  Info       Starting local model download...
+[2026-03-21T05:23:28.758Z] [Agent][stdout]  Info       Attempting model download: {
+[2026-03-21T05:23:28.758Z] [Agent][stdout]   description: "LFS URL with GGUF suffix",
+[2026-03-21T05:23:28.758Z] [Agent][stdout]   url: "https://huggingface.co/nomic-ai/nomic-embed-text-v1.5-GGUF/resolve/main/nomic-embed-text-v1.5.Q5_K_M.gguf?download=true",
+[2026-03-21T05:23:28.758Z] [Agent][stdout]   timestamp: "2026-03-21T05:23:28.744Z",
+[2026-03-21T05:23:28.758Z] [Agent][stdout] }
+[2026-03-21T05:23:28.758Z] [Agent][stdout]  Info       Starting download to: /Users/paranjay/.eliza/models/nomic-embed-text-v1.5.Q5_K_M.gguf
+[2026-03-21T05:23:29.532Z] [Agent][stdout]  Info       Starting download to: /Users/paranjay/.eliza/models/nomic-embed-text-v1.5.Q5_K_M.gguf
+[2026-03-21T05:23:29.823Z] [Agent][stdout]  Info       Downloading nomic-embed-text-v1.5.Q5_K_M.gguf: ▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱ 0%
+[2026-03-21T05:23:30.275Z] [Agent][stdout]  Info       Downloading nomic-embed-text-v1.5.Q5_K_M.gguf: ▰▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱ 5%
+[2026-03-21T05:23:30.482Z] [Agent][stdout]  Info       Downloading nomic-embed-text-v1.5.Q5_K_M.gguf: ▰▰▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱ 10%
+[2026-03-21T05:23:30.677Z] [Agent][stdout]  Info       Downloading nomic-embed-text-v1.5.Q5_K_M.gguf: ▰▰▰▰▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱ 15%
+[2026-03-21T05:23:30.859Z] [Agent][stdout]  Info       Downloading nomic-embed-text-v1.5.Q5_K_M.gguf: ▰▰▰▰▰▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱ 20%
+[2026-03-21T05:23:31.051Z] [Agent][stdout]  Info       Downloading nomic-embed-text-v1.5.Q5_K_M.gguf: ▰▰▰▰▰▰▰▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱ 25%
+[2026-03-21T05:23:31.323Z] [Agent][stdout]  Info       Downloading nomic-embed-text-v1.5.Q5_K_M.gguf: ▰▰▰▰▰▰▰▰▰▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱ 30%
+[2026-03-21T05:23:31.422Z] [Agent][stdout]  Info       Downloading nomic-embed-text-v1.5.Q5_K_M.gguf: ▰▰▰▰▰▰▰▰▰▰▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱ 35%
+[2026-03-21T05:23:31.590Z] [Agent][stdout]  Info       Downloading nomic-embed-text-v1.5.Q5_K_M.gguf: ▰▰▰▰▰▰▰▰▰▰▰▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱ 40%
+[2026-03-21T05:23:31.764Z] [Agent][stdout]  Info       Downloading nomic-embed-text-v1.5.Q5_K_M.gguf: ▰▰▰▰▰▰▰▰▰▰▰▰▰▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱ 45%
+[2026-03-21T05:23:31.928Z] [Agent][stdout]  Info       Downloading nomic-embed-text-v1.5.Q5_K_M.gguf: ▰▰▰▰▰▰▰▰▰▰▰▰▰▰▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱ 50%
+[2026-03-21T05:23:32.111Z] [Agent][stdout]  Info       Downloading nomic-embed-text-v1.5.Q5_K_M.gguf: ▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▱▱▱▱▱▱▱▱▱▱▱▱▱▱ 55%
+[2026-03-21T05:23:32.303Z] [Agent][stdout]  Info       Downloading nomic-embed-text-v1.5.Q5_K_M.gguf: ▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▱▱▱▱▱▱▱▱▱▱▱▱▱ 60%
+[2026-03-21T05:23:32.469Z] [Agent][stdout]  Info       Downloading nomic-embed-text-v1.5.Q5_K_M.gguf: ▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▱▱▱▱▱▱▱▱▱▱▱ 65%
+[2026-03-21T05:23:32.641Z] [Agent][stdout]  Info       Downloading nomic-embed-text-v1.5.Q5_K_M.gguf: ▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▱▱▱▱▱▱▱▱▱▱ 70%
+[2026-03-21T05:23:32.798Z] [Agent][stdout]  Info       Downloading nomic-embed-text-v1.5.Q5_K_M.gguf: ▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▱▱▱▱▱▱▱▱ 75%
+[2026-03-21T05:23:32.972Z] [Agent][stdout]  Info       Downloading nomic-embed-text-v1.5.Q5_K_M.gguf: ▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▱▱▱▱▱▱▱ 80%
+[2026-03-21T05:23:33.130Z] [Agent][stdout]  Info       Downloading nomic-embed-text-v1.5.Q5_K_M.gguf: ▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▱▱▱▱▱ 85%
+[2026-03-21T05:23:33.295Z] [Agent][stdout]  Info       Downloading nomic-embed-text-v1.5.Q5_K_M.gguf: ▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▱▱▱▱ 90%
+[2026-03-21T05:23:33.465Z] [Agent][stdout]  Info       Downloading nomic-embed-text-v1.5.Q5_K_M.gguf: ▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▱▱ 95%
+[2026-03-21T05:23:33.636Z] [Agent][stdout]  Info       Downloading nomic-embed-text-v1.5.Q5_K_M.gguf: ▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▱ 100%
+[2026-03-21T05:23:33.662Z] [Agent][stdout]  Info       Downloading nomic-embed-text-v1.5.Q5_K_M.gguf: ▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰ 100%
+[2026-03-21T05:23:48.038Z] [Agent][stdout]  Info       Loading embedding model: /Users/paranjay/.eliza/models/nomic-embed-text-v1.5.Q5_K_M.gguf
+[2026-03-21T05:23:48.316Z] [Agent][stdout]  Info       Embedding model initialized successfully
+[2026-03-21T05:23:48.316Z] [Agent][stdout]  Info       Generating embedding for text (textLength=25)
+[2026-03-21T05:23:48.689Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:48.764Z] [Agent][stdout]  Info       [SecretsService] Initializing
+[2026-03-21T05:23:48.764Z] [Agent][stdout]  Info       [PluginActivator] Initializing
+[2026-03-21T05:23:48.764Z] [Agent][stderr]  Warn       [PluginActivator] SecretsService not available, activation will be limited
+[2026-03-21T05:23:48.765Z] [Agent][stdout]  Info       [PluginActivator] Initialized
+[2026-03-21T05:23:48.765Z] [Agent][stdout]  Info       [OnboardingService] Starting
+[2026-03-21T05:23:48.765Z] [Agent][stdout]  Info       [OnboardingService] Started
+[2026-03-21T05:23:48.766Z] [Agent][stdout]  Info       Starting Knowledge service for agent: c1f385de-1f9e-06fc-8658-dcbc3e40e7a6
+[2026-03-21T05:23:48.774Z] [Agent][stderr]  Warn       Basic Embedding mode - documents will not be enriched with context
+[2026-03-21T05:23:48.775Z] [Agent][stdout]  Info       To enable contextual enrichment: Set CTX_KNOWLEDGE_ENABLED=true and configure TEXT_PROVIDER/TEXT_MODEL
+[2026-03-21T05:23:48.775Z] [Agent][stdout]  Info       Using plugin-openai configuration for embeddings
+[2026-03-21T05:23:48.785Z] [Agent][stdout]  Info       Shell plugin enabled with allowed directory: /Volumes/Milady-canary/Milady-canary.app/Contents/Resources/app/milady-dist, background: true, timeout: 30000ms
+[2026-03-21T05:23:48.785Z] [Agent][stdout]  Info       Shell service initialized with PTY, background execution, and history tracking
+[2026-03-21T05:23:48.795Z] [Agent][stdout]  Info       [SERVICE:EXEC_APPROVAL] ExecApprovalService started
+[2026-03-21T05:23:48.798Z] [Agent][stdout]  Info       [PluginManagerService] Initialized with config: {"pluginDirectory":"./plugins"}
+[2026-03-21T05:23:48.800Z] [Agent][stdout]  Info       [TrustEngine] Initialized with config: (trustConfig={"recencyBias":0.7,"evidenceDecayRate":0.5,"minimumEvidenceCount":3,"verificationMultiplier":1.5,"dimensionWeights":{"reliability":0.25,"competence":0.2,"integrity":0.25,"benevolence":0.2,"transparency":0.1}})
+[2026-03-21T05:23:48.801Z] [Agent][stdout]  Info       [LLMEvaluator] Initialized
+[2026-03-21T05:23:48.801Z] [Agent][stdout]  Info       Starting TodoReminderService...
+[2026-03-21T05:23:48.802Z] [Agent][stdout]  Info       CacheManager initialized
+[2026-03-21T05:23:48.802Z] [Agent][stderr]  Warn       Rolodex services not found - only in-app notifications will be sent
+[2026-03-21T05:23:48.804Z] [Agent][stdout]  Info       Reminder loop started - checking every 30 seconds
+[2026-03-21T05:23:48.805Z] [Agent][stdout]  Info       Starting TodoIntegrationBridge...
+[2026-03-21T05:23:48.807Z] [Agent][stdout]  Info       [SERVICE:TOOL_POLICY] ToolPolicyService started (coreToolCount=23)
+[2026-03-21T05:23:48.828Z] [Agent][stdout]  Info       NotificationManager initialized
+[2026-03-21T05:23:48.829Z] [Agent][stdout]  Info       TodoReminderService started successfully
+[2026-03-21T05:23:48.829Z] [Agent][stdout]  Info       TodoIntegrationBridge started successfully
+[2026-03-21T05:23:48.829Z] [Agent][stdout]  Info       Generating embedding for text (textLength=193)
+[2026-03-21T05:23:48.829Z] [Agent][stdout]  Info       Generating embedding for text (textLength=192)
+[2026-03-21T05:23:48.829Z] [Agent][stdout]  Info       Generating embedding for text (textLength=276)
+[2026-03-21T05:23:48.830Z] [Agent][stdout]  Info       Generating embedding for text (textLength=134)
+[2026-03-21T05:23:48.830Z] [Agent][stdout]  Info       Generating embedding for text (textLength=85)
+[2026-03-21T05:23:48.830Z] [Agent][stdout]  Info       Generating embedding for text (textLength=104)
+[2026-03-21T05:23:48.830Z] [Agent][stdout]  Info       Generating embedding for text (textLength=174)
+[2026-03-21T05:23:48.831Z] [Agent][stdout]  Info       Generating embedding for text (textLength=400)
+[2026-03-21T05:23:48.831Z] [Agent][stdout]  Info       Generating embedding for text (textLength=460)
+[2026-03-21T05:23:48.831Z] [Agent][stdout]  Info       Generating embedding for text (textLength=379)
+[2026-03-21T05:23:48.832Z] [Agent][stdout]  Info       [FormService] Started with built-in types
+[2026-03-21T05:23:48.832Z] [Agent][stdout]  Info       [CharacterSettingsStorage] Migrated 0 env vars to secrets
+[2026-03-21T05:23:48.833Z] [Agent][stdout]  Info       [SecurityModule] Initialized
+[2026-03-21T05:23:48.836Z] [Agent][stderr] [trajectory-persistence] installDatabaseTrajectoryLogger: patched logger!
+[2026-03-21T05:23:48.861Z] [Agent][stderr]  Error      #Milady  [AGENT] Service registration failed for AGENT_SKILLS_SERVICE (plugin: @elizaos/plugin-agent-skills). The agent will continue without this service. (plugin=@elizaos/plugin-agent-skills, serviceType=AGENT_SKILLS_SERVICE, error=FileSystemSkillStore requires Node.js fs module)
+[2026-03-21T05:23:48.861Z] [Agent][stdout]  Info       [CredentialProtector] Initialized
+[2026-03-21T05:23:48.870Z] [Agent][stdout]  Info       [ExperienceService] Loaded 0 experiences from memory
+[2026-03-21T05:23:48.871Z] [Agent][stdout]  Info       [SecretsService] Initialized
+[2026-03-21T05:23:48.871Z] [Agent][stdout]  Info       [RolodexService] Loaded 0 contacts
+[2026-03-21T05:23:48.872Z] [Agent][stdout]  Info       [RolodexService] Initialized
+[2026-03-21T05:23:48.872Z] [Agent][stdout]  Info       [FollowUpService] Successfully acquired RolodexService via service promise
+[2026-03-21T05:23:48.872Z] [Agent][stdout]  Info       [FollowUpService] Successfully acquired RolodexService via service promise
+[2026-03-21T05:23:48.872Z] [Agent][stdout]  Info       [FollowUpService] Initialized successfully
+[2026-03-21T05:23:48.874Z] [Agent][stdout]  Info       [EntityResolution] Initialized with 0 indexed names
+[2026-03-21T05:23:48.901Z] [Agent][stderr]  Warn       [PLUGIN:SQL] Ignoring non-UUID message/server identifier for world (serverId=00000000-0000-0000-0000-000000000000)
+[2026-03-21T05:23:48.902Z] [Agent][stderr] [trajectory-persistence] Trajectories table missing or has outdated schema, recreating...
+[2026-03-21T05:23:48.941Z] [Agent][stdout]  Info       [Heartbeat] Created recurring task (every 1800s)
+[2026-03-21T05:23:48.942Z] [Agent][stdout]  Info       [CronService] Started for agent c1f385de-1f9e-06fc-8658-dcbc3e40e7a6 with 0 jobs
+[2026-03-21T05:23:48.949Z] [Agent][stderr] [trajectory-persistence] Recreated trajectories table with updated schema
+[2026-03-21T05:23:48.971Z] [Agent][stderr]  Warn       [trajectory-logger] Failed to create indexes (non-fatal): Failed query: CREATE INDEX IF NOT EXISTS idx_trajectories_scenario_id ON trajectories(scenario_id)
+[2026-03-21T05:23:48.971Z] [Agent][stderr] params: 
+[2026-03-21T05:23:48.979Z] [Agent][stdout]  Info       [milady] AutonomyService started for trigger dispatch
+[2026-03-21T05:23:48.984Z] [Agent][stdout]  Info       [milady] Added action alias CODE_TASK -> CREATE_TASK for agent-orchestrator
+[2026-03-21T05:23:48.992Z] [Agent][stdout]  Info       [trajectory-logger] Trajectory logger service initialized
+[2026-03-21T05:23:48.992Z] [Agent][stderr]  Error      #Milady  [AGENT] Service registration failed for CHARACTER_MANAGEMENT (plugin: @elizaos/plugin-personality). The agent will continue without this service. (plugin=@elizaos/plugin-personality, serviceType=CHARACTER_MANAGEMENT, error=EROFS: read-only file system, mkdir '/Volumes/Milady-canary/Milady-canary.app/Contents/Resources/app/milady-dist/.eliza')
+[2026-03-21T05:23:49.006Z] [Agent][stdout]  Info       [hooks] Discovered 0 hooks
+[2026-03-21T05:23:49.006Z] [Agent][stdout]  Info       [hooks] Load complete: 0/0 registered, 0 skipped, 0 failed
+[2026-03-21T05:23:49.364Z] [Agent][stdout] [milady-api] startApiServer called
+[2026-03-21T05:23:49.365Z] [Agent][stdout] [milady-api] Token check done (0ms)
+[2026-03-21T05:23:49.373Z] [Agent][stdout] [milady-api] Config loaded (9ms)
+[2026-03-21T05:23:49.373Z] [Agent][stdout]  Info       [milady-api] Using public RPC defaults for unset endpoints: BSC_RPC_URL=https://bsc-rpc.publicnode.com, ETHEREUM_RPC_URL=https://ethereum.publicnode.com, BASE_RPC_URL=https://base.publicnode.com, SOLANA_RPC_URL=https://solana-rpc.publicnode.com
+[2026-03-21T05:23:49.414Z] [Agent][stdout]  Info       [milady-api] Generated EVM wallet: 0xfBDA2D1E9D3d6E8F75b8e2579a6caF3ca11d3820
+[2026-03-21T05:23:49.415Z] [Agent][stdout]  Info       [milady-api] Generated Solana wallet: 7q4rugnS7vhzCu9mdWAp2UzAEG7MA6AFRVaop4fc46b6
+[2026-03-21T05:23:49.425Z] [Agent][stdout] [milady-api] Plugins discovered (61ms)
+[2026-03-21T05:23:49.443Z] [Agent][stderr]  Warn       [milady-api] Training service package unavailable; using fallback in-memory implementation
+[2026-03-21T05:23:49.447Z] [Agent][stdout] [milady-api] Creating http server (83ms)
+[2026-03-21T05:23:49.450Z] [Agent][stdout] [milady-api] Server created (86ms)
+[2026-03-21T05:23:49.454Z] [Agent][stdout] [milady-api] Calling server.listen (90ms)
+[2026-03-21T05:23:49.495Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:49.507Z] [Agent][stderr]  Warn       [model-catalog] Failed to fetch Ollama models: Unable to connect. Is the computer able to access the url?
+[2026-03-21T05:23:49.508Z] [Agent][stdout] [milady-api] server.listen callback fired (143ms)
+[2026-03-21T05:23:49.510Z] [Agent][stdout]  Info       [milady-api] Listening on http://127.0.0.1:2138
+[2026-03-21T05:23:49.512Z] [Agent][stdout] [milady] Control UI: http://localhost:2138
+[2026-03-21T05:23:49.513Z] [Agent][stdout]  Info       [milady] API server listening on http://localhost:2138
+[2026-03-21T05:23:49.519Z] [Agent][stderr]  Warn       [PLUGIN:SQL] Ignoring non-UUID message/server identifier for world (serverId=5b5a11b1-46e0-0309-a241-e0d6ce60c303)
+[2026-03-21T05:23:49.537Z] [Agent][stdout] 💬 Chat with Milady (type 'exit' to quit)
+[2026-03-21T05:23:49.544Z] [Agent][stdout] You:  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:49.617Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:49.625Z] [Agent][stdout]  Info       [milady-api] No built UI found — dashboard routes are disabled
+[2026-03-21T05:23:49.792Z] [Agent] Runtime started -- agent: Milady, port: 2138, pid: 45123, startup_ms: 34823
+[2026-03-21T05:23:50.007Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:50.007Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:50.007Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:50.007Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:50.007Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:50.008Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:50.008Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:50.008Z] [Agent][stdout]  Info       Generating embedding for text (textLength=379)
+[2026-03-21T05:23:50.008Z] [Agent][stdout]  Info       Generating embedding for text (textLength=277)
+[2026-03-21T05:23:50.008Z] [Agent][stdout]  Info       Generating embedding for text (textLength=240)
+[2026-03-21T05:23:50.008Z] [Agent][stdout]  Info       Generating embedding for text (textLength=147)
+[2026-03-21T05:23:50.009Z] [Agent][stdout]  Info       Generating embedding for text (textLength=155)
+[2026-03-21T05:23:50.009Z] [Agent][stdout]  Info       Generating embedding for text (textLength=95)
+[2026-03-21T05:23:50.009Z] [Agent][stdout]  Info       Generating embedding for text (textLength=115)
+[2026-03-21T05:23:50.009Z] [Agent][stdout]  Info       Generating embedding for text (textLength=62)
+[2026-03-21T05:23:50.009Z] [Agent][stdout]  Info       Generating embedding for text (textLength=57)
+[2026-03-21T05:23:50.009Z] [Agent][stdout]  Info       Generating embedding for text (textLength=75)
+[2026-03-21T05:23:50.014Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:50.046Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:50.074Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:50.095Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:50.121Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:50.144Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:50.164Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:50.179Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:50.191Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:50.209Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:50.211Z] [Agent][stdout]  Info       Generating embedding for text (textLength=67)
+[2026-03-21T05:23:50.212Z] [Agent][stdout]  Info       Generating embedding for text (textLength=225)
+[2026-03-21T05:23:50.214Z] [Agent][stdout]  Info       Generating embedding for text (textLength=161)
+[2026-03-21T05:23:50.214Z] [Agent][stdout]  Info       Generating embedding for text (textLength=103)
+[2026-03-21T05:23:50.214Z] [Agent][stdout]  Info       Generating embedding for text (textLength=101)
+[2026-03-21T05:23:50.214Z] [Agent][stdout]  Info       Generating embedding for text (textLength=114)
+[2026-03-21T05:23:50.214Z] [Agent][stdout]  Info       Generating embedding for text (textLength=269)
+[2026-03-21T05:23:50.215Z] [Agent][stdout]  Info       Generating embedding for text (textLength=250)
+[2026-03-21T05:23:50.215Z] [Agent][stdout]  Info       Generating embedding for text (textLength=157)
+[2026-03-21T05:23:50.215Z] [Agent][stdout]  Info       Generating embedding for text (textLength=168)
+[2026-03-21T05:23:50.241Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:50.264Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:50.287Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:50.306Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:50.325Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:50.353Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:50.414Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:50.442Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:50.475Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:50.495Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:50.497Z] [Agent][stdout]  Info       Generating embedding for text (textLength=166)
+[2026-03-21T05:23:50.497Z] [Agent][stdout]  Info       Generating embedding for text (textLength=263)
+[2026-03-21T05:23:50.498Z] [Agent][stdout]  Info       Generating embedding for text (textLength=204)
+[2026-03-21T05:23:50.498Z] [Agent][stdout]  Info       Generating embedding for text (textLength=172)
+[2026-03-21T05:23:50.498Z] [Agent][stdout]  Info       Generating embedding for text (textLength=198)
+[2026-03-21T05:23:50.498Z] [Agent][stdout]  Info       Generating embedding for text (textLength=202)
+[2026-03-21T05:23:50.499Z] [Agent][stdout]  Info       Generating embedding for text (textLength=156)
+[2026-03-21T05:23:50.499Z] [Agent][stdout]  Info       Generating embedding for text (textLength=134)
+[2026-03-21T05:23:50.499Z] [Agent][stdout]  Info       Generating embedding for text (textLength=182)
+[2026-03-21T05:23:50.499Z] [Agent][stdout]  Info       Generating embedding for text (textLength=210)
+[2026-03-21T05:23:50.519Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:50.548Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:50.571Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:50.594Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:50.618Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:50.646Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:50.667Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:50.687Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:50.711Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:50.734Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:50.735Z] [Agent][stdout]  Info       Generating embedding for text (textLength=163)
+[2026-03-21T05:23:50.735Z] [Agent][stdout]  Info       Generating embedding for text (textLength=128)
+[2026-03-21T05:23:50.735Z] [Agent][stdout]  Info       Generating embedding for text (textLength=132)
+[2026-03-21T05:23:50.735Z] [Agent][stdout]  Info       Generating embedding for text (textLength=235)
+[2026-03-21T05:23:50.735Z] [Agent][stdout]  Info       Generating embedding for text (textLength=118)
+[2026-03-21T05:23:50.736Z] [Agent][stdout]  Info       Generating embedding for text (textLength=141)
+[2026-03-21T05:23:50.736Z] [Agent][stdout]  Info       Generating embedding for text (textLength=190)
+[2026-03-21T05:23:50.736Z] [Agent][stdout]  Info       Generating embedding for text (textLength=228)
+[2026-03-21T05:23:50.737Z] [Agent][stdout]  Info       Generating embedding for text (textLength=161)
+[2026-03-21T05:23:50.737Z] [Agent][stdout]  Info       Generating embedding for text (textLength=215)
+[2026-03-21T05:23:50.759Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:50.779Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:50.799Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:50.826Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:50.845Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:50.860Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:50.890Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:50.918Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:50.943Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:50.963Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:50.964Z] [Agent][stdout]  Info       Generating embedding for text (textLength=244)
+[2026-03-21T05:23:50.964Z] [Agent][stdout]  Info       Generating embedding for text (textLength=216)
+[2026-03-21T05:23:50.964Z] [Agent][stdout]  Info       Generating embedding for text (textLength=280)
+[2026-03-21T05:23:50.964Z] [Agent][stdout]  Info       Generating embedding for text (textLength=152)
+[2026-03-21T05:23:50.965Z] [Agent][stdout]  Info       Generating embedding for text (textLength=109)
+[2026-03-21T05:23:50.965Z] [Agent][stdout]  Info       Generating embedding for text (textLength=134)
+[2026-03-21T05:23:50.965Z] [Agent][stdout]  Info       Generating embedding for text (textLength=144)
+[2026-03-21T05:23:50.965Z] [Agent][stdout]  Info       Generating embedding for text (textLength=112)
+[2026-03-21T05:23:50.965Z] [Agent][stdout]  Info       Generating embedding for text (textLength=392)
+[2026-03-21T05:23:50.965Z] [Agent][stdout]  Info       Generating embedding for text (textLength=252)
+[2026-03-21T05:23:50.988Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:51.015Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:51.044Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:51.071Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:51.084Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:51.108Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:51.215Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:51.291Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:51.327Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:51.355Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:51.356Z] [Agent][stdout]  Info       Generating embedding for text (textLength=343)
+[2026-03-21T05:23:51.357Z] [Agent][stdout]  Info       Generating embedding for text (textLength=492)
+[2026-03-21T05:23:51.357Z] [Agent][stdout]  Info       Generating embedding for text (textLength=166)
+[2026-03-21T05:23:51.358Z] [Agent][stdout]  Info       Generating embedding for text (textLength=312)
+[2026-03-21T05:23:51.358Z] [Agent][stdout]  Info       Generating embedding for text (textLength=359)
+[2026-03-21T05:23:51.359Z] [Agent][stdout]  Info       Generating embedding for text (textLength=138)
+[2026-03-21T05:23:51.359Z] [Agent][stdout]  Info       Generating embedding for text (textLength=255)
+[2026-03-21T05:23:51.359Z] [Agent][stdout]  Info       Generating embedding for text (textLength=437)
+[2026-03-21T05:23:51.360Z] [Agent][stdout]  Info       Generating embedding for text (textLength=169)
+[2026-03-21T05:23:51.360Z] [Agent][stdout]  Info       Generating embedding for text (textLength=109)
+[2026-03-21T05:23:51.392Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:51.433Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:51.457Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:51.591Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:51.637Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:51.655Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:51.683Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:51.723Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:51.759Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:51.789Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:51.789Z] [Agent][stdout]  Info       Generating embedding for text (textLength=414)
+[2026-03-21T05:23:51.790Z] [Agent][stdout]  Info       Generating embedding for text (textLength=227)
+[2026-03-21T05:23:51.791Z] [Agent][stdout]  Info       Generating embedding for text (textLength=581)
+[2026-03-21T05:23:51.847Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:51.877Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:51.985Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:23:51.989Z] [Agent][stdout]  Info       [SERVICE:ACTION-FILTER] ActionFilterService started (actionCount=73, embeddingAvailable=true)
+[2026-03-21T05:24:38.943Z] [Agent][stdout]  Info       [milady-api] Sandbox mode set to: standard
+[2026-03-21T05:24:38.955Z] [Agent][stdout]  Info       [milady-api] Onboarding complete for agent "Koishi" (mode: local)
+[2026-03-21T05:24:38.972Z] [Agent][stdout]  Info       [milady] Hot-reload: Restarting runtime...
+[2026-03-21T05:24:38.972Z] [Agent][stdout]  Info       Knowledge service stopping for agent: Milady
+[2026-03-21T05:24:38.973Z] [Agent][stdout]  Info       Shell service stopped, cleaned up 0 running sessions
+[2026-03-21T05:24:38.973Z] [Agent][stdout]  Info       [PluginManagerService] Stopping...
+[2026-03-21T05:24:38.973Z] [Agent][stdout]  Info       [PluginManagerService] Stopped
+[2026-03-21T05:24:38.974Z] [Agent][stdout]  Info       [ExperienceService] Stopping...
+[2026-03-21T05:24:38.974Z] [Agent][stdout]  Info       [ExperienceService] Saved 0 experiences
+[2026-03-21T05:24:38.975Z] [Agent][stdout]  Info       [PluginActivator] Stopping
+[2026-03-21T05:24:38.976Z] [Agent][stdout]  Info       [PluginActivator] Stopped
+[2026-03-21T05:24:38.976Z] [Agent][stdout]  Info       [OnboardingService] Stopping
+[2026-03-21T05:24:38.976Z] [Agent][stdout]  Info       [OnboardingService] Stopped
+[2026-03-21T05:24:38.977Z] [Agent][stdout]  Info       [LLMEvaluator] Stopped
+[2026-03-21T05:24:38.978Z] [Agent][stdout]  Info       NotificationManager stopped
+[2026-03-21T05:24:38.979Z] [Agent][stdout]  Info       CacheManager stopped
+[2026-03-21T05:24:38.981Z] [Agent][stdout]  Info       TodoReminderService stopped
+[2026-03-21T05:24:38.982Z] [Agent][stdout]  Info       TodoIntegrationBridge stopped
+[2026-03-21T05:24:38.984Z] [Agent][stdout]  Info       [FormService] Stopped
+[2026-03-21T05:24:38.985Z] [Agent][stdout]  Info       [SecretsService] Stopping
+[2026-03-21T05:24:38.985Z] [Agent][stdout]  Info       [SecretsService] Stopped
+[2026-03-21T05:24:38.986Z] [Agent][stdout]  Info       [RolodexService] Stopped
+[2026-03-21T05:24:38.986Z] [Agent][stdout]  Info       [FollowUpService] Stopped successfully
+[2026-03-21T05:24:38.986Z] [Agent][stdout]  Info       [EntityResolution] Stopped
+[2026-03-21T05:24:38.986Z] [Agent][stdout]  Info       [CronService] Stopped for agent c1f385de-1f9e-06fc-8658-dcbc3e40e7a6
+[2026-03-21T05:24:38.986Z] [Agent][stdout]  Info       [SERVICE:ACTION-FILTER] ActionFilterService stopped
+[2026-03-21T05:24:39.034Z] [Agent][stdout]  Info       [milady] PGlite data dir: /Users/paranjay/.milady/workspace/.eliza/.elizadb (existed)
+[2026-03-21T05:24:39.044Z] [Agent][stderr]  Warn       [milady] Removed malformed PGlite postmaster.pid
+[2026-03-21T05:24:39.072Z] [Agent][stdout]  Info       [milady] Resolving 18 plugins...
+[2026-03-21T05:24:39.092Z] [Agent][stdout]  Info       [milady] Plugin loading took 21ms
+[2026-03-21T05:24:39.094Z] [Agent][stdout]  Info       [milady] Plugin resolution complete: 18/18 loaded
+[2026-03-21T05:24:39.272Z] [Agent][stdout]  Info       [milady] Configured local embedding env: nomic-embed-text-v1.5.Q5_K_M.gguf (repo: auto, dims: auto, ctx: auto, GPU: auto, mmap: false)
+[2026-03-21T05:24:39.274Z] [Agent][stdout]  Info       Initializing local embedding plugin...
+[2026-03-21T05:24:39.275Z] [Agent][stdout]  Info       Initializing platform detection...
+[2026-03-21T05:24:39.706Z] [Agent][stdout]  Info       Platform capabilities detected (platform=darwin, gpu=metal, recommendedModel=small, supportedBackends=["cpu","metal"])
+[2026-03-21T05:24:39.710Z] [Agent][stdout]  Info       Using local AI configuration: (LOCAL_EMBEDDING_MODEL=nomic-embed-text-v1.5.Q5_K_M.gguf, MODELS_DIR=/Users/paranjay/.eliza/models, LOCAL_EMBEDDING_GPU_LAYERS=-1, LOCAL_EMBEDDING_USE_MMAP=false)
+[2026-03-21T05:24:39.710Z] [Agent][stdout]  Info       Embedding model file is present (embeddingModelPath=nomic-embed-text-v1.5.Q5_K_M.gguf)
+[2026-03-21T05:24:39.710Z] [Agent][stdout]  Info       [SecretsManagerPlugin] Initializing
+[2026-03-21T05:24:39.711Z] [Agent][stdout]  Info       [SecretsManagerPlugin] Initialized
+[2026-03-21T05:24:39.714Z] [Agent][stdout]  Info       [Rolodex] Plugin initialized with LLM-based extraction and entity resolution
+[2026-03-21T05:24:39.717Z] [Agent][stdout]  Info       [TrustPlugin] Initializing trust plugin. Services will be started by the runtime.
+[2026-03-21T05:24:39.719Z] [Agent][stdout]  Info       [TodoPlugin] Database adapter registered — ready for operation
+[2026-03-21T05:24:39.719Z] [Agent][stderr]  Warn       [TodoPlugin] Rolodex not available — only in-app notifications will work
+[2026-03-21T05:24:39.719Z] [Agent][stdout]  Info       [TodoPlugin] Initialized
+[2026-03-21T05:24:39.746Z] [Agent][stdout]  Info       [ExperiencePlugin] Initializing experience learning system
+[2026-03-21T05:24:39.746Z] [Agent][stdout]  Info       [ExperiencePlugin] Configuration:
+[2026-03-21T05:24:39.746Z] [Agent][stdout]     - AUTO_RECORD_THRESHOLD: 0.7
+[2026-03-21T05:24:39.852Z] [Agent][stdout]  Info       [PLUGIN:SQL] Initializing migration system
+[2026-03-21T05:24:39.866Z] [Agent][stdout]  Info       [PLUGIN:SQL] Migration system initialized
+[2026-03-21T05:24:39.866Z] [Agent][stdout]  Info       [PLUGIN:SQL] DatabaseMigrationService initialized
+[2026-03-21T05:24:39.867Z] [Agent][stdout]  Info       [PLUGIN:SQL] Starting migrations (environment=DEVELOPMENT, pluginCount=3, dryRun=false)
+[2026-03-21T05:24:39.867Z] [Agent][stdout]  Info       [PLUGIN:SQL] Starting migration for plugin (pluginName=@elizaos/plugin-sql)
+[2026-03-21T05:24:39.868Z] [Agent][stdout]  Info       [PLUGIN:SQL] Initializing migration system
+[2026-03-21T05:24:39.875Z] [Agent][stdout]  Info       [PLUGIN:SQL] Migration system initialized
+[2026-03-21T05:24:39.899Z] [Agent][stdout]  Info       [PLUGIN:SQL] No changes detected, skipping migration (pluginName=@elizaos/plugin-sql, hash=9ba9e93cfb2f9416fc1959a0240794d8)
+[2026-03-21T05:24:39.900Z] [Agent][stdout]  Info       [PLUGIN:SQL] Migration completed (pluginName=@elizaos/plugin-sql)
+[2026-03-21T05:24:39.900Z] [Agent][stdout]  Info       [PLUGIN:SQL] Starting migration for plugin (pluginName=trust)
+[2026-03-21T05:24:39.900Z] [Agent][stdout]  Info       [PLUGIN:SQL] Initializing migration system
+[2026-03-21T05:24:39.906Z] [Agent][stdout]  Info       [PLUGIN:SQL] Migration system initialized
+[2026-03-21T05:24:39.909Z] [Agent][stderr]  Warn       [PLUGIN:SQL] Plugin table is using public schema - consider using pgSchema for better isolation (pluginName=trust, tableName=whistleblower_reports, expectedSchema=trust)
+[2026-03-21T05:24:39.909Z] [Agent][stderr]  Warn       [PLUGIN:SQL] Plugin table is using public schema - consider using pgSchema for better isolation (pluginName=trust, tableName=trust_profiles, expectedSchema=trust)
+[2026-03-21T05:24:39.909Z] [Agent][stderr]  Warn       [PLUGIN:SQL] Plugin table is using public schema - consider using pgSchema for better isolation (pluginName=trust, tableName=trust_evidence, expectedSchema=trust)
+[2026-03-21T05:24:39.909Z] [Agent][stderr]  Warn       [PLUGIN:SQL] Plugin table is using public schema - consider using pgSchema for better isolation (pluginName=trust, tableName=security_incidents, expectedSchema=trust)
+[2026-03-21T05:24:39.909Z] [Agent][stderr]  Warn       [PLUGIN:SQL] Plugin table is using public schema - consider using pgSchema for better isolation (pluginName=trust, tableName=permission_delegations, expectedSchema=trust)
+[2026-03-21T05:24:39.909Z] [Agent][stderr]  Warn       [PLUGIN:SQL] Plugin table is using public schema - consider using pgSchema for better isolation (pluginName=trust, tableName=identity_links, expectedSchema=trust)
+[2026-03-21T05:24:39.909Z] [Agent][stderr]  Warn       [PLUGIN:SQL] Plugin table is using public schema - consider using pgSchema for better isolation (pluginName=trust, tableName=contextual_roles, expectedSchema=trust)
+[2026-03-21T05:24:39.909Z] [Agent][stderr]  Warn       [PLUGIN:SQL] Plugin table is using public schema - consider using pgSchema for better isolation (pluginName=trust, tableName=behavioral_profiles, expectedSchema=trust)
+[2026-03-21T05:24:39.910Z] [Agent][stdout]  Info       [PLUGIN:SQL] No changes detected, skipping migration (pluginName=trust, hash=e4df6cde371c3a3437d8d1c2fbaed4ba)
+[2026-03-21T05:24:39.911Z] [Agent][stdout]  Info       [PLUGIN:SQL] Migration completed (pluginName=trust)
+[2026-03-21T05:24:39.911Z] [Agent][stdout]  Info       [PLUGIN:SQL] Starting migration for plugin (pluginName=todo)
+[2026-03-21T05:24:39.912Z] [Agent][stdout]  Info       [PLUGIN:SQL] Initializing migration system
+[2026-03-21T05:24:39.917Z] [Agent][stdout]  Info       [PLUGIN:SQL] Migration system initialized
+[2026-03-21T05:24:39.919Z] [Agent][stderr]  Warn       [PLUGIN:SQL] Plugin table is using public schema - consider using pgSchema for better isolation (pluginName=todo, tableName=todos, expectedSchema=todo)
+[2026-03-21T05:24:39.919Z] [Agent][stderr]  Warn       [PLUGIN:SQL] Plugin table is using public schema - consider using pgSchema for better isolation (pluginName=todo, tableName=todo_tags, expectedSchema=todo)
+[2026-03-21T05:24:39.920Z] [Agent][stdout]  Info       [PLUGIN:SQL] No changes detected, skipping migration (pluginName=todo, hash=9ed54a7d1020c9d7c215d66156e4d9d9)
+[2026-03-21T05:24:39.920Z] [Agent][stdout]  Info       [PLUGIN:SQL] Migration completed (pluginName=todo)
+[2026-03-21T05:24:39.920Z] [Agent][stdout]  Info       [PLUGIN:SQL] All migrations completed successfully (successCount=3)
+[2026-03-21T05:24:39.920Z] [Agent][stdout]  Info       [PLUGIN:SQL] Skipping RLS re-application (ENABLE_DATA_ISOLATION is not true)
+[2026-03-21T05:24:39.966Z] [Agent][stdout]  Info       Generating embedding for text (textLength=25)
+[2026-03-21T05:24:40.049Z] [Agent][stderr]  Warn       Google AI configuration error: {"error":{"code":400,"message":"API key not valid. Please pass a valid API key.","status":"INVALID_ARGUMENT","details":[{"@type":"type.googleapis.com/google.rpc.ErrorInfo","reason":"API_KEY_INVALID","domain":"googleapis.com","metadata":{"service":"generativelanguage.googleapis.com"}},{"@type":"type.googleapis.com/google.rpc.LocalizedMessage","locale":"en-US","message":"API key not valid. Please pass a valid API key."}]}}
+[2026-03-21T05:24:40.050Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:40.067Z] [Agent][stdout]  Info       [SecretsService] Initializing
+[2026-03-21T05:24:40.067Z] [Agent][stdout]  Info       [PluginActivator] Initializing
+[2026-03-21T05:24:40.068Z] [Agent][stdout]  Info       [PluginActivator] Initialized
+[2026-03-21T05:24:40.068Z] [Agent][stderr]  Warn       [PluginActivator] SecretsService not available, activation will be limited
+[2026-03-21T05:24:40.068Z] [Agent][stdout]  Info       [OnboardingService] Starting
+[2026-03-21T05:24:40.068Z] [Agent][stdout]  Info       [OnboardingService] Started
+[2026-03-21T05:24:40.068Z] [Agent][stdout]  Info       Starting Knowledge service for agent: 6c12c3fa-9deb-04f9-add0-171456ba7453
+[2026-03-21T05:24:40.069Z] [Agent][stderr]  Warn       Basic Embedding mode - documents will not be enriched with context
+[2026-03-21T05:24:40.069Z] [Agent][stdout]  Info       To enable contextual enrichment: Set CTX_KNOWLEDGE_ENABLED=true and configure TEXT_PROVIDER/TEXT_MODEL
+[2026-03-21T05:24:40.069Z] [Agent][stdout]  Info       Using plugin-openai configuration for embeddings
+[2026-03-21T05:24:40.072Z] [Agent][stdout]  Info       Shell plugin enabled with allowed directory: /Volumes/Milady-canary/Milady-canary.app/Contents/Resources/app/milady-dist, background: true, timeout: 30000ms
+[2026-03-21T05:24:40.073Z] [Agent][stdout]  Info       Shell service initialized with PTY, background execution, and history tracking
+[2026-03-21T05:24:40.073Z] [Agent][stdout]  Info       [SERVICE:EXEC_APPROVAL] ExecApprovalService started
+[2026-03-21T05:24:40.076Z] [Agent][stdout]  Info       [PluginManagerService] Initialized with config: {"pluginDirectory":"./plugins"}
+[2026-03-21T05:24:40.083Z] [Agent][stdout]  Info       [TrustEngine] Initialized with config: (trustConfig={"recencyBias":0.7,"evidenceDecayRate":0.5,"minimumEvidenceCount":3,"verificationMultiplier":1.5,"dimensionWeights":{"reliability":0.25,"competence":0.2,"integrity":0.25,"benevolence":0.2,"transparency":0.1}})
+[2026-03-21T05:24:40.083Z] [Agent][stdout]  Info       [LLMEvaluator] Initialized
+[2026-03-21T05:24:40.083Z] [Agent][stdout]  Info       Starting TodoReminderService...
+[2026-03-21T05:24:40.083Z] [Agent][stdout]  Info       CacheManager initialized
+[2026-03-21T05:24:40.083Z] [Agent][stderr]  Warn       Rolodex services not found - only in-app notifications will be sent
+[2026-03-21T05:24:40.084Z] [Agent][stdout]  Info       Reminder loop started - checking every 30 seconds
+[2026-03-21T05:24:40.084Z] [Agent][stdout]  Info       Starting TodoIntegrationBridge...
+[2026-03-21T05:24:40.086Z] [Agent][stdout]  Info       [SERVICE:TOOL_POLICY] ToolPolicyService started (coreToolCount=23)
+[2026-03-21T05:24:40.094Z] [Agent][stdout]  Info       NotificationManager initialized
+[2026-03-21T05:24:40.094Z] [Agent][stdout]  Info       TodoReminderService started successfully
+[2026-03-21T05:24:40.094Z] [Agent][stdout]  Info       TodoIntegrationBridge started successfully
+[2026-03-21T05:24:40.094Z] [Agent][stdout]  Info       Generating embedding for text (textLength=193)
+[2026-03-21T05:24:40.099Z] [Agent][stdout]  Info       Generating embedding for text (textLength=192)
+[2026-03-21T05:24:40.099Z] [Agent][stdout]  Info       Generating embedding for text (textLength=276)
+[2026-03-21T05:24:40.099Z] [Agent][stdout]  Info       Generating embedding for text (textLength=134)
+[2026-03-21T05:24:40.100Z] [Agent][stdout]  Info       Generating embedding for text (textLength=85)
+[2026-03-21T05:24:40.101Z] [Agent][stdout]  Info       Generating embedding for text (textLength=104)
+[2026-03-21T05:24:40.102Z] [Agent][stdout]  Info       Generating embedding for text (textLength=174)
+[2026-03-21T05:24:40.102Z] [Agent][stdout]  Info       Generating embedding for text (textLength=400)
+[2026-03-21T05:24:40.103Z] [Agent][stdout]  Info       Generating embedding for text (textLength=460)
+[2026-03-21T05:24:40.103Z] [Agent][stdout]  Info       Generating embedding for text (textLength=379)
+[2026-03-21T05:24:40.103Z] [Agent][stdout]  Info       [FormService] Started with built-in types
+[2026-03-21T05:24:40.104Z] [Agent][stdout]  Info       [CharacterSettingsStorage] Migrated 0 env vars to secrets
+[2026-03-21T05:24:40.104Z] [Agent][stdout]  Info       [SecurityModule] Initialized
+[2026-03-21T05:24:40.106Z] [Agent][stderr]  Error      #Koishi  [AGENT] Service registration failed for AGENT_SKILLS_SERVICE (plugin: @elizaos/plugin-agent-skills). The agent will continue without this service. (plugin=@elizaos/plugin-agent-skills, serviceType=AGENT_SKILLS_SERVICE, error=FileSystemSkillStore requires Node.js fs module)
+[2026-03-21T05:24:40.106Z] [Agent][stdout]  Info       [CredentialProtector] Initialized
+[2026-03-21T05:24:40.119Z] [Agent][stdout]  Info       [ExperienceService] Loaded 0 experiences from memory
+[2026-03-21T05:24:40.119Z] [Agent][stdout]  Info       [SecretsService] Migrated 1 aliased keys to canonical names
+[2026-03-21T05:24:40.119Z] [Agent][stdout]  Info       [RolodexService] Loaded 0 contacts
+[2026-03-21T05:24:40.119Z] [Agent][stdout]  Info       [RolodexService] Initialized
+[2026-03-21T05:24:40.120Z] [Agent][stdout]  Info       [FollowUpService] Successfully acquired RolodexService via service promise
+[2026-03-21T05:24:40.120Z] [Agent][stdout]  Info       [FollowUpService] Successfully acquired RolodexService via service promise
+[2026-03-21T05:24:40.120Z] [Agent][stdout]  Info       [FollowUpService] Initialized successfully
+[2026-03-21T05:24:40.125Z] [Agent][stdout]  Info       [SecretsService] Initialized
+[2026-03-21T05:24:40.125Z] [Agent][stdout]  Info       [EntityResolution] Initialized with 0 indexed names
+[2026-03-21T05:24:40.139Z] [Agent][stdout]  Info       [Heartbeat] Created recurring task (every 1800s)
+[2026-03-21T05:24:40.142Z] [Agent][stdout]  Info       [CronService] Started for agent 6c12c3fa-9deb-04f9-add0-171456ba7453 with 0 jobs
+[2026-03-21T05:24:40.173Z] [Agent][stdout]  Info       [milady] Hot-reload: Runtime restarted successfully
+[2026-03-21T05:24:40.186Z] [Agent][stdout]  Info       [trajectory-logger] Trajectory logger service initialized
+[2026-03-21T05:24:40.186Z] [Agent][stderr]  Error      #Koishi  [AGENT] Service registration failed for CHARACTER_MANAGEMENT (plugin: @elizaos/plugin-personality). The agent will continue without this service. (plugin=@elizaos/plugin-personality, serviceType=CHARACTER_MANAGEMENT, error=EROFS: read-only file system, mkdir '/Volumes/Milady-canary/Milady-canary.app/Contents/Resources/app/milady-dist/.eliza')
+[2026-03-21T05:24:40.187Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:40.265Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:40.300Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:40.321Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:40.344Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:40.363Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:40.386Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:40.473Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:40.529Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:40.567Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:40.568Z] [Agent][stdout]  Info       Generating embedding for text (textLength=379)
+[2026-03-21T05:24:40.569Z] [Agent][stdout]  Info       Generating embedding for text (textLength=277)
+[2026-03-21T05:24:40.569Z] [Agent][stdout]  Info       Generating embedding for text (textLength=240)
+[2026-03-21T05:24:40.569Z] [Agent][stdout]  Info       Generating embedding for text (textLength=147)
+[2026-03-21T05:24:40.569Z] [Agent][stdout]  Info       Generating embedding for text (textLength=155)
+[2026-03-21T05:24:40.569Z] [Agent][stdout]  Info       Generating embedding for text (textLength=95)
+[2026-03-21T05:24:40.569Z] [Agent][stdout]  Info       Generating embedding for text (textLength=115)
+[2026-03-21T05:24:40.570Z] [Agent][stdout]  Info       Generating embedding for text (textLength=62)
+[2026-03-21T05:24:40.570Z] [Agent][stdout]  Info       Generating embedding for text (textLength=57)
+[2026-03-21T05:24:40.570Z] [Agent][stdout]  Info       Generating embedding for text (textLength=75)
+[2026-03-21T05:24:40.629Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:40.668Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:40.711Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:40.745Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:40.776Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:40.795Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:40.828Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:40.867Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:40.915Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:41.015Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:41.020Z] [Agent][stdout]  Info       Generating embedding for text (textLength=67)
+[2026-03-21T05:24:41.023Z] [Agent][stdout]  Info       Generating embedding for text (textLength=225)
+[2026-03-21T05:24:41.024Z] [Agent][stdout]  Info       Generating embedding for text (textLength=161)
+[2026-03-21T05:24:41.024Z] [Agent][stdout]  Info       Generating embedding for text (textLength=103)
+[2026-03-21T05:24:41.024Z] [Agent][stdout]  Info       Generating embedding for text (textLength=101)
+[2026-03-21T05:24:41.025Z] [Agent][stdout]  Info       Generating embedding for text (textLength=114)
+[2026-03-21T05:24:41.025Z] [Agent][stdout]  Info       Generating embedding for text (textLength=269)
+[2026-03-21T05:24:41.025Z] [Agent][stdout]  Info       Generating embedding for text (textLength=250)
+[2026-03-21T05:24:41.026Z] [Agent][stdout]  Info       Generating embedding for text (textLength=157)
+[2026-03-21T05:24:41.026Z] [Agent][stdout]  Info       Generating embedding for text (textLength=168)
+[2026-03-21T05:24:41.055Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:41.098Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:41.133Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:41.188Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:41.632Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:41.672Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:41.708Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:41.748Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:41.785Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:41.827Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:41.827Z] [Agent][stdout]  Info       Generating embedding for text (textLength=166)
+[2026-03-21T05:24:41.829Z] [Agent][stdout]  Info       Generating embedding for text (textLength=263)
+[2026-03-21T05:24:41.830Z] [Agent][stdout]  Info       Generating embedding for text (textLength=204)
+[2026-03-21T05:24:41.831Z] [Agent][stdout]  Info       Generating embedding for text (textLength=172)
+[2026-03-21T05:24:41.831Z] [Agent][stdout]  Info       Generating embedding for text (textLength=198)
+[2026-03-21T05:24:41.832Z] [Agent][stdout]  Info       Generating embedding for text (textLength=202)
+[2026-03-21T05:24:41.832Z] [Agent][stdout]  Info       Generating embedding for text (textLength=156)
+[2026-03-21T05:24:41.832Z] [Agent][stdout]  Info       Generating embedding for text (textLength=134)
+[2026-03-21T05:24:41.833Z] [Agent][stdout]  Info       Generating embedding for text (textLength=182)
+[2026-03-21T05:24:41.833Z] [Agent][stdout]  Info       Generating embedding for text (textLength=210)
+[2026-03-21T05:24:41.869Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:41.909Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:41.939Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:41.976Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:42.012Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:42.048Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:42.076Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:42.110Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:42.141Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:42.178Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:42.181Z] [Agent][stdout]  Info       Generating embedding for text (textLength=163)
+[2026-03-21T05:24:42.182Z] [Agent][stdout]  Info       Generating embedding for text (textLength=128)
+[2026-03-21T05:24:42.182Z] [Agent][stdout]  Info       Generating embedding for text (textLength=132)
+[2026-03-21T05:24:42.182Z] [Agent][stdout]  Info       Generating embedding for text (textLength=235)
+[2026-03-21T05:24:42.182Z] [Agent][stdout]  Info       Generating embedding for text (textLength=118)
+[2026-03-21T05:24:42.183Z] [Agent][stdout]  Info       Generating embedding for text (textLength=141)
+[2026-03-21T05:24:42.183Z] [Agent][stdout]  Info       Generating embedding for text (textLength=190)
+[2026-03-21T05:24:42.183Z] [Agent][stdout]  Info       Generating embedding for text (textLength=228)
+[2026-03-21T05:24:42.183Z] [Agent][stdout]  Info       Generating embedding for text (textLength=161)
+[2026-03-21T05:24:42.183Z] [Agent][stdout]  Info       Generating embedding for text (textLength=215)
+[2026-03-21T05:24:42.215Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:42.231Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:42.256Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:42.294Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:42.320Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:42.341Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:42.381Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:42.413Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:42.447Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:42.476Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:42.477Z] [Agent][stdout]  Info       Generating embedding for text (textLength=244)
+[2026-03-21T05:24:42.477Z] [Agent][stdout]  Info       Generating embedding for text (textLength=216)
+[2026-03-21T05:24:42.478Z] [Agent][stdout]  Info       Generating embedding for text (textLength=280)
+[2026-03-21T05:24:42.478Z] [Agent][stdout]  Info       Generating embedding for text (textLength=152)
+[2026-03-21T05:24:42.478Z] [Agent][stdout]  Info       Generating embedding for text (textLength=109)
+[2026-03-21T05:24:42.478Z] [Agent][stdout]  Info       Generating embedding for text (textLength=134)
+[2026-03-21T05:24:42.479Z] [Agent][stdout]  Info       Generating embedding for text (textLength=144)
+[2026-03-21T05:24:42.479Z] [Agent][stdout]  Info       Generating embedding for text (textLength=112)
+[2026-03-21T05:24:42.479Z] [Agent][stdout]  Info       Generating embedding for text (textLength=392)
+[2026-03-21T05:24:42.479Z] [Agent][stdout]  Info       Generating embedding for text (textLength=252)
+[2026-03-21T05:24:42.509Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:42.544Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:42.589Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:42.626Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:42.655Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:42.691Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:42.736Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:42.776Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:42.824Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:42.869Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:42.871Z] [Agent][stdout]  Info       Generating embedding for text (textLength=343)
+[2026-03-21T05:24:42.871Z] [Agent][stdout]  Info       Generating embedding for text (textLength=492)
+[2026-03-21T05:24:42.872Z] [Agent][stdout]  Info       Generating embedding for text (textLength=166)
+[2026-03-21T05:24:42.872Z] [Agent][stdout]  Info       Generating embedding for text (textLength=312)
+[2026-03-21T05:24:42.873Z] [Agent][stdout]  Info       Generating embedding for text (textLength=359)
+[2026-03-21T05:24:42.873Z] [Agent][stdout]  Info       Generating embedding for text (textLength=138)
+[2026-03-21T05:24:42.873Z] [Agent][stdout]  Info       Generating embedding for text (textLength=255)
+[2026-03-21T05:24:42.874Z] [Agent][stdout]  Info       Generating embedding for text (textLength=437)
+[2026-03-21T05:24:42.874Z] [Agent][stdout]  Info       Generating embedding for text (textLength=169)
+[2026-03-21T05:24:42.875Z] [Agent][stdout]  Info       Generating embedding for text (textLength=109)
+[2026-03-21T05:24:42.921Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:42.974Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:43.016Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:43.110Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:43.158Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:43.187Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:43.492Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:43.572Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:43.614Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:43.637Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:43.639Z] [Agent][stdout]  Info       Generating embedding for text (textLength=414)
+[2026-03-21T05:24:43.641Z] [Agent][stdout]  Info       Generating embedding for text (textLength=227)
+[2026-03-21T05:24:43.642Z] [Agent][stdout]  Info       Generating embedding for text (textLength=581)
+[2026-03-21T05:24:43.695Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:43.727Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:43.797Z] [Agent][stdout]  Info       Embedding generation complete (dimensions=768)
+[2026-03-21T05:24:43.803Z] [Agent][stdout]  Info       [SERVICE:ACTION-FILTER] ActionFilterService started (actionCount=73, embeddingAvailable=true)
+[2026-03-21T05:25:08.526Z] [Agent][stderr]  Warn       [PLUGIN:SQL] Ignoring non-UUID message/server identifier for world (serverId=5bec2a57-bb51-0080-a8e1-a9abf672137c)
+[2026-03-21T05:25:09.333Z] [Agent] Sending SIGTERM to pid 45123
