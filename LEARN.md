@@ -72,6 +72,98 @@ Before diving in, here's what each tool actually does in plain English:
 | **Gemini CLI** | Google's AI in terminal | Alternative to ChatGPT |
 | **Agents (.agents/)** | Design skill pack | 20 skills for UI/UX improvements |
 
+## OpenCode
+
+### What Is OpenCode?
+
+OpenCode is a terminal-based AI coding assistant. Think Cursor, but it runs in your terminal. You can chat with it, ask it to write code, explain things, run commands, etc.
+
+### Config Location
+
+`~/.config/opencode/opencode.json`
+
+### Antigravity Auth Plugin
+
+[antigravity-auth](https://github.com/NoeFabris/opencode-antigravity-auth) lets you use Google's premium AI models (Claude Opus, Gemini Pro) through Google OAuth. No API key needed — just sign in with your Google account.
+
+**How to install:**
+
+1. The plugin is already in your `opencode.json`:
+   ```json
+   { "plugin": ["opencode-antigravity-auth@latest"] }
+   ```
+
+2. Login with Google:
+   ```bash
+   opencode auth login
+   ```
+
+3. That's it. You now have access to:
+
+**Antigravity models (Google quota):**
+
+| Model | What It's Good For |
+|-------|-------------------|
+| `antigravity-claude-opus-4-6-thinking` | Hardest problems, complex reasoning |
+| `antigravity-claude-sonnet-4-6` | General coding, fast |
+| `antigravity-gemini-3.1-pro` | Large context, multimodal |
+| `antigravity-gemini-3-pro` | General purpose |
+| `antigravity-gemini-3-flash` | Fast, cheap, good enough |
+
+**Gemini CLI models (separate quota):**
+
+| Model | What It's Good For |
+|-------|-------------------|
+| `gemini-2.5-pro` | Solid general purpose |
+| `gemini-2.5-flash` | Fast, cheaper |
+
+**Using a model:**
+
+```bash
+# Run with a specific model
+opencode run "explain this code" --model=google/antigravity-claude-sonnet-4-6
+
+# Use thinking mode (Opus)
+opencode run "solve this bug" --model=google/antigravity-claude-opus-4-6-thinking --variant=max
+
+# Inside OpenCode TUI, just type:
+/model google/antigravity-gemini-3.1-pro
+```
+
+**Multi-account setup:**
+
+```bash
+# Add more Google accounts for higher quotas
+opencode auth login   # Run again to add another account
+opencode auth login   # And again...
+```
+
+The plugin auto-rotates when one account gets rate-limited.
+
+**Config file locations:**
+
+| File | What's In It |
+|------|-------------|
+| `~/.config/opencode/opencode.json` | Main config, plugins, models |
+| `~/.config/opencode/antigravity-accounts.json` | Your Google auth tokens (don't share!) |
+| `~/.config/opencode/antigravity.json` | Optional plugin settings |
+
+**Warning:** Using this may violate Google's Terms of Service. Some users have reported account restrictions. Use at your own risk.
+
+### Common OpenCode Commands
+
+```bash
+# Start interactive mode
+opencode
+
+# Run a single prompt
+opencode run "write a fibonacci function in python"
+
+# Login/logout
+opencode auth login
+opencode auth logout
+```
+
 ---
 
 ## Zsh Shell
