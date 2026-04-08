@@ -1,0 +1,13 @@
+{
+    "security.workspace.trust.untrustedFiles": "open",
+    "python.languageServer": "Default",
+    "svelte.enable-ts-plugin": true,
+    "workbench.settings.applyToAllProfiles": [],
+    "git.ignoredRepositories": [
+        "/Users/paranjay/.asdf",
+        "/Users/paranjay/.fzf",
+        "/Users/paranjay/.nvm",
+        "/Users/paranjay/.oh-my-zsh",
+        "/Users/paranjay/homebrew"
+    ]
+}
