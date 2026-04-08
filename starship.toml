@@ -1,159 +1,49 @@
-# Starship Configuration
+# Starship Configuration | High-Vibrancy Edition
 # ============================================
-# Optimized for high readability and premium feel
-# Using numbers for Git status as requested
 
-# Inserts a blank line between shell prompts
-add_newline = true
-
-# Use a custom format
 format = """
-$username\
-$hostname\
-$localip\
-$shlvl\
-$singularity\
-$kubernetes\
 $directory\
-$vcsh\
-$fossil\
 $git_branch\
-$git_commit\
-$git_state\
-$git_metrics\
 $git_status\
-$hg_branch\
-$pijul_channel\
-$docker_context\
-$package\
-$c\
-$cmake\
-$cobol\
-$daml\
-$dart\
-$deno\
-$dotnet\
-$elixir\
-$elm\
-$erlang\
-$fennel\
-$gleam\
-$golang\
-$guix_shell\
-$haskell\
-$haxe\
-$helm\
-$java\
-$julia\
-$kotlin\
-$gradle\
-$lua\
-$nim\
-$nodejs\
-$ocaml\
-$opa\
-$perl\
-$php\
-$pulumi\
-$purescript\
-$python\
-$quarto\
-$raku\
-$rlang\
-$red\
-$ruby\
-$rust\
-$scala\
-$solidity\
-$swift\
-$terraform\
-$typst\
-$vlang\
-$vagrant\
-$zig\
-$buf\
-$nix_shell\
-$conda\
-$meson\
-$spack\
-$memory_usage\
-$aws\
-$gcloud\
-$openstack\
-$azure\
-$nats\
-$direnv\
-$env_var\
-$crystal\
-$custom\
-$sudo\
+$fill\
 $cmd_duration\
 $line_break\
-$jobs\
-$battery\
-$time\
-$status\
-$os\
-$container\
-$shell\
 $character"""
 
+[fill]
+symbol = " "
+
 [directory]
-style = "bold cyan"
+style = "bold #7dcfff"
+truncate_to_repo = true
 truncation_length = 3
 truncation_symbol = "…/"
 read_only = " 🔒"
 
 [git_branch]
-symbol = " "
-style = "bold purple"
+symbol = " "
+style = "bold #7aa2f7"
 format = "on [$symbol$branch]($style) "
 
 [git_status]
-style = "bold yellow"
+style = "bold #bb9af7"
 format = '([$all_status$ahead_behind]($style) )'
-conflicted = "!$count "
-ahead = "↑$count "
-behind = "↓$count "
-diverged = "⇕ A=$ahead_count B=$behind_count "
-untracked = "?$count "
-stashed = "*$count "
-modified = "~$count "
-staged = "+$count "
-renamed = "»$count "
-deleted = "-$count "
+conflicted = "💥 $count "
+ahead = "⬆️ $count "
+behind = "⬇️ $count "
+diverged = "🚦 A=$ahead_count B=$behind_count "
+untracked = "🆕 $count "
+stashed = "📦 $count "
+modified = "📝 $count "
+staged = "✅ $count "
+renamed = "🚚 $count "
+deleted = "🗑️ $count "
 
 [character]
-success_symbol = "[❯](bold green)"
-error_symbol = "[❯](bold red)"
-vicmd_symbol = "[❮](bold yellow)"
+success_symbol = "[❯](bold #7dcfff)"
+error_symbol = "[❯](bold #f7768e)"
+vicmd_symbol = "[❮](bold #7aa2f7)"
 
 [cmd_duration]
 min_time = 0
-format = "⏱ took [$duration]($style) "
-
-[bun]
-symbol = "🥐 "
-format = "via [$symbol($version )]($style)"
-
-[python]
-symbol = "python: "
-format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
-
-[nodejs]
-symbol = "node: "
-format = "via [$symbol($version )]($style)"
-
-[rust]
-symbol = "rust: "
-format = "via [$symbol($version )]($style)"
-
-[package]
-symbol = "pkg: "
-
-[memory_usage]
-symbol = "mem: "
-threshold = 30
-style = "bold dimmed white"
-format = "mem [$symbol$ram]($style) "
-disabled = true
+format = "took [󱎫 $duration](bold #7aa2f7)"

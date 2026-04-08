@@ -1,141 +1,50 @@
-# 🛠️ Paranjay's Dotfiles
+# 🛠️ .config | Paranjay's System Environment
 
-> Personal macOS development environment — shell, editors, tools, everything.
+This repository tracks my core system configurations, environment variables, and tool preferences. It is designed for the **OmniWM "God Build"** ecosystem.
 
-## What's This?
+## 📂 Component Directory
 
-This is my **`~/.config/`** folder — a git repo that stores all my dotfiles. One `git push` backs up my entire dev setup. One `git pull` + `./install.sh` on a new Mac and I'm ready to go.
+### 🐚 Zsh (`zsh/`)
+Modern shell with **Starship** integration.
+-   **Config**: `~/.zshrc`
+-   **Features**: Syntax highlighting, autosuggestions, fuzzy-tab completion.
+-   **Aliases**:
+    -   `reload`: Refresh your entire shell config.
+    -   `proj`: Jump to `~/Developer` directory.
+    -   `tms`: Quickly attach to main tmux session.
+    -   `..`, `...`, `....`: Easy directory climbing.
 
-## Quick Start
+### 🍱 Tmux (`tmux/`)
+Session manager with a **Theo-inspired** (t3.gg) aesthetic.
+-   **Config**: `~/.config/tmux/tmux.conf`
+-   **Shortcuts** (Prefix is `Ctrl+B`):
+    -   `|` and `-`: Split pane vertically / horizontally.
+    -   `Shift + ←/→`: Switch windows (No prefix needed).
+    -   `Alt + Arrow Keys`: Switch panes (No prefix needed).
+    -   `z`: Toggle pane fullscreen.
+    -   `g`: Pop up **LazyGit** (80% screen).
+    -   `t`: Pop up **System Stats** (htop/btm).
+    -   `r`: Reload tmux config.
+    -   `e`: Jump into config editing.
 
+### 👻 Ghostty (`ghostty/`)
+High-performance macOS terminal.
+-   **Default**: Out-of-the-box standard look.
+-   **Glass Mode**: Run `ghostty --config-file=~/.config/ghostty/glass` for blurred transparency.
+
+### 🎹 Keyboard & WM (`karabiner/`, `omniwm/`)
+The layers of the God Build. 
+-   **OmniWM**: Managed window tiling (Niri layout).
+-   **Karabiner**: Layer triggers for OmniWM commands.
+-   *Note: Deep-config pending (User Exam Mode Active).*
+
+## 🔄 Syncing
+To save your sweating/changes to this repo:
 ```bash
-# On a new machine
-git clone https://github.com/Paranjayy/dotfiles.git ~/.config
-cd ~/.config
-./install.sh          # Creates symlinks
-source ~/.zshrc       # Reload shell
+git -C ~/.config status
+git -C ~/.config add .
+git -C ~/.config commit -m "feat: your update message"
 ```
-
-## Structure
-
-```
-~/.config/  ← (this repo, git tracked)
-│
-├── shell/
-│   ├── zshrc              # Main shell config
-│   ├── zshrc.local        # Machine-specific (not synced)
-│   ├── zprofile           # Login shell paths
-│   ├── zshenv             # Environment vars
-│   ├── profile            # Generic profile
-│   └── bashrc             # Bash config
-│
-├── git/
-│   └── config             # Git config
-│
-├── tmux/
-│   ├── tmux.conf          # Terminal multiplexer
-│   └── scripts/           # Battery, CPU, workspace scripts
-│
-├── nvim/                  # Neovim (LazyVim)
-├── ghostty/               # Ghostty terminal
-├── fastfetch/             # System info
-├── gh/                    # GitHub CLI
-├── karabiner/             # Keyboard (Hyper key)
-├── zed/                   # Zed editor
-├── omniwm/                # Tiling WM
-├── fzf/, fd/, pnpm/       # Tools
-│
-├── install.sh             # Symlink installer
-└── .gitignore             # Excludes junk
-```
-
-## What's Installed
-
-### Shell (Zsh)
-
-| Feature | Tool |
-|---------|------|
-| Plugin manager | Zinit |
-| Prompt | Starship |
-| Fuzzy finder | FZF |
-| Directory jumping | Zoxide |
-| Autosuggestions | zsh-autosuggestions |
-| Syntax highlighting | zsh-syntax-highlighting |
-
-### Modern CLI Tools
-
-| Old | New | Why |
-|-----|-----|-----|
-| `ls` | `eza` | Icons, git status |
-| `cat` | `bat` | Syntax highlighting |
-| `find` | `fd` | Simpler, faster |
-| `grep` | `ripgrep` | Blazing fast |
-| `cd` | `zoxide` | Learns habits |
-
-## Key Shortcuts
-
-### Shell Aliases
-
-```bash
-.., ..., ~        # Navigation
-ll, lt            # Listing (eza)
-gst, gco, gp, gl  # Git
-tms, dev, work    # Tmux workspaces
-bi, ba, bro       # Bun
-```
-
-### Tmux (Prefix: Ctrl+b)
-
-```
-Ctrl+b |     Split vertical
-Ctrl+b -     Split horizontal
-Ctrl+b h/j/k/l   Navigate
-Ctrl+b z     Zoom
-Ctrl+b g     Lazygit
-```
-
-## Daily Workflow
-
-```bash
-# 1. Edit config
-nano ~/.config/shell/zshrc
-
-# 2. Test it
-source ~/.zshrc
-
-# 3. Save & push
-cd ~/.config
-git add -A
-git commit -m "add new alias"
-git push
-```
-
-## Customization
-
-### Machine-Specific (`zshrc.local` — not synced)
-
-```bash
-export FASTFETCH_COUNTDOWN_DATE="2026-08-13"
-export FASTFETCH_QUOTE="Build something that matters today."
-```
-
-### Adding Tools
-
-1. Add config to `~/.config/toolname/`
-2. Update `.gitignore` if needed
-3. `git add -A && git commit && git push`
-
-## FAQ
-
-**Where are secrets?**
-→ In `.gitignore`. Never committed.
-
-**What about machine-specific stuff?**
-→ `shell/zshrc.local` (gitignored). Use `zshrc.local.template`.
-
-**How to restore on new Mac?**
-→ `git clone` → `./install.sh` → `source ~/.zshrc`
 
 ---
-
-**Author:** Paranjay ([@paranjayy](https://github.com/Paranjayy))
+*Maintained by Paranjay & Antigravity Assistant*

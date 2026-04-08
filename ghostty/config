@@ -1,1 +1,23 @@
+# Ghostty Default Configuration
+# ============================================
+
+# Theme & Colors
+background = #1a1b26
+
+# Window Settings
+window-padding-x = 8
+window-padding-y = 8
+window-decoration = true
+
+# macOS Specific
+macos-option-as-alt = true
+
+# Standard Window Settings
+window-padding-x = 8
+window-padding-y = 8
+window-decoration = true
+
+# macOS Specific
+macos-option-as-alt = true
+
 background-opacity = 1.00

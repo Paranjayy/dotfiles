@@ -1,0 +1,17 @@
+# Ghostty GLASS Scenario Configuration
+# ============================================
+# Launch with: ghostty --config-file=~/.config/ghostty/glass
+
+# Glass Aesthetics
+theme = tokyonight
+background-opacity = 0.85
+background-blur-radius = 20
+window-decoration = false
+
+# Custom Shell
+command = /opt/homebrew/bin/tmux new-session -A -s main
+
+# Layout
+window-padding-x = 10
+window-padding-y = 10
+macos-option-as-alt = true
