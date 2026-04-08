@@ -145,8 +145,6 @@
             "type": "locale",
             "key": "Locale",
             "keyColor": "blue"
-        },
-        "break",
-        "colors"
+        }
     ]
 }
