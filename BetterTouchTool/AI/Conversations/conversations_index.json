@@ -1,0 +1,19 @@
+[
+  {
+    "chatIdentifier" : "7367B2FE-8286-454D-9EFF-3594821B587D",
+    "createdAt" : "2026-04-04T01:44:38Z",
+    "id" : "7C14B4D6-5A5C-4255-8601-867EB71F32FF",
+    "messageCount" : 58,
+    "provider" : {
+      "apiType" : "codex-cli-openai",
+      "apiUrl" : "",
+      "modelName" : "gpt-5.4",
+      "type" : "custom"
+    },
+    "tags" : [
+
+    ],
+    "title" : "can u organise my shortcuts and things?",
+    "updatedAt" : "2026-04-04T01:44:38Z"
+  }
+]

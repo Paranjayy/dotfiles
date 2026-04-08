@@ -1,0 +1,624 @@
+/*
+* By default this file will be overridden with every BetterTouchTool update.
+* If you make changes to this file, BTT will not update the file, however 
+* features might not work correctly anymore.
+*
+* If possible only override the BTTNochBarUser.css and BTTNotchBarUser.js.
+*
+* If you absolutely need to make changes to this file, make sure to integrate the
+* changes from /Applications/BetterTouchTool.app/Contents/Resources/NotchBar/
+*/
+
+.body::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 0;
+  height: 0;
+}
+
+/* This is automatically added to the body element if the screen is not active */
+.dimmed {
+  filter: grayscale(0.7) brightness(85%);
+  opacity: 0.5;
+}
+
+body {
+  background: var(--notchbar-background);
+  background-image: var(--notchbar-background-image, unset);
+  background-size: fill;
+  backdrop-filter: var(--notchbar-background-filter, blur(30px));
+  -webkit-backdrop-filter: var(--notchbar-background-filter, blur(30px));
+
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  font-family: --apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  color: white;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  padding-right: var(--notchbar-margin-right);
+}
+
+#BTTNotchBarWrapper {
+  height: 100%;
+  
+}
+
+#BTTNotchBarContainer {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: var(--notchbar-background-color-overlay, unset);
+}
+
+#BTTNotchBarContainer::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 0;
+  height: 0;
+}
+
+#BTTNotchBar {
+  margin-top: 0px;
+  margin-left: var(--notchbar-margin-left);
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  height: 100%;
+}
+
+#BTTNotch {
+  display: block;
+  height: 100%;
+  width: var(--notch-width);
+}
+
+/* The whole area left of the notch */
+#BTTNotchBarLeftOfNotch {
+  width: calc(50vw - var(--notch-width) / 2 - var(--notchbar-margin-left));
+
+  display: flex;
+  flex-direction: row;
+}
+
+/* The whole area right of the notch */
+#BTTNotchBarRightOfNotch {
+  width: calc(50vw - var(--notch-width) / 2 - var(--notchbar-margin-right));
+  justify-content: space-between;
+  pointer-events: none;
+  display: flex;
+  flex-direction: row;
+}
+
+/* The fixed area on the very left */
+#BTTNotchBarFixedLeft {
+  display: flex;
+  gap: var(--notchbar-button-gap);
+  width: fit-content;
+  flex-grow: 0;
+  flex-direction: row;
+  min-width: max-content;
+  overflow: hidden;
+  align-items: center;
+}
+
+.menubar-mode-active div#BTTNotchBarFixedLeft {
+  padding-left: var(--menubar-area-size);
+}
+
+#BTTNotchBarFixedLeft:empty {
+  display: none;
+}
+
+#BTTNotchMenuBarOverlay {
+  display: flex;
+  gap: var(--notchbar-button-gap);
+  width: fit-content;
+  flex-grow: 0;
+  flex-direction: row;
+  min-width: max-content;
+  overflow: hidden;
+  z-index: 100000;
+}
+
+/* The scrollable area left of the notch */
+#BTTNotchBarScrollableLeftOfNotch {
+  display: flex;
+  gap: var(--notchbar-button-gap);
+  width: fit-content;
+  flex-grow: 1;
+  flex-direction: row;
+  overflow: scroll;
+  margin-left: var(--notchbar-button-gap);
+  pointer-events: auto;
+  align-items: center;
+}
+
+/* The scrollable area right of the notch */
+#BTTNotchBarScrollableRightOfNotch {
+  display: flex;
+  gap: var(--notchbar-button-gap);
+  width: fit-content;
+  flex-grow: 1;
+  flex-direction: row;
+  overflow: scroll;
+  pointer-events: auto;
+  align-items: center;
+}
+
+/* workaround for flexbox issue https://stackoverflow.com/questions/36130760/use-justify-content-flex-end-and-to-have-vertical-scrollbar */
+#BTTNotchBarScrollableRightOfNotch > :first-child {
+  margin-left: auto !important;
+  /* use !important to prevent breakage from child margin settings */
+}
+
+.notchbar-html-widget > :first-child {
+}
+
+/* hide the scrollbars on the left scrollable area*/
+#BTTNotchBarScrollableLeftOfNotch::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 0;
+  height: 0;
+}
+
+/* hide the scrollbars on the right scrollable area*/
+#BTTNotchBarScrollableRightOfNotch::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 0;
+  height: 0;
+}
+
+/* The area on the very right side */
+#BTTNotchBarFixedRight {
+  z-index: 10000;
+  display: flex;
+  gap: var(--notchbar-button-gap);
+  width: fit-content;
+  min-width: max-content;
+  flex-direction: row;
+  overflow: visible;
+  justify-content: flex-end;
+  margin-left: var(--notchbar-button-gap);
+  overflow: hidden;
+  pointer-events: none;
+  align-items: center;
+}
+
+/* The area where the menubar items are placed (bottom left) */
+#BTTNotchMenuBar {
+  position: absolute;
+  left: 0;
+  font-size: var(--notchbar-menubar-button-font-size-widget-mode);
+  transition: font-size 0.26s ease-out;
+  bottom: 0px;
+  pointer-events: none;
+  z-index: 50000;
+
+}
+
+/* When the Notch Bar button bar has been hidden by scrolling / gesture
+.menubar-mode-notchbar {
+  transform: scaleY(0);
+  overflow: hidden;
+  transform-origin: top;
+  transition: transform 0.26s ease;
+} */
+
+.widget-mode-active {
+  /* can be used to override variables in widget mode */
+}
+
+.mode-any {
+  display: block;
+}
+
+.mode-hidden {
+  display:none !important;
+}
+
+.menubar-mode-active .mode-widget {
+  transform: scaleY(0);
+  overflow: hidden;
+  transform-origin: top;
+  transition: transform 0.26s ease;
+  pointer-events: none;
+  width:0px;
+  display:none;
+}
+
+.widget-mode-active .mode-menubar {
+  transform: scaleY(0);
+  overflow: hidden;
+  transform-origin: top;
+  transition: transform 0.26s ease;
+  pointer-events: none;
+  width:0px;
+  display:none;
+}
+
+.widget-mode-active .button.mode-menubar {
+  display: none;
+}
+
+.menubar-mode-active .button.mode-widget {
+  display: none;
+}
+
+/* When the Notch Bar button bar is made visible again */
+.widget-mode {
+  transform: scaleY(1);
+  overflow: hidden;
+  transform-origin: top;
+  transition: transform 0.26s ease;
+}
+
+/* a spacer that is behind the notch (if notch is available, otherwise it will be zero width) */
+#BTTNotch {
+  width: var(--notch-width);
+}
+
+.placeholder-container {
+  display: flex;
+  flex-direction: row;
+}
+
+/* Standard button definition */
+.button {
+  background: var(--notchbar-standard-button-background);
+  border: 1px solid var(--notchbar-standard-button-border-color);
+  color: var(--notchbar-standard-button-color);
+  padding-left: var(
+    --notchbar-standard-button-padding-left-and-right,
+    var(--notchbar-standard-button-padding)
+  );
+  padding-right: var(
+    --notchbar-standard-button-padding-left-and-right,
+    var(--notchbar-standard-button-padding)
+  );
+  padding-top: var(
+    --notchbar-standard-button-padding-top-and-bottom,
+    var(--notchbar-standard-button-padding)
+  );
+  padding-bottom: var(
+    --notchbar-standard-button-padding-top-and-bottom,
+    var(--notchbar-standard-button-padding)
+  );
+  margin-left: var(--notchbar-standard-button-margin-left);
+  margin-right: var(--notchbar-standard-button-margin-right);
+
+  font-family: var(--notchbar-standard-button-font-family);
+  text-align: center;
+  cursor: hand;
+  font-size: calc(
+    var(--notchbar-standard-button-font-size) +
+      var(--standard-menubar-font-size-adjust)
+  );
+
+  align-items: center;
+  height: max-content;
+  min-width: max-content;
+  pointer-events: all;
+  z-index: 100000;
+  display: var(--btt-notchbar-element-display, flex);
+  flex-direction: row;
+
+  border-top-left-radius: var(
+    --notchbar-standard-button-border-top-left-radius,
+    var(--notchbar-standard-button-border-radius, 5px)
+  );
+  border-top-right-radius: var(
+    --notchbar-standard-button-border-top-right-radius,
+    var(--notchbar-standard-button-border-radius, 5px)
+  );
+  border-bottom-left-radius: var(
+    --notchbar-standard-button-border-bottom-left-radius,
+    var(--notchbar-standard-button-border-radius, 5px)
+  );
+  border-bottom-right-radius: var(
+    --notchbar-standard-button-border-bottom-right-radius,
+    var(--notchbar-standard-button-border-radius, 5px)
+  );
+  width: var(--notchbar-standard-button-fixed-width);
+
+  height: calc(
+    var(--notchbar-standard-button-fixed-height) +
+      var(--standard-menubar-button-height-adjust)
+  );
+
+  --standard-menubar-font-size-adjust: -2px;
+}
+
+/* when the mouse is over a button */
+.button.manualhover {
+  color: white !important;
+  background: var(--notchbar-standard-button-hover-background) !important;
+}
+
+.btn-text-container {
+  display: flex;
+  flex-direction: column;
+  pointer-events: none;
+}
+.btn-img {
+  pointer-events: none;
+}
+
+/* it's important that sub-elements don't have pointer events */
+.btn-line1 {
+  pointer-events: none;
+  font-size: var(
+    --notchbar-standard-button-font-size-line1,
+    var(--notchbar-standard-button-font-size)
+  );
+}
+
+/* it's important that sub-elements don't have pointer events */
+.btn-line2 {
+  display: block;
+  pointer-events: none;
+  font-size: var(
+    --notchbar-standard-button-font-size-line2,
+    var(--notchbar-standard-button-font-size)
+  );
+}
+
+.menubar-mode-active .menubar-disabled-menubarmode {
+  --notchbar-menubar-display: none;
+}
+
+.widget-mode-active .menubar-disabled-widgetmode {
+  --notchbar-menubar-display: none;
+}
+
+/* The custom menubar when the Notch Bar action bar has been hidden */
+.menubar-mode {
+  font-size: var(--notchbar-menubar-button-font-size-menubar-mode) !important;
+  bottom: 0px !important;
+
+  display: var(--notchbar-menubar-display) !important;
+  transition: font-size 0.26s ease-in;
+}
+
+#BTTFullscreenToggle {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  padding-left: 0px;
+  margin-left: 0px;
+  width: 10px;
+  height: 100%;
+  display: none;
+  z-index: 10000000000;
+  font-size: 10px;
+}
+
+.fullscreen-toggle-hidden {
+  display: none !important;
+}
+
+.fullscreen-toggle-visible {
+  display: block !important;
+}
+
+/* A button representing a menubar item */
+.menubar-button {
+  color: var(--notchbar-menubar-button-color-bttset, --notchbar-menubar-button-color);
+  flex-direction: column;
+  text-align: center;
+  cursor: default;
+  padding-left: 0px;
+  font-weight: 500;
+  position: absolute;
+  display: var(--notchbar-menubar-display-action-bar-hidden);
+  bottom: 0px;
+  pointer-events: all;
+  z-index: 1000;
+  line-height: var(--notchbar-menubar-height);
+  height: var(--notchbar-menubar-height);
+  bottom: var(--notchbar-menubar-bottom-adjust, unset) !important;
+}
+
+.menubar-mode .menubar-button {
+  line-height: var(--notchbar-menubar-height-when-action-bar-hidden) !important;
+  height: var(--notchbar-menubar-height-when-action-bar-hidden) !important;
+  bottom: var(--notchbar-menubar-bottom-adjust, unset) !important;
+}
+
+/* when the mouse is over a menubar button */
+.menubar-button.manualhover {
+  font-weight: bold;
+  color: var(--notchbar-menubar-button-hover-color, );
+  filter: brightness(180%);
+
+}
+
+.widget-mode-active .menubar-disabled-widgetmode .menubar-button {
+  display: none;
+}
+
+/* This is also positioned on the very right side, but absolutely on the bottom */
+#BTTNotchStatusBar {
+  position: absolute;
+  bottom: var(--notchbar-statusbar-margin-bottom);
+  right: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  height: 60vh;
+}
+
+.notch-screen .system-status-icons {
+  display:flex;
+  flex-direction: row;
+  justify-content: right;
+}
+
+.standard-screen .system-status-icons {
+  display:flex;
+  flex-direction: row;
+  justify-content: right;
+}
+
+/* a standard menubar status item (the items on the very right, like clock, control center etc.) */
+.statusbar-item {
+  display: block;
+  pointer-events: all;
+  z-index: 10000;
+  overflow: hidden;
+  padding: 0px;
+}
+
+.statusbar-item-image {
+  pointer-events: none;
+  filter: var(--notchbar-statusbar-icon-invert, unset);
+  height: 100%;
+  object-fit: contain;
+}
+
+.notch-screen .statusbar-item-image.source-standard {
+  display: none;
+}
+
+.standard-screen .statusbar-item-image.source-notch {
+  display: none;
+}
+
+.standard-screen .statusbar-item-image.source-standard {
+}
+
+.notch-screen .statusbar-item-image.source-notch {
+}
+
+
+
+/* when the mouse is over a menubar status item */
+.statusbar-item.manualhover {
+  background: var(--notchbar-statusbar-icon-background-hover);
+  border-radius: 3px;
+}
+
+.mini-menubar-hidden {
+  display: none !important;
+}
+
+.mini-statusbar-hidden {
+  display: none !important;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  margin-right: 15px;
+  width: 200px;
+  height: 7px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 5px;
+  background-image: linear-gradient(#2f2f2f, #2a2a2a);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  margin-top: 10px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  background: #9e9e9e;
+  cursor: ew-resize;
+  box-shadow: 0 0 2px 0 #555;
+  transition: background 0.3s ease-in-out;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  -webkit-appearance: none;
+  box-shadow: none;
+  border: none;
+  background: transparent;
+}
+
+.black-background {
+  background: black !important;
+}
+
+@keyframes append-animate {
+  from {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  to {
+    transform-origin: left;
+    transform: scaleX(1);
+  }
+}
+
+/* animate new box */
+.new-box {
+  animation: append-animate 0.3s linear;
+}
+
+
+.mini-menubar-at-top-edge .menubar-button {
+  top: 0px !important;
+  bottom:unset !important;
+}
+
+.mini-menubar-at-top-edge .statusbar-item {
+  top: 0px !important;
+  bottom:unset !important;
+}
+
+.mini-menubar-at-top-edge #BTTNotchStatusBar {
+  top: 0px !important;
+  bottom:unset !important;
+}
+
+.mini-menubar-at-top-edge #BTTNotchMenuBar {
+  top: 0px !important;
+  bottom:unset !important;
+}
+
+
+.widget-mode-active #BTTNotchBarFixedLeft {
+  align-items: flex-start;
+}
+
+ .widget-mode-active #BTTNotchBarFixedRight {
+  align-items: flex-start;
+}
+
+ .widget-mode-active #BTTNotchBarScrollableLeftOfNotch {
+  align-items: flex-start;
+}
+
+ .widget-mode-active #BTTNotchBarScrollableRightOfNotch {
+  align-items: flex-start;
+}
+
+
+
+ .mini-menubar-at-top-edge .widget-mode-active #BTTNotchBarFixedLeft {
+  align-items: flex-end;
+}
+
+ .mini-menubar-at-top-edge .widget-mode-active #BTTNotchBarFixedRight {
+  align-items: flex-end;
+}
+
+.mini-menubar-at-top-edge .widget-mode-active #BTTNotchBarScrollableLeftOfNotch {
+  align-items: flex-end;
+}
+
+
+.mini-menubar-at-top-edge .widget-mode-active #BTTNotchBarScrollableRightOfNotch {
+  align-items: flex-end;
+}

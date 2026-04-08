@@ -1,0 +1,70 @@
+:root {
+    /* The overall Notch Bar margin to the left / right */
+    --notchbar-margin-left: 10px;
+    --notchbar-margin-right: 0px;
+    --notchbar-background-image: unset;
+
+    /* The standard gap between the buttons */
+    --notchbar-button-gap: 2px;
+
+    /* The notchbar background color */
+    --notchbar-background: black;
+    --notchbar-background-filter: blur(30px);
+
+    /* These variables define the standard button design, most of them will be overriden per button */
+    --notchbar-standard-button-background: red;
+    --notchbar-standard-button-color: white;
+    --notchbar-standard-button-font-size: 12px;
+    --notchbar-standard-button-border-color: white;
+    --notchbar-standard-button-padding: 3px;
+    --notchbar-standard-button-hover-background: lightcoral;
+
+    --notchbar-standard-button-fixed-height: 40vh;
+    --standard-menubar-button-height-adjust: 0vh;
+
+    /* These variables define the menubar button design */
+    --notchbar-menubar-button-background: black;
+    --notchbar-menubar-button-border: black;
+    --notchbar-menubar-button-color: rgb(236, 236, 236);
+    --notchbar-menubar-button-font-size-widget-mode: 10px;
+    --notchbar-menubar-button-font-size-menubar-mode: 13px;
+    --notchbar-menubar-height: 50vh;
+    --notchbar-menubar-height-when-action-bar-hidden: 100vh;
+
+    --notchbar-menubar-display: flex;
+    --notchbar-menubar-display-action-bar-hidden: flex;
+
+    /* adjust the size on standard menubars without notch */
+    --standard-menubar-font-size-adjust: 0px;
+
+
+    --notchbar-statusbar-margin-bottom: 0px;
+    --notchbar-statusbar-icon-height: 22px;
+    --notchbar-statusbar-icon-invert: invert(0%);
+    --notchbar-statusbar-icon-background-hover: rgb(80, 80, 80);
+
+    /* internal */
+    --container-possible-insert-x: 0px;
+    --notchbar-menubar-bottom-adjust: 0px;
+
+
+  }
+  
+  /* This is automatically added to the body element if the screen does NOT have a notch */
+  .standard-menubar {
+    --notchbar-menubar-height: 30vh;
+    --notchbar-menubar-button-font-size-widget-mode: 8px;
+    --notchbar-menubar-button-font-size-menubar-mode: 13px;
+    --notchbar-menubar-height-when-action-bar-hidden: 100vh;
+    --notchbar-menubar-display: flex;
+    --notchbar-statusbar-margin-bottom: 0px;
+    --standard-menubar-font-size-adjust: 2px;
+    --standard-menubar-button-height-adjust: 20vh;
+    --notchbar-menubar-bottom-adjust: -1px;
+
+  }
+
+  .widget-mode-active {
+    --notchbar-menubar-bottom-adjust: -3px;
+    
+  }

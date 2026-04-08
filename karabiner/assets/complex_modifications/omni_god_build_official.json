@@ -1,0 +1,31 @@
+{
+  "title": "OmniWM - Official App Tweaks (God Build v2)",
+  "rules": [
+    {
+      "description": "Right Command + Y: Float, Resize (1194x947), and Center focused window",
+      "manipulators": [
+        {
+          "conditions": [
+            {
+              "name": "rcmd_layer",
+              "type": "variable_if",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "y",
+            "modifiers": {
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "/Users/paranjay/Developer/OmniWM/Scripts/center_float.sh"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    }
+  ]
+}

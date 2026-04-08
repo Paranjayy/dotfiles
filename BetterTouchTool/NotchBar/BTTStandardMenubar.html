@@ -1,0 +1,74 @@
+<!-- 
+* By default this file will be overridden with every BetterTouchTool update.
+* If you make changes to this file, BTT will not update the file, however 
+* features might not work correctly anymore.
+*
+* If possible only override the BTTNochBarUser.css and BTTNotchBarUser.js.
+*
+* If you absolutely need to make changes to this file, make sure to integrate the
+* changes from /Applications/BetterTouchTool.app/Contents/Resources/NotchBar/
+-->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+
+    <link rel="stylesheet" href="BTTNotchBarVariables.css">   
+    <link rel="stylesheet" href="BTTNotchBar.css">   
+    <link rel="stylesheet" href="BTTNotchBarUser.css">
+    <script src="BTTNotchBarHelperFunctions.js"></script>
+    <script src="BTTNotchBar.js"></script>
+    <script src="BTTNotchBarUser.js"></script>
+
+  </head>
+  <body  id="BTTNotchBarBody">
+    <div id="BTTNotchBarContainer">
+      <!-- This ID needs to stay the same-->
+      <div id="BTTNotchBarWrapper">
+        <div id="BTTNotchBar">
+           
+          <div id="BTTNotchBarLeftOfNotch">
+            <!-- START LEFT OF NOTCH-->
+            <div id="BTTNotchBarFixedLeft">
+              <!-- START OF FIXED AREA LEFT OF NOTCH-->
+              <!-- END OF FIXED AREA LEFT OF NOTCH-->
+            </div>
+            <div id="BTTNotchBarScrollableLeftOfNotch">
+              <!-- START OF SCROLLABLE AREA LEFT OF NOTCH-->
+              <!-- END OF SCROLLABLE AREA LEFT OF NOTCH-->
+            </div>
+            <!-- END LEFT OF NOTCH-->
+          </div>
+          <div id="BTTNotch"></div>
+            <!-- This area is hidden behind the notch -->
+          <div id="BTTNotchBarRightOfNotch">
+            <div id="BTTNotchBarScrollableRightOfNotch">
+              <!-- START OF SCROLLABLE AREA RIGHT OF NOTCH-->
+              
+              <!-- END OF SCROLLABLE AREA RIGHT OF NOTCH-->
+            </div>
+            <div id="BTTNotchBarFixedRight">
+              <!-- START OF FIXED AREA RIGHT OF NOTCH-->
+              
+              <!-- END OF FIXED AREA RIGHT OF NOTCH-->
+            </div>
+          </div>
+        </div>
+      </div>
+   
+
+      <!-- The menubar items will be inserted here -->
+      <div id="BTTNotchMenuBar">
+
+      </div>
+      <div id="BTTNotchMenuBarOverlay">
+
+      </div>
+      <!-- This area is fixed to the right, you can insert the menu bar status items here -->
+      <div id="BTTNotchStatusBar"></div>
+
+    </div>
+  </body>
+</html>
