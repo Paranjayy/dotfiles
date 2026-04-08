@@ -1,13 +1,17 @@
 {
     "security.workspace.trust.untrustedFiles": "open",
     "python.languageServer": "Default",
-    "svelte.enable-ts-plugin": true,
-    "workbench.settings.applyToAllProfiles": [],
     "git.ignoredRepositories": [
         "/Users/paranjay/.asdf",
         "/Users/paranjay/.fzf",
         "/Users/paranjay/.nvm",
         "/Users/paranjay/.oh-my-zsh",
         "/Users/paranjay/homebrew"
-    ]
+    ],
+    "explorer.fileNesting.enabled": true,
+    "explorer.fileNesting.patterns": {
+        "package.json": "package-lock.json, yarn.lock, pnpm-lock.yaml, .npmrc",
+        "*.ts": "${capture}.js, ${capture}.d.ts, ${capture}.test.ts",
+        "tailwind.config.js": "postcss.config.js, prettier.config.js"
+    }
 }
