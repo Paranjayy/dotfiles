@@ -25,6 +25,7 @@ Window Management    ████░░░░░░░░░░░░░░░�
 - **Sops/Age** — Encrypting sensitive configs within the dotfiles repo.
 
 ### 🟡 Experimental (The "Cool" Factor)
+- **AG Benchmarking** — Implement a "GBrain" style system to benchmark AI evals against your actual prompt history (`~/.omni_memory/`).
 - **Raycast Extension** — Custom Raycast script to trigger `antigravity` tasks.
 - **Warp-speed Zsh** — Profile and optimize shell startup to < 50ms.
 - **Dotfiles Dashboard** — A custom `fastfetch` or `neofetch` layout that shows dotfiles health.

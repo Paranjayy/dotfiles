@@ -462,6 +462,7 @@ alias glog='git log --oneline --graph --decorate'
 
 # GitHub TUI
 alias pr='ghui'
+alias ship='~/.local/bin/ship'
 
 # Dotfiles management
 dots() {
