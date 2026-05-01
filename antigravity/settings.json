@@ -1,11 +1,20 @@
 {
-    "security.workspace.trust.untrustedFiles": "open",
-    "python.languageServer": "Default",
-    "git.ignoredRepositories": [
-        "/Users/paranjay/.asdf",
-        "/Users/paranjay/.fzf",
-        "/Users/paranjay/.nvm",
-        "/Users/paranjay/.oh-my-zsh",
-        "/Users/paranjay/homebrew"
-    ]
+  "window.titleBarStyle": "custom",
+  "task.allowAutomaticTasks": "on",
+  "security.workspace.trust.untrustedFiles": "open",
+  "python.languageServer": "Default",
+  "git.ignoredRepositories": [
+    "/Users/paranjay/.asdf",
+    "/Users/paranjay/.fzf",
+    "/Users/paranjay/.nvm",
+    "/Users/paranjay/.oh-my-zsh",
+    "/Users/paranjay/homebrew"
+  ],
+  "workbench.colorCustomizations": {
+    "titleBar.activeBackground": "#ac3e95",
+    "titleBar.inactiveBackground": "#b865a6cc",
+    "titleBar.activeForeground": "#eef6ff",
+    "titleBar.inactiveForeground": "#d7e9ffcc"
+  },
+  "tfa.system.autoAccept": true
 }

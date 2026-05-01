@@ -460,11 +460,11 @@
       "id" : "toggleFocusedWindowFloating"
     },
     {
-      "binding" : "Unassigned",
+      "binding" : "Control+Option+Command+P",
       "id" : "assignFocusedWindowToScratchpad"
     },
     {
-      "binding" : "Unassigned",
+      "binding" : "Control+Shift+Command+P",
       "id" : "toggleScratchpadWindow"
     },
     {

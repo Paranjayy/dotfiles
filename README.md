@@ -32,6 +32,11 @@ High-performance macOS terminal.
 -   **Default**: Out-of-the-box standard look.
 -   **Glass Mode**: Run `ghostty --config-file=~/.config/ghostty/glass` for blurred transparency.
 
+### 🚀 GitHub TUI (`ghui`)
+Centralized management of pull requests.
+-   **TUI**: Run `ghui` to browse PRs.
+-   **Tmux**: Press `Prefix + P` for a popup.
+
 ### 🎹 Keyboard & WM (`karabiner/`, `omniwm/`)
 The layers of the God Build. 
 -   **OmniWM**: Managed window tiling (Niri layout).

@@ -1,0 +1,144 @@
+{
+    "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+    "logo": {
+        "source": "/Users/paranjay/.config/fastfetch/avatar.png",
+        "type": "iterm",
+        "width": 30,
+        "height": 15,
+        "padding": {
+            "top": 2,
+            "left": 2,
+            "right": 4
+        }
+    },
+    "display": {
+        "separator": " -> ",
+        "color": {
+            "keys": "magenta",
+            "title": "blue"
+        }
+    },
+    "modules": [
+        "title",
+        {
+            "type": "separator",
+            "string": "-"
+        },
+        {
+            "type": "command",
+            "key": "Software",
+            "keyColor": "magenta",
+            "text": "echo \"\u001b[3m(system basics)\u001b[0m\""
+        },
+        {
+            "type": "os",
+            "key": "OS",
+            "keyColor": "blue"
+        },
+        {
+            "type": "host",
+            "key": "Host",
+            "keyColor": "blue"
+        },
+        {
+            "type": "kernel",
+            "key": "Kernel",
+            "keyColor": "blue"
+        },
+        {
+            "type": "shell",
+            "key": "Shell",
+            "keyColor": "blue"
+        },
+        {
+            "type": "packages",
+            "key": "Packages",
+            "keyColor": "blue"
+        },
+        {
+            "type": "command",
+            "key": "Theme",
+            "keyColor": "blue",
+            "text": "defaults read -g AppleInterfaceStyle >/dev/null 2>&1 && echo \"🌙 Dark\" || echo \"☀️ Light\""
+        },
+        {
+            "type": "command",
+            "key": "Now Playing",
+            "keyColor": "blue",
+            "text": "osascript -e 'set musicState to \"None\"' -e 'if application \"Music\" is running then tell application \"Music\" to set musicState to \"🎵 \" & name of current track & \" - \" & artist of current track' -e 'if application \"Spotify\" is running then tell application \"Spotify\" to set musicState to \"🎵 \" & name of current track & \" - \" & artist of current track' -e 'get musicState'"
+        },
+        "separator",
+        {
+            "type": "command",
+            "key": "Hardware",
+            "keyColor": "magenta",
+            "text": "echo \"\u001b[3m(the internals)\u001b[0m\""
+        },
+        {
+            "type": "cpu",
+            "key": "CPU",
+            "keyColor": "blue"
+        },
+        {
+            "type": "gpu",
+            "key": "GPU",
+            "keyColor": "blue"
+        },
+        {
+            "type": "memory",
+            "key": "Memory",
+            "keyColor": "blue"
+        },
+        {
+            "type": "swap",
+            "key": "Swap",
+            "keyColor": "blue"
+        },
+        {
+            "type": "disk",
+            "key": "Disk",
+            "keyColor": "blue"
+        },
+        "separator",
+        {
+            "type": "command",
+            "key": "OS Age / Status",
+            "keyColor": "magenta",
+            "text": "echo \"\u001b[3m(live data)\u001b[0m\""
+        },
+        {
+            "type": "command",
+            "key": "OS Age",
+            "keyColor": "blue",
+            "text": "birth_time=$(stat -f %B /); current_time=$(date +%s); echo \"$(( (current_time - birth_time) / 86400 )) days\""
+        },
+        {
+            "type": "uptime",
+            "key": "Uptime",
+            "keyColor": "blue"
+        },
+        {
+            "type": "command",
+            "key": "Load Averages",
+            "keyColor": "blue",
+            "text": "uptime | awk -F'load averages:' '{ print $2 }' | sed 's/^ //'"
+        },
+        {
+            "type": "command",
+            "key": "Processes",
+            "keyColor": "blue",
+            "text": "ps -ax | wc -l | tr -d ' '"
+        },
+        {
+            "type": "command",
+            "key": "Project",
+            "keyColor": "blue",
+            "text": "basename $(pwd)"
+        },
+        {
+            "type": "locale",
+            "key": "Locale",
+            "keyColor": "blue"
+        }
+    ]
+}

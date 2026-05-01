@@ -20,7 +20,16 @@
     },
     "modules": [
         "title",
-        "separator",
+        {
+            "type": "separator",
+            "string": "-"
+        },
+        {
+            "type": "command",
+            "key": "Software",
+            "keyColor": "magenta",
+            "text": "echo \"\u001b[3m(system basics)\u001b[0m\""
+        },
         {
             "type": "os",
             "key": "OS",
@@ -37,8 +46,8 @@
             "keyColor": "blue"
         },
         {
-            "type": "uptime",
-            "key": "Uptime",
+            "type": "shell",
+            "key": "Shell",
             "keyColor": "blue"
         },
         {
@@ -47,23 +56,20 @@
             "keyColor": "blue"
         },
         {
-            "type": "shell",
-            "key": "Shell",
-            "keyColor": "blue"
+            "type": "command",
+            "key": "Appearance",
+            "keyColor": "blue",
+            "text": "defaults read -g AppleInterfaceStyle >/dev/null 2>&1 && echo '🌙 Dark' || echo '☀️ Light'"
         },
         {
-            "type": "display",
-            "key": "Display",
-            "keyColor": "blue"
+            "type": "command",
+            "key": "Now Playing",
+            "keyColor": "blue",
+            "text": "~/.config/fastfetch/get_cached.sh now_playing"
         },
         {
             "type": "wm",
             "key": "WM",
-            "keyColor": "blue"
-        },
-        {
-            "type": "wmtheme",
-            "key": "WM Theme",
             "keyColor": "blue"
         },
         {
@@ -77,14 +83,16 @@
             "keyColor": "blue"
         },
         {
-            "type": "cursor",
-            "key": "Cursor",
-            "keyColor": "blue"
-        },
-        {
             "type": "terminal",
             "key": "Terminal",
             "keyColor": "blue"
+        },
+        "separator",
+        {
+            "type": "command",
+            "key": "Hardware",
+            "keyColor": "magenta",
+            "text": "echo \"\u001b[3m(the internals)\u001b[0m\""
         },
         {
             "type": "cpu",
@@ -112,34 +120,183 @@
             "keyColor": "blue"
         },
         {
-            "type": "processes",
-            "key": "Processes",
-            "keyColor": "blue"
-        },
-        {
-            "type": "brightness",
-            "key": "Brightness",
-            "keyColor": "blue"
-        },
-        {
-            "type": "localip",
-            "key": "Local IP",
-            "keyColor": "blue"
-        },
-        {
-            "type": "publicip",
-            "key": "Public IP",
-            "keyColor": "blue"
-        },
-        {
             "type": "battery",
             "key": "Battery",
             "keyColor": "blue"
         },
         {
+            "type": "command",
+            "key": "Battery Health",
+            "keyColor": "blue",
+            "text": "~/.config/fastfetch/get_cached.sh battery_health"
+        },
+        {
+            "type": "command",
+            "key": "Cycle Count",
+            "keyColor": "blue",
+            "text": "~/.config/fastfetch/get_cached.sh battery_cycles"
+        },
+        {
+            "type": "command",
+            "key": "Battery Temp",
+            "keyColor": "blue",
+            "text": "~/.config/fastfetch/get_cached.sh battery_temp"
+        },
+        {
             "type": "poweradapter",
             "key": "Power",
             "keyColor": "blue"
+        },
+        "separator",
+        {
+            "type": "command",
+            "key": "OS Age / Status",
+            "keyColor": "magenta",
+            "text": "echo \"\u001b[3m(live data)\u001b[0m\""
+        },
+        {
+            "type": "command",
+            "key": "OS Age",
+            "keyColor": "blue",
+            "text": "birth_time=$(stat -f %B /); current_time=$(date +%s); echo \"$(( (current_time - birth_time) / 86400 )) days\""
+        },
+        {
+            "type": "uptime",
+            "key": "Uptime",
+            "keyColor": "blue"
+        },
+        {
+            "type": "command",
+            "key": "Session Age",
+            "keyColor": "blue",
+            "text": "ps -o etime= -p $$ | sed 's/^[[:space:]]*//'"
+        },
+        {
+            "type": "command",
+            "key": "Load Averages",
+            "keyColor": "blue",
+            "text": "uptime | awk -F'load averages:' '{ print $2 }' | sed 's/^ //'"
+        },
+        {
+            "type": "command",
+            "key": "Next Event",
+            "keyColor": "blue",
+            "text": "~/.config/fastfetch/get_cached.sh next_event"
+        },
+        {
+            "type": "command",
+            "key": "Last Boot",
+            "keyColor": "blue",
+            "text": "date -r $(sysctl -n kern.boottime | awk '{print $4}' | sed 's/,//g') \"+%Y-%m-%d %H:%M\""
+        },
+        {
+            "type": "processes",
+            "key": "Processes",
+            "keyColor": "blue"
+        },
+        {
+            "type": "command",
+            "key": "Top CPU",
+            "keyColor": "blue",
+            "text": "ps -Ao %cpu,comm -r | head -n 2 | tail -n 1 | awk '{print $2, \"(\" $1 \"%) \"}' | sed 's:.*/::'"
+        },
+        {
+            "type": "command",
+            "key": "Top RAM",
+            "keyColor": "blue",
+            "text": "ps -Ao %mem,comm -m | head -n 2 | tail -n 1 | awk '{print $2, \"(\" $1 \"%) \"}' | sed 's:.*/::'"
+        },
+        {
+            "type": "command",
+            "key": "Project Context",
+            "keyColor": "blue",
+            "text": "echo \"$(basename $(pwd)) $([ -d .git ] && git rev-parse --abbrev-ref HEAD 2>/dev/null | awk '{print \"[\" $0 \"]\"}') $([ -d .git ] && git status -s | wc -l | awk '$1>0 {print \"(+\" $1 \" modified)\"}')\""
+        },
+        {
+            "type": "command",
+            "key": "Last Commit",
+            "keyColor": "blue",
+            "text": "[ -d .git ] && git log -1 --format='%h %s' 2>/dev/null | cut -c 1-50 || echo 'N/A'"
+        },
+        {
+            "type": "command",
+            "key": "SSH Sessions",
+            "keyColor": "blue",
+            "text": "who | grep -v console | wc -l | awk '{if ($1>0) print $1 \" active 🔴\"; else print \"None ✅\"}'"
+        },
+        "separator",
+        {
+            "type": "command",
+            "key": "GitHub Activity",
+            "keyColor": "magenta",
+            "text": "echo \"\u001b[3m(contributions)\u001b[0m\""
+        },
+        {
+            "type": "command",
+            "key": "Profile",
+            "keyColor": "blue",
+            "text": "/Users/paranjay/.config/fastfetch/github.sh profile"
+        },
+        {
+            "type": "command",
+            "key": "Streak",
+            "keyColor": "blue",
+            "text": "/Users/paranjay/.config/fastfetch/github.sh streak"
+        },
+        {
+            "type": "command",
+            "key": "Work",
+            "keyColor": "blue",
+            "text": "/Users/paranjay/.config/fastfetch/github.sh work"
+        },
+        "separator",
+        {
+            "type": "command",
+            "key": "VPN / Tunnel",
+            "keyColor": "blue",
+            "text": "ifconfig -u | grep -q 'utun' && echo 'Active 🔒' || echo 'Inactive 🔓'"
+        },
+        {
+            "type": "command",
+            "key": "DNS Server",
+            "keyColor": "blue",
+            "text": "scutil --dns | grep 'nameserver\\[0\\]' | head -n 1 | awk '{print $3 \" (DNS)\"}' || echo \"Default\""
+        },
+        {
+            "type": "command",
+            "key": "Peripherals",
+            "keyColor": "blue",
+            "text": "~/.config/fastfetch/get_cached.sh peripherals"
+        },
+        {
+            "type": "command",
+            "key": "Active Windows",
+            "keyColor": "blue",
+            "text": "~/.config/fastfetch/get_cached.sh active_windows"
+        },
+        {
+            "type": "command",
+            "key": "Local IP",
+            "keyColor": "blue",
+            "text": "ipconfig getifaddr en0 | sed -E 's/([0-9]+\\.[0-9]+\\.[0-9]+)\\.[0-9]+$/\\1.XXX/' || echo 'Offline'"
+        },
+        {
+            "type": "command",
+            "key": "Public IP",
+            "keyColor": "blue",
+            "text": "~/.config/fastfetch/get_cached.sh location"
+        },
+        {
+            "type": "command",
+            "key": "Weather",
+            "keyColor": "blue",
+            "text": "~/.config/fastfetch/get_cached.sh weather"
+        },
+        {
+            "type": "command",
+            "key": "Wi-Fi (SSID)",
+            "keyColor": "blue",
+            "text": "/usr/sbin/networksetup -getairportnetwork en0 | cut -d ':' -f 2 | sed 's/ //g' | sed 's/.$/X/'"
         },
         {
             "type": "locale",
