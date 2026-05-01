@@ -214,6 +214,12 @@
         },
         {
             "type": "command",
+            "key": "Dotfiles Status",
+            "keyColor": "blue",
+            "text": "echo \"$(git -C ~/.config rev-parse --abbrev-ref HEAD) $([ $(git -C ~/.config status -s | wc -l) -eq 0 ] && echo '✓ Clean' || echo '⚠ Unsynced')\""
+        },
+        {
+            "type": "command",
             "key": "Last Commit",
             "keyColor": "blue",
             "text": "[ -d .git ] && git log -1 --format='%h %s' 2>/dev/null | cut -c 1-50 || echo 'N/A'"
