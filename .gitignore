@@ -13,6 +13,8 @@ karabiner/automatic_backups/
 karabiner/*.bak.*
 *.bak
 *.orig
+omniwm/runtime-state.json
+omniwm/settings.toml.corrupt
 
 # === LARGE / BINARY ===
 raycast/extensions/
