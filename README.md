@@ -37,11 +37,20 @@ Centralized management of pull requests.
 -   **TUI**: Run `ghui` to browse PRs.
 -   **Tmux**: Press `Prefix + P` for a popup.
 
-### 🎹 Keyboard & WM (`karabiner/`, `omniwm/`)
-The layers of the God Build. 
--   **OmniWM**: Managed window tiling (Niri layout).
--   **Karabiner**: Layer triggers for OmniWM commands.
--   *Note: Deep-config pending (User Exam Mode Active).*
+### 🚀 Git Yeet Ecosystem (`git/bin/`)
+A collection of "God Build" Git utilities for high-velocity shipping.
+-   **Config**: Add `~/.config/git/bin` to your `PATH`.
+-   **Commands**:
+    -   `yeet "msg"`: Stage, commit, and push in one go (with confirmation).
+    -   `yoink`: Quick `git pull --rebase`.
+    -   `ghost`: Silent push with auto-generated message.
+    -   `chore "msg"`: Fast commit-push with `chore:` prefix.
+    -   `sync`: Deep sync (fetch + prune + rebase).
+    -   `undo`: Soft-reset the last commit (keeps changes).
+    -   `spawn <branch>`: Create and push a new branch immediately.
+    -   `fixup <hash>`: Create a fixup commit for a target.
+    -   `squash`: Auto-squash all fixups against `origin/main`.
+    -   `kaboom`: **Nuclear option**—wipe all uncommitted/untracked changes.
 
 ## 🔄 Syncing
 To save your sweating/changes to this repo:
