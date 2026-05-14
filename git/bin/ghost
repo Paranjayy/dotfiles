@@ -1,0 +1,15 @@
+#!/usr/bin/env zsh
+# ghost: Commit and push without needing a manual message.
+
+MAGENTA='\033[1;35m'
+CYAN='\033[1;36m'
+GREEN='\033[1;32m'
+RESET='\033[0m'
+
+MSG="chore: ghost ship $(date +'%Y-%m-%d %H:%M')"
+
+echo -e "${CYAN}👻 Ghost shipping changes...${RESET}"
+git add .
+git commit -m "$MSG"
+git push
+echo -e "${GREEN}✅ Vanished into origin.${RESET}"

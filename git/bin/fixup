@@ -1,0 +1,16 @@
+#!/usr/bin/env zsh
+# fixup: Create a fixup commit for a specific target commit.
+
+MAGENTA='\033[1;35m'
+RESET='\033[0m'
+
+if [[ -z "$1" ]]; then
+    echo -e "${MAGENTA}Usage: fixup <commit-hash>${RESET}"
+    exit 1
+fi
+
+HASH="$1"
+echo -e "${MAGENTA}🔧 Creating fixup for ${HASH}...${RESET}"
+git add .
+git commit --fixup="$HASH"
+echo -e "${MAGENTA}✅ Fixup commit created. Run 'squash' later to finalize.${RESET}"

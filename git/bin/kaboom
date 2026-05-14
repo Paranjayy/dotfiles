@@ -1,0 +1,19 @@
+#!/usr/bin/env zsh
+# kaboom: Hard reset and clean everything. Nuclear option.
+
+RED='\033[1;31m'
+BOLD='\033[1m'
+RESET='\033[0m'
+
+echo -e "${RED}${BOLD}⚠️  KABOOM: This will wipe all uncommitted changes and untracked files!${RESET}"
+echo -en "${RED}Are you absolutely sure? [y/N] ${RESET}"
+read -r CONFIRM
+
+if [[ "$CONFIRM" == "y" || "$CONFIRM" == "Y" ]]; then
+    echo -e "${RED}💥 Detonating...${RESET}"
+    git reset --hard HEAD
+    git clean -fd
+    echo -e "${RED}💨 Everything is gone.${RESET}"
+else
+    echo -e "Whew. That was close."
+fi

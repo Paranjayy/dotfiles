@@ -1,0 +1,18 @@
+#!/usr/bin/env zsh
+# spawn: Create a new branch and set upstream immediately.
+
+CYAN='\033[1;36m'
+GREEN='\033[1;32m'
+RESET='\033[0m'
+
+if [[ -z "$1" ]]; then
+    echo -e "${CYAN}Usage: spawn <branch-name>${RESET}"
+    exit 1
+fi
+
+BRANCH="$1"
+
+echo -e "${CYAN}🌱 Spawning branch '${BRANCH}'...${RESET}"
+git checkout -b "$BRANCH"
+git push -u origin "$BRANCH"
+echo -e "${GREEN}✅ Branch spawned and tracking origin/${BRANCH}.${RESET}"
