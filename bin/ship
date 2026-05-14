@@ -1,0 +1,178 @@
+#!/usr/bin/env python3
+import os
+import subprocess
+import json
+import re
+from datetime import datetime, timedelta
+
+# Configuration
+DEV_DIR = os.path.expanduser("~/Developer")
+MEMORY_DIR = os.path.expanduser("~/.omni_memory")
+CHANGELOG_PATH = os.path.join(MEMORY_DIR, "CHANGELOG.md")
+PROMPT_HISTORY_PATH = os.path.join(MEMORY_DIR, "PROMPT_HISTORY.md")
+
+# ANSI Colors
+MAGENTA = "\033[35m"
+BLUE = "\033[34m"
+CYAN = "\033[36m"
+GREEN = "\033[32m"
+YELLOW = "\033[33m"
+RED = "\033[31m"
+BOLD = "\033[1m"
+ITALIC = "\033[3m"
+RESET = "\033[0m"
+
+def get_git_stats(days=7):
+    total_commits = 0
+    added_loc = 0
+    deleted_loc = 0
+    projects = []
+    
+    since_date = (datetime.now() - timedelta(days=days)).strftime("%Y-%m-%d")
+    
+    for entry in os.scandir(DEV_DIR):
+        if entry.is_dir():
+            git_dir = os.path.join(entry.path, ".git")
+            if os.path.exists(git_dir):
+                try:
+                    # Get commits
+                    commits_cmd = ["git", "-C", entry.path, "rev-list", "--count", f"--since={since_date}", "HEAD"]
+                    commits = int(subprocess.check_output(commits_cmd, stderr=subprocess.DEVNULL).decode().strip())
+                    
+                    if commits > 0:
+                        # Get LOC stats
+                        loc_cmd = ["git", "-C", entry.path, "log", f"--since={since_date}", "--pretty=tformat:", "--numstat"]
+                        loc_out = subprocess.check_output(loc_cmd, stderr=subprocess.DEVNULL).decode().splitlines()
+                        
+                        p_added = 0
+                        p_deleted = 0
+                        for line in loc_out:
+                            parts = line.split()
+                            if len(parts) >= 2:
+                                if parts[0].isdigit(): p_added += int(parts[0])
+                                if parts[1].isdigit(): p_deleted += int(parts[1])
+                        
+                        total_commits += commits
+                        added_loc += p_added
+                        deleted_loc += p_deleted
+                        projects.append({
+                            "name": entry.name,
+                            "commits": commits,
+                            "added": p_added,
+                            "deleted": p_deleted
+                        })
+                except Exception:
+                    continue
+                    
+    projects.sort(key=lambda x: x["commits"], reverse=True)
+    return total_commits, added_loc, deleted_loc, projects[:5]
+
+def get_ai_stats(days=7):
+    sessions = 0
+    if os.path.exists(PROMPT_HISTORY_PATH):
+        with open(PROMPT_HISTORY_PATH, "r") as f:
+            content = f.read()
+            # Count entries in last 7 days
+            entries = re.findall(r"### \[(\d{4}-\d{2}-\d{2})", content)
+            since_date = (datetime.now() - timedelta(days=days)).strftime("%Y-%m-%d")
+            for date_str in entries:
+                if date_str >= since_date:
+                    sessions += 1
+    return sessions
+
+def get_top_work():
+    ship_of_week = "N/A"
+    top_work = []
+    if os.path.exists(CHANGELOG_PATH):
+        with open(CHANGELOG_PATH, "r") as f:
+            lines = f.readlines()
+            current_version = None
+            for line in lines:
+                if line.startswith("## ["):
+                    if current_version: break # Only take the first (latest) entry
+                    current_version = line.strip()
+                    ship_of_week = re.search(r"\[(.*?)\]", current_version).group(1)
+                elif line.startswith("- ") and current_version:
+                    top_work.append(line.strip("- \n"))
+    return ship_of_week, top_work[:3]
+
+def get_streak():
+    # Simple streak calculation based on git logs across all projects
+    days_active = set()
+    for entry in os.scandir(DEV_DIR):
+        if entry.is_dir() and os.path.exists(os.path.join(entry.path, ".git")):
+            try:
+                out = subprocess.check_output(["git", "-C", entry.path, "log", "--format=%as", "--all"], stderr=subprocess.DEVNULL).decode().splitlines()
+                days_active.update(out)
+            except:
+                continue
+    
+    sorted_days = sorted(list(days_active), reverse=True)
+    streak = 0
+    current_date = datetime.now().date()
+    
+    for i in range(100): # Check up to 100 days
+        check_date = (current_date - timedelta(days=i)).strftime("%Y-%m-%d")
+        if check_date in days_active:
+            streak += 1
+        else:
+            if i == 0: continue # Allow for today to be empty if it's early
+            break
+    return streak
+
+def print_report():
+    commits, added, deleted, top_projects = get_git_stats()
+    ai_sessions = get_ai_stats()
+    ship_ver, work = get_top_work()
+    streak = get_streak()
+    
+    week_start = (datetime.now() - timedelta(days=7)).strftime("%b %d")
+    week_end = datetime.now().strftime("%d, %Y")
+    
+    width = 70
+    border = "=" * width
+    thin_border = "-" * width
+    
+    print(f"\n{BOLD}🚀 Your Week: {os.getlogin().upper()} — {week_start}-{week_end}{RESET}\n")
+    print(f"╔{border}╗")
+    print(f"║ {BOLD}{os.getlogin().upper()} — Week of {week_start}{RESET}{' ' * (width - 11 - len(os.getlogin()) - len(week_start))}║")
+    print(f"╠{border}╣")
+    print(f"║{' ' * (width)}║")
+    
+    # Stats
+    print(f"║  {BOLD}{commits} commits{RESET} across {BOLD}{len(top_projects)} projects{RESET}{' ' * (width - 32)}║")
+    print(f"║  {GREEN}+{added/1000:.1f}k LOC added{RESET} · {RED}{deleted/1000:.1f}k LOC deleted{RESET} · {CYAN}{(added-deleted)/1000:.1f}k net{RESET}{' ' * (width - 55)}║")
+    print(f"║  {BOLD}{ai_sessions} AI coding sessions{RESET} (Powered by Antigravity){' ' * (width - 45)}║")
+    print(f"║  {YELLOW}{streak}-day shipping streak{RESET} 🔥{' ' * (width - 25)}║")
+    print(f"║{' ' * (width)}║")
+    
+    # Projects
+    print(f"║  {BOLD}PROJECTS{RESET}{' ' * (width - 10)}║")
+    print(f"║  {thin_border[3:]}║")
+    for p in top_projects:
+        name = p['name'][:25]
+        stats = f"{p['commits']} commits"
+        loc = f"+{p['added']/1000:.1f}k LOC"
+        line = f"║  {name:<25} {stats:<15} {loc:<15} solo{' ' * (width - 61)}║"
+        print(line)
+    print(f"║{' ' * (width)}║")
+    
+    # Ship of the Week
+    print(f"║  {BOLD}SHIP OF THE WEEK{RESET}{' ' * (width - 18)}║")
+    print(f"║  {ship_ver} — {work[0] if work else 'N/A'}{' ' * (width - len(ship_ver) - (len(work[0]) if work else 3) - 7)}║")
+    print(f"║{' ' * (width)}║")
+    
+    # Top Work
+    print(f"║  {BOLD}TOP WORK{RESET}{' ' * (width - 10)}║")
+    for w in work:
+        item = f"• {w[:60]}"
+        print(f"║  {item}{' ' * (width - len(item) - 2)}║")
+    print(f"║{' ' * (width)}║")
+    
+    # Footer
+    footer = "Powered by Antigravity"
+    print(f"║  {ITALIC}{footer}{RESET}{' ' * (width - len(footer) - 2)}║")
+    print(f"╚{border}╝\n")
+
+if __name__ == "__main__":
+    print_report()

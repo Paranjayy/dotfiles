@@ -1,0 +1,56 @@
+#!/usr/bin/env python3
+import os
+import sys
+
+history_path = os.path.expanduser("~/.config/zsh/.zsh_history")
+print("\n\033[1;34m╭────────────────────────────────────────────────╮\033[0m")
+print("\033[1;34m│\033[0m  \033[1;36m⏳ VAULT TIME-TRAVEL: SEMANTIC GRAPH\033[0m          \033[1;34m│\033[0m")
+print("\033[1;34m╰────────────────────────────────────────────────╯\033[0m\n")
+
+categories = {
+    "🌐 Web/Frontend": ["npm", "bun", "yarn", "node", "npx", "pnpm"],
+    "🐙 Version Control": ["git", "lazygit", "ghost-git", "tig"],
+    "🐳 Infrastructure": ["docker", "docker-compose", "kubectl", "aws"],
+    "🛠️ System/Files": ["ls", "cd", "rm", "mv", "eza", "cat", "bat", "nano", "vim", "nvim"],
+    "🧠 Automation/Agent": ["fastfetch", "reload", "stats", "peek"],
+}
+
+tallies = {k: 0 for k in categories}
+recent_cmds = []
+
+try:
+    with open(history_path, 'r', errors='ignore') as f:
+        lines = f.readlines()
+        for line in lines[-2000:]:
+            # zsh history format starts with `: 1234567890:0;command`
+            cmd = line.split(';')[-1].strip() if ';' in line else line.strip()
+            if not cmd: continue
+            base = cmd.split()[0]
+            
+            for cat, tools in categories.items():
+                if base in tools:
+                    tallies[cat] += 1
+            recent_cmds.append(cmd)
+except Exception as e:
+    print(f"\033[31mTemporal anomaly detected: {e}\033[0m")
+
+print("\033[1mWorkflow Activity Clusters (Last 2000 commands):\033[0m")
+for cat, count in sorted(tallies.items(), key=lambda x: x[1], reverse=True):
+    if count > 0:
+        bar = "█" * min(40, count // 5) # Scale to fit screen
+        print(f" \033[35m{cat:<22}\033[0m | \033[36m{bar}\033[0m ({count})")
+
+print("\n\033[1mRecent Temporal Signatures (Last 5 unique complex actions):\033[0m")
+seen = set()
+complex_cmds = []
+for cmd in reversed(recent_cmds):
+    # Only show commands that are slightly complex (more than 2 words)
+    if len(cmd.split()) > 2 and cmd not in seen:
+        if not cmd.startswith("echo") and not cmd.startswith("cd"):
+            complex_cmds.append(cmd)
+            seen.add(cmd)
+    if len(complex_cmds) == 5: break
+
+for c in complex_cmds:
+    print(f" ┣━ \033[90m{c}\033[0m")
+print()
