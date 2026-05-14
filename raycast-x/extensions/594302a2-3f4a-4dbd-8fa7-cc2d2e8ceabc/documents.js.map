@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../src/documents.tsx"],
+  "sourcesContent": ["import { open, getPreferenceValues } from \"@raycast/api\";\n\nexport default function Command() {\n  return open(getPreferenceValues<Preferences.Documents>().documentsdir);\n}\n"],
+  "mappings": "yaAAA,IAAAA,EAAA,GAAAC,EAAAD,EAAA,aAAAE,IAAA,eAAAC,EAAAH,GAAA,IAAAI,EAA0C,wBAE3B,SAARF,GAA2B,CAChC,SAAO,WAAK,uBAA2C,EAAE,YAAY,CACvE",
+  "names": ["documents_exports", "__export", "Command", "__toCommonJS", "import_api"]
+}

@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../src/trash.tsx"],
+  "sourcesContent": ["import { open } from \"@raycast/api\";\nimport { homedir } from \"os\";\nimport { join } from \"path\";\n\nexport default function Command() {\n  return open(join(homedir(), \".Trash\"));\n}\n"],
+  "mappings": "yaAAA,IAAAA,EAAA,GAAAC,EAAAD,EAAA,aAAAE,IAAA,eAAAC,EAAAH,GAAA,IAAAI,EAAqB,wBACrBC,EAAwB,cACxBC,EAAqB,gBAEN,SAARJ,GAA2B,CAChC,SAAO,WAAK,WAAK,WAAQ,EAAG,QAAQ,CAAC,CACvC",
+  "names": ["trash_exports", "__export", "Command", "__toCommonJS", "import_api", "import_os", "import_path"]
+}

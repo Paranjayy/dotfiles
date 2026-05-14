@@ -20,6 +20,7 @@ export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
 HOMEBREW_PREFIX="$HOME/homebrew"
 BUN_INSTALL="$HOME/.bun"
 LOCAL_BIN="$HOME/.local/bin"
+BIN_DIR="$HOME/.config/bin"
 
 # Create necessary directories
 mkdir -p "$XDG_CONFIG_HOME/zsh"
@@ -332,6 +333,7 @@ add_to_path() {
 
 # Add directories to PATH
 add_to_path "$LOCAL_BIN"
+add_to_path "$BIN_DIR"
 add_to_path "$HOMEBREW_PREFIX/bin"
 add_to_path "$HOMEBREW_PREFIX/sbin"
 add_to_path "$BUN_INSTALL/bin"

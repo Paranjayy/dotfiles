@@ -1,0 +1,16 @@
+
+--- 2026-05-10T17:12:30.086Z debug
+🪵  Writing logs to "/Users/paranjay/.config/.wrangler/logs/wrangler-2026-05-10_17-12-20_586.log"
+---
+
+--- 2026-05-10T17:12:30.086Z debug
+local dev variables file not found at ".dev.vars". Continuing... For more details, refer to https://developers.cloudflare.com/workers/wrangler/system-environment-variables/
+---
+
+--- 2026-05-10T17:12:30.087Z debug
+.env file not found at "/Users/paranjay/Developer/riff.fm lovable/.env". Continuing... For more details, refer to https://developers.cloudflare.com/workers/wrangler/system-environment-variables/
+---
+
+--- 2026-05-10T17:12:30.087Z debug
+.env file not found at "/Users/paranjay/Developer/riff.fm lovable/.env.local". Continuing... For more details, refer to https://developers.cloudflare.com/workers/wrangler/system-environment-variables/
+---

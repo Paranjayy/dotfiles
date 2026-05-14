@@ -1,0 +1,52 @@
+{
+  "$schema": "https://www.raycast.com/schemas/extension.json",
+  "name": "instagram-media-hub",
+  "version": "1.5.0",
+  "title": "Instagram Media Hub",
+  "description": "Professional Interception & Archiving Tool for Instagram",
+  "icon": "assets/icon.png",
+  "author": "paranjay",
+  "license": "MIT",
+  "commands": [
+    {
+      "name": "hoard",
+      "title": "Hoard Everything",
+      "description": "Scan profiles, stories, and media with mass-download support",
+      "icon": "assets/icon.png",
+      "mode": "view",
+      "arguments": [
+        {
+          "name": "username",
+          "placeholder": "Username",
+          "type": "text",
+          "required": false
+        }
+      ]
+    }
+  ],
+  "dependencies": {
+    "@raycast/api": "^1.71.0",
+    "axios": "^1.15.2",
+    "cheerio": "^1.2.0",
+    "node-fetch": "^3.3.2",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "@raycast/eslint-config": "^1.0.8",
+    "@types/node": "20.8.10",
+    "@types/node-fetch": "^2.6.9",
+    "@types/react": "18.2.27",
+    "eslint": "^8.51.0",
+    "prettier": "^3.0.3",
+    "typescript": "^5.2.2"
+  },
+  "scripts": {
+    "build": "ray build",
+    "dev": "ray develop",
+    "archive-only": "bun scripts/archive-brain.ts",
+    "fix-lint": "eslint src --fix",
+    "lint": "eslint src",
+    "publish": "npx @raycast/api@latest publish"
+  }
+}

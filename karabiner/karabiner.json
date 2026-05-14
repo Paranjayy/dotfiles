@@ -26,7 +26,7 @@
                                         }
                                     },
                                     {
-                                        "shell_command": "/Users/paranjay/Developer/OmniWM/bar_manager.sh --hold"
+                                        "shell_command": "/Users/paranjay/.config/omniwm/bar_manager.sh --hold"
                                     },
                                     {
                                         "key_code": "vk_none"
@@ -40,7 +40,7 @@
                                         }
                                     },
                                     {
-                                        "shell_command": "/Users/paranjay/Developer/OmniWM/bar_manager.sh --release"
+                                        "shell_command": "/Users/paranjay/.config/omniwm/bar_manager.sh --release"
                                     }
                                 ],
                                 "to_if_alone": [
@@ -70,7 +70,7 @@
                                         }
                                     },
                                     {
-                                        "shell_command": "/Users/paranjay/Developer/OmniWM/bar_manager.sh --hold"
+                                        "shell_command": "/Users/paranjay/.config/omniwm/bar_manager.sh --hold"
                                     },
                                     {
                                         "key_code": "vk_none"
@@ -84,7 +84,7 @@
                                         }
                                     },
                                     {
-                                        "shell_command": "/Users/paranjay/Developer/OmniWM/bar_manager.sh --release"
+                                        "shell_command": "/Users/paranjay/.config/omniwm/bar_manager.sh --release"
                                     }
                                 ],
                                 "to_if_alone": [
@@ -1247,7 +1247,7 @@
                                         "shell_command": "open raycast://extensions/raycast/pomodoro/start-pomodoro"
                                     },
                                     {
-                                        "shell_command": "/Users/paranjay/Developer/OmniWM/zen.sh"
+                                        "shell_command": "/Users/paranjay/.config/omniwm/zen.sh"
                                     }
                                 ],
                                 "type": "basic"
@@ -1815,7 +1815,7 @@
                                 },
                                 "to": [
                                     {
-                                        "shell_command": "/Users/paranjay/Developer/OmniWM/zen.sh"
+                                        "shell_command": "/Users/paranjay/.config/omniwm/zen.sh"
                                     }
                                 ],
                                 "type": "basic"
@@ -1838,7 +1838,7 @@
                                 },
                                 "to": [
                                     {
-                                        "shell_command": "/Users/paranjay/Developer/OmniWM/bar_manager.sh --toggle"
+                                        "shell_command": "/Users/paranjay/.config/omniwm/bar_manager.sh --toggle"
                                     }
                                 ],
                                 "type": "basic"
@@ -1856,7 +1856,7 @@
                                 },
                                 "to": [
                                     {
-                                        "shell_command": "/Users/paranjay/Developer/OmniWM/bar_manager.sh --toggle"
+                                        "shell_command": "/Users/paranjay/.config/omniwm/bar_manager.sh --toggle"
                                     }
                                 ],
                                 "type": "basic"
@@ -2381,7 +2381,7 @@
                                 },
                                 "to": [
                                     {
-                                        "shell_command": "/Users/paranjay/Developer/OmniWM/center_float.sh"
+                                        "shell_command": "/Users/paranjay/.config/omniwm/center_float.sh"
                                     }
                                 ],
                                 "type": "basic"

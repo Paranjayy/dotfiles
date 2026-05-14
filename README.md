@@ -43,7 +43,7 @@ A collection of "God Build" Git utilities for high-velocity shipping.
 -   **Commands**:
     -   `yeet "msg"`: Stage, commit, and push in one go (with confirmation).
     -   `yoink`: Quick `git pull --rebase`.
-    -   `ghost`: Silent push with auto-generated message.
+    -   `vanish`: Silent push with auto-generated message.
     -   `chore "msg"`: Fast commit-push with `chore:` prefix.
     -   `sync`: Deep sync (fetch + prune + rebase).
     -   `undo`: Soft-reset the last commit (keeps changes).
