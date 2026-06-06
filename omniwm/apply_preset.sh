@@ -4,55 +4,70 @@
 # Author: Antigravity
 # Usage: ./apply_preset.sh <coding|chill>
 
+# Ensure homebrew and standard paths are loaded
+export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/paranjay/.local/bin:$PATH"
+
 PRESET=$1
+
+# Helper function to wait for window
+wait_for_window() {
+    local bundle_id=$1
+    for i in {1..20}; do
+        local win_id=$(omniwmctl query windows --bundle-id "$bundle_id" --format json | jq -r '.result.payload.windows[0].id')
+        if [ -n "$win_id" ] && [ "$win_id" != "null" ]; then
+            echo "$win_id"
+            return 0
+        fi
+        sleep 0.2
+    done
+    return 1
+}
 
 case "$PRESET" in
     coding)
         echo "Applying Coding layout..."
         open -a Zed
         open -a Ghostty
-        sleep 0.6
 
-        # Move Zed to workspace 2
-        ZED_WIN=$(/opt/homebrew/bin/omniwmctl query windows --bundle-id "dev.zed.Zed" --format json | /Users/paranjay/.local/bin/jq -r '.result.payload.windows[0].id')
-        if [ -n "$ZED_WIN" ] && [ "$ZED_WIN" != "null" ]; then
-            /opt/homebrew/bin/omniwmctl window focus "$ZED_WIN"
-            /opt/homebrew/bin/omniwmctl command move-column-to-workspace 2
+        # Wait for Zed window
+        ZED_WIN=$(wait_for_window "dev.zed.Zed")
+        if [ -n "$ZED_WIN" ]; then
+            omniwmctl window focus "$ZED_WIN"
+            omniwmctl command move-column-to-workspace 2
         fi
 
-        # Move Ghostty to workspace 2
-        GHOSTTY_WIN=$(/opt/homebrew/bin/omniwmctl query windows --bundle-id "com.mitchellh.ghostty" --format json | /Users/paranjay/.local/bin/jq -r '.result.payload.windows[0].id')
-        if [ -n "$GHOSTTY_WIN" ] && [ "$GHOSTTY_WIN" != "null" ]; then
-            /opt/homebrew/bin/omniwmctl window focus "$GHOSTTY_WIN"
-            /opt/homebrew/bin/omniwmctl command move-column-to-workspace 2
+        # Wait for Ghostty window
+        GHOSTTY_WIN=$(wait_for_window "com.mitchellh.ghostty")
+        if [ -n "$GHOSTTY_WIN" ]; then
+            omniwmctl window focus "$GHOSTTY_WIN"
+            omniwmctl command move-column-to-workspace 2
         fi
 
         # Focus workspace 2
-        /opt/homebrew/bin/omniwmctl command switch-workspace 2
+        omniwmctl workspace focus-name "2"
         ;;
 
     chill)
         echo "Applying Chill layout..."
         open -a Spotify
         open -a Safari
-        sleep 0.6
 
-        # Move Spotify to workspace 8
-        SPOTIFY_WIN=$(/opt/homebrew/bin/omniwmctl query windows --bundle-id "com.spotify.client" --format json | /Users/paranjay/.local/bin/jq -r '.result.payload.windows[0].id')
-        if [ -n "$SPOTIFY_WIN" ] && [ "$SPOTIFY_WIN" != "null" ]; then
-            /opt/homebrew/bin/omniwmctl window focus "$SPOTIFY_WIN"
-            /opt/homebrew/bin/omniwmctl command move-column-to-workspace 8
+        # Wait for Spotify window
+        SPOTIFY_WIN=$(wait_for_window "com.spotify.client")
+        if [ -n "$SPOTIFY_WIN" ]; then
+            omniwmctl window focus "$SPOTIFY_WIN"
+            omniwmctl command move-column-to-workspace 8
         fi
 
-        # Move Safari to workspace 8
-        SAFARI_WIN=$(/opt/homebrew/bin/omniwmctl query windows --bundle-id "com.apple.Safari" --format json | /Users/paranjay/.local/bin/jq -r '.result.payload.windows[0].id')
-        if [ -n "$SAFARI_WIN" ] && [ "$SAFARI_WIN" != "null" ]; then
-            /opt/homebrew/bin/omniwmctl window focus "$SAFARI_WIN"
-            /opt/homebrew/bin/omniwmctl command move-column-to-workspace 8
+        # Wait for Safari window
+        SAFARI_WIN=$(wait_for_window "com.apple.Safari")
+        if [ -n "$SAFARI_WIN" ]; then
+            omniwmctl window focus "$SAFARI_WIN"
+            omniwmctl command move-column-to-workspace 8
         fi
 
         # Focus workspace 8
-        /opt/homebrew/bin/omniwmctl command switch-workspace 8
+        omniwmctl workspace focus-name "8"
         ;;
 
     *)

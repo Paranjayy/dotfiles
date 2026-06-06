@@ -3,14 +3,19 @@
 # QuickStats Toggle Script for Karabiner + OmniWM
 # Author: Antigravity
 
+# Ensure homebrew and standard paths are loaded
+export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/paranjay/.local/bin:$PATH"
+
 # Query windows for a Ghostty window with "QuickStats" title
-QUICK_STATS_PID=$(/opt/homebrew/bin/omniwmctl query windows --format json | /Users/paranjay/.local/bin/jq -r '.result.payload.windows[] | select(.title == "QuickStats") | .pid' | head -n 1)
+QUICK_STATS_PID=$(/opt/homebrew/bin/omniwmctl query windows --format json | jq -r '.result.payload.windows[] | select(.title == "QuickStats") | .pid' | head -n 1)
 
 if [ -n "$QUICK_STATS_PID" ] && [ "$QUICK_STATS_PID" != "null" ]; then
     kill "$QUICK_STATS_PID"
 else
     # Launch Ghostty with the title "QuickStats" running a menu-driven dashboard
-    ghostty --title="QuickStats" -e "bash -c '
+    /Applications/Ghostty.app/Contents/MacOS/ghostty --title="QuickStats" -e "bash -c '
+    # Inner path setup
+    export PATH=\"/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/paranjay/.local/bin:\$PATH\"
     while true; do
         clear
         echo -e \"\033[1;35m⚡ QUICK SYSTEM DASHBOARD ⚡\033[0m\"

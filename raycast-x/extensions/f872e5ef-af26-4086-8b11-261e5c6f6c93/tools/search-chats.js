@@ -66,5 +66,5 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
       chat.chat_identifier
     ORDER BY
       last_message_date DESC
-    LIMIT 1000;
+    LIMIT ${e?"1000":"50"};
     `);if(!a)return[];let d=[...new Set(a.map(n=>n.chat_identifier))],p=await d4(d,!1),t=M4(p),r=a.map(n=>{let s={chat_identifier:n.chat_identifier,is_group:!!n.is_group,display_name:n.display_name,group_participants:n.group_participants},{displayName:l,phoneNumber:m}=B4(s,t);return{...n,displayName:l,phoneNumber:m,is_group:!!n.is_group}});if(!e)return r.slice(0,50);let i=e.toLowerCase().split(/\s+/).filter(n=>n.length>0);return r.filter(n=>{let s=`${n.chat_identifier} ${n.displayName} ${n.group_participants||""}`;return L4(s,i)}).slice(0,50)}async function b5(e){try{let a=await z4(e.searchTerm);return a.length===0?"No contacts were found.":a}catch(a){return a instanceof Error&&a.message.includes("database")?"The user can't access the chat database":"An error occurred while searching for chats"}}

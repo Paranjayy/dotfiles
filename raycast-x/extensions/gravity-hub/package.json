@@ -9,6 +9,13 @@
   "license": "MIT",
   "commands": [
     {
+      "name": "smartthings",
+      "title": "SmartThings",
+      "description": "Browse devices, scenes, and location modes",
+      "icon": "assets/icon.png",
+      "mode": "view"
+    },
+    {
       "name": "control",
       "title": "Control House",
       "description": "Manage AC, Lights, and Scenes",
@@ -51,6 +58,22 @@
       "mode": "no-view"
     }
   ],
+  "preferences": [
+    {
+      "name": "smartThingsPat",
+      "title": "SmartThings PAT",
+      "description": "Personal access token for SmartThings linking",
+      "type": "password",
+      "required": false
+    },
+    {
+      "name": "smartThingsLocationId",
+      "title": "SmartThings Location ID",
+      "description": "Optional location ID UUID for SmartThings",
+      "type": "textfield",
+      "required": false
+    }
+  ],
   "dependencies": {
     "@raycast/api": "^1.71.0",
     "node-fetch": "^3.3.2",
@@ -67,10 +90,10 @@
     "typescript": "^5.2.2"
   },
   "scripts": {
-    "build": "ray build",
-    "dev": "ray develop",
+    "build": "bunx @raycast/api@latest build",
+    "dev": "bunx @raycast/api@latest dev",
     "fix-lint": "eslint src --fix",
     "lint": "eslint src",
-    "publish": "npx @raycast/api@latest publish"
+    "publish": "bunx @raycast/api@latest publish"
   }
 }
