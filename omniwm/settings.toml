@@ -455,6 +455,14 @@ binding = "Control+Shift+Command+Left Bracket"
 id = "cycleColumnWidthBackward"
 
 [[hotkeys]]
+binding = "Control+Shift+Command+Equal"
+id = "setColumnWidth.increase10Percent"
+
+[[hotkeys]]
+binding = "Control+Shift+Command+Minus"
+id = "setColumnWidth.decrease10Percent"
+
+[[hotkeys]]
 binding = "Unassigned"
 id = "toggleColumnFullWidth"
 
