@@ -190,6 +190,14 @@ bundleId = "com.apple.systempreferences"
 id = "B6B17A90-51E7-4713-8924-934DE8B68A93"
 layout = "float"
 
+[[appRules]]
+bundleId = "com.mitchellh.ghostty"
+id = "7E6148E2-BC52-475D-85C1-4D99D4F2AA1C"
+titleSubstring = "QuickStats"
+layout = "float"
+minHeight = 600.0
+minWidth = 850.0
+
 [[hotkeys]]
 binding = "Control+Shift+Command+1"
 id = "switchWorkspace.0"
