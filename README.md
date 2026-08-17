@@ -64,7 +64,7 @@ curl -fsSL https://raw.githubusercontent.com/Paranjayy/dotfiles/main/macos/insta
 
 ## Website
 
-Live: [dotfiles.paranjay.dev](https://dotfiles.paranjay.dev)
+Live: [dotfiles.paranjay.dev](https://website-two-iota-zukp3rlpu8.vercel.app)
 
 ## License
 
