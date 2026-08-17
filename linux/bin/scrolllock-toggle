@@ -1,21 +1,14 @@
 #!/bin/bash
 # Toggle Scroll Lock LED (RGB keyboard backlight)
-# Uses a state file to avoid conflict with keyboard firmware
 
 LED="input4::scrolllock"
-STATE_FILE="/tmp/.scrolllock-state"
+LOG="/tmp/scrolllock.log"
 
-# Get tracked state (default to OFF)
-if [ -f "$STATE_FILE" ]; then
-    STATE=$(cat "$STATE_FILE")
-else
-    STATE="0"
-fi
+CURRENT=$(/usr/bin/brightnessctl --device "$LED" get 2>/dev/null)
+echo "$(date): toggle from $CURRENT" >> "$LOG"
 
-if [ "$STATE" -eq 0 ]; then
-    brightnessctl --device "$LED" set 1 2>/dev/null
-    echo "1" > "$STATE_FILE"
+if [ "$CURRENT" -eq 0 ]; then
+    /usr/bin/brightnessctl --device "$LED" set 1 2>/dev/null
 else
-    brightnessctl --device "$LED" set 0 2>/dev/null
-    echo "0" > "$STATE_FILE"
+    /usr/bin/brightnessctl --device "$LED" set 0 2>/dev/null
 fi
