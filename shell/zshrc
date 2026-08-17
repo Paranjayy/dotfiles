@@ -488,13 +488,13 @@ setopt INTERACTIVE_COMMENTS # Allow comments in interactive shell
 unsetopt BEEP
 
 # opencode
-add_to_path "/Users/paranjay/.opencode/bin"
+add_to_path "$HOME/.opencode/bin"
 
 # Added by LM Studio CLI (lms)
-add_to_path "/Users/paranjay/.lmstudio/bin"
+add_to_path "$HOME/.lmstudio/bin"
 
 # Added by Antigravity
-add_to_path "/Users/paranjay/.antigravity/antigravity/bin"
+add_to_path "$HOME/.antigravity/antigravity/bin"
 
 # Bun completions
 [ -s "$BUN_INSTALL/_bun" ] && source "$BUN_INSTALL/_bun"

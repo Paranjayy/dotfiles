@@ -34,33 +34,52 @@ function install {
 }
 
 # ── Git Aliases ────────────────────────────────────────────────
-function gs { git status }
-function gp { git push }
-function gpl { git pull --rebase }
-function gl { git log --oneline -15 }
-function gd { git diff }
-function gco { param($b) git checkout $b }
-function gb { git branch }
-function gaa { git add . }
-function gcm { param($m) git commit -m $m }
-function gpm { git pull --rebase && git push }
-function gbd { param($b) git branch -d $b }
+function gs { git status @args }
+function gp { git push @args }
+function gpl { git pull --rebase @args }
+function gl { git log --oneline -15 @args }
+function gd { git diff @args }
+function gco { param($b) git checkout $b @args }
+function gb { git branch @args }
+function gaa { git add . @args }
+function gcm { param($m) git commit -m $m @args }
+function gpm { git pull --rebase; git push }
+function gbd { param($b) git branch -d $b @args }
+function glog { git log --oneline --graph --decorate @args }
 
 # ── Navigation ─────────────────────────────────────────────────
 function .. { Set-Location .. }
 function ... { Set-Location ..\.. }
 function .... { Set-Location ..\..\.. }
+function dl { Set-Location ~/Downloads }
+function proj { Set-Location ~/Developer }
+function dots { Set-Location ~/dotfiles }
 
 # ── Linux-Style Aliases ────────────────────────────────────────
 function ll {
-    if ($IsLinux -or $env:OS -ne "Windows_NT") {
+    if (Get-Command eza -ErrorAction SilentlyContinue) {
+        eza -la --icons --git @args
+    } elseif ($IsLinux -or $env:OS -ne "Windows_NT") {
         Get-ChildItem -Force --color=auto
     } else {
         Get-ChildItem -Force
     }
 }
+function lt {
+    if (Get-Command eza -ErrorAction SilentlyContinue) {
+        eza --tree --icons --level=2 @args
+    } else {
+        tree /F /A
+    }
+}
 function la { Get-ChildItem -Force -Hidden }
 function cls { Clear-Host }
+function c { Clear-Host }
+
+# bat as cat if available
+if (Get-Command bat -ErrorAction SilentlyContinue) {
+    function cat { bat @args }
+}
 
 # ── Utilities ──────────────────────────────────────────────────
 function mkcd { param($d) New-Item -ItemType Directory -Path $d -Force; Set-Location $d }
@@ -78,6 +97,16 @@ function ports {
 $env:EDITOR = if (Get-Command nvim -ErrorAction SilentlyContinue) { "nvim" } else { "vim" }
 $env:GIT_EDITOR = $env:EDITOR
 
+# ── PATH Helper ────────────────────────────────────────────────
+function Add-ToPath {
+    param([string]$Dir)
+    if (Test-Path $Dir -PathType Container) {
+        $env:PATH = "$Dir;$env:PATH"
+    }
+}
+$scoopShims = "$env:USERPROFILE\scoop\shims"
+if (Test-Path $scoopShims) { Add-ToPath $scoopShims }
+
 # ── FZF ────────────────────────────────────────────────────────
 if (Get-Command fzf -ErrorAction SilentlyContinue) {
     Set-PSReadLineKeyHandler -Key Ctrl+r -ScriptBlock {
@@ -90,4 +119,14 @@ if (Get-Command fzf -ErrorAction SilentlyContinue) {
             [Microsoft.PowerShell.PSConsoleReadLine]::Insert($result)
         }
     }
+}
+
+# ── Starship Prompt ────────────────────────────────────────────
+if (Get-Command starship -ErrorAction SilentlyContinue) {
+    function Invoke-Starship_transient_function {
+        $ESC = [char]27
+        "$ESC[1;35m❯$ESC[0m "
+    }
+    Enable-TransientPrompt
+    function prompt { starship prompt }
 }
