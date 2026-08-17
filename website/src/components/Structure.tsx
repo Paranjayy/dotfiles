@@ -69,7 +69,7 @@ export function Structure() {
           <div className="p-6 font-mono text-sm overflow-x-auto">
             <div className="text-zinc-500 mb-2">dotfiles/</div>
             {treeData.map((item, i) => {
-              const prefix = "│  ".repeat(item.indent - 1) + (item.indent > 0 ? "├── " : "");
+              const prefix = item.indent > 0 ? "│  ".repeat(Math.max(0, item.indent - 1)) + "├── " : "";
               return (
                 <div key={i} className="flex items-center gap-2 py-0.5 hover:bg-zinc-800/50 rounded px-1">
                   <span className="text-zinc-600 whitespace-pre">{prefix}</span>
