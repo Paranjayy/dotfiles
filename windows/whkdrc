@@ -1,45 +1,53 @@
-# whkd config — Window Hot Key Daemon
-# mod: alt (change to win for super key)
+# whkd config — Match omniwm keybindings
+# Alt = Hyper key (like omniwm's Left Option)
+; Use ; as prefix for workspace commands
 
-; ── Window Management ──────────────────────────────────────────
-
-; Focus windows
+; ── Window Focus (vim-style) ───────────────────────────────────
 alt + h         : komorebic focus left
 alt + j         : komorebic focus down
 alt + k         : komorebic focus up
 alt + l         : komorebic focus right
 
-; Move windows
+; ── Window Move (vim-style) ────────────────────────────────────
 alt + shift + h : komorebic move left
 alt + shift + j : komorebic move down
 alt + shift + k : komorebic move up
 alt + shift + l : komorebic move right
 
-; Resize windows
+; ── Resize Windows ─────────────────────────────────────────────
 alt + ctrl + h  : komorebic resize-axis width increase
 alt + ctrl + j  : komorebic resize-axis height increase
 alt + ctrl + k  : komorebic resize-axis height decrease
 alt + ctrl + l  : komorebic resize-axis width decrease
 
-; Layouts
-alt + m         : komorebic toggle-monocle
-alt + shift + m : komorebic quick-close
-
-; Workspaces
+; ── Workspaces (like omniwm Hyper+1-9) ─────────────────────────
 alt + 1         : komorebic focus-workspace 0
 alt + 2         : komorebic focus-workspace 1
 alt + 3         : komorebic focus-workspace 2
 alt + 4         : komorebic focus-workspace 3
 alt + 5         : komorebic focus-workspace 4
 
-; Move to workspace
+; ── Move to Workspace ──────────────────────────────────────────
 alt + shift + 1 : komorebic move-to-workspace 0
 alt + shift + 2 : komorebic move-to-workspace 1
 alt + shift + 3 : komorebic move-to-workspace 2
 alt + shift + 4 : komorebic move-to-workspace 3
-alt + shift + 5 : komorebic move-to-workspace 5
+alt + shift + 5 : komorebic move-to-workspace 4
 
-; Window actions
+; ── Window Actions ─────────────────────────────────────────────
 alt + shift + f : komorebic toggle-float
+alt + shift + m : komorebic toggle-monocle
 alt + shift + x : komorebic close
+alt + return    : komorebic toggle-fullscreen
+
+; ── Layout ─────────────────────────────────────────────────────
+alt + shift + l : komorebic cycle-layout
+alt + shift + b : komorebic balance-ratio
 alt + shift + r : komorebic reload-config
+
+; ── Quake Terminal (like omniwm Hyper+Grave) ───────────────────
+alt + grave     : komorebic toggle-quake-console
+
+; ── Quick Actions ──────────────────────────────────────────────
+alt + shift + s : komorebic quick-start
+alt + shift + q : komorebic quick-close

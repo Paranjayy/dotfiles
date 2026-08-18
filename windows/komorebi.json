@@ -11,7 +11,10 @@
   "float_rules": [
     { "kind": "Class", "id": "TaskManagerWindow", "atching": true },
     { "kind": "Title", "id": "Microsoft PowerToys Settings", "atching": true },
-    { "kind": "Title", "id": "Settings", "atching": true }
+    { "kind": "Title", "id": "Settings", "atching": true },
+    { "kind": "Title", "id": "Run", "atching": true },
+    { "kind": "Title", "id": "Save As", "atching": true },
+    { "kind": "Title", "id": "Open", "atching": true }
   ],
   "monitors": [
     {
