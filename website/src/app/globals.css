@@ -2,81 +2,40 @@
 
 @theme {
   --color-bg: #09090b;
-  --color-bg-card: #18181b;
-  --color-bg-elevated: #27272a;
-  --color-border: #3f3f46;
+  --color-card: #18181b;
+  --color-border: #27272a;
   --color-text: #fafafa;
-  --color-text-muted: #a1a1aa;
-  --color-text-dim: #71717a;
-  --color-accent-purple: #a855f7;
-  --color-accent-cyan: #06b6d4;
-  --color-accent-green: #22c55e;
-  --color-accent-orange: #f97316;
-  --color-accent-pink: #ec4899;
+  --color-muted: #a1a1aa;
+  --color-dim: #71717a;
+  --color-purple: #a855f7;
+  --color-cyan: #06b6d4;
+  --color-green: #22c55e;
+  --color-orange: #f97316;
+  --color-pink: #ec4899;
+  --color-blue: #3b82f6;
 }
 
-* {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 body {
   background: var(--color-bg);
   color: var(--color-text);
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
+::selection { background: var(--color-purple); color: white; }
 
-::selection {
-  background: var(--color-accent-purple);
-  color: white;
-}
-
-::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--color-bg); }
-::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: #52525b; }
+::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
-}
-
-@keyframes pulse-glow {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 0.8; }
-}
-
-@keyframes slide-up {
-  from { opacity: 0; transform: translateY(30px); }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
-
-@keyframes fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes gradient-shift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-.animate-float { animation: float 6s ease-in-out infinite; }
-.animate-pulse-glow { animation: pulse-glow 4s ease-in-out infinite; }
-.animate-slide-up { animation: slide-up 0.8s ease-out forwards; }
-.animate-fade-in { animation: fade-in 0.6s ease-out forwards; }
-.animate-gradient { 
-  background-size: 200% 200%;
-  animation: gradient-shift 8s ease infinite; 
-}
-
-.delay-100 { animation-delay: 0.1s; }
-.delay-200 { animation-delay: 0.2s; }
-.delay-300 { animation-delay: 0.3s; }
-.delay-400 { animation-delay: 0.4s; }
+.animate-fade-up { animation: fadeUp 0.6s ease-out forwards; opacity: 0; }
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+.delay-4 { animation-delay: 0.4s; }
+.delay-5 { animation-delay: 0.5s; }

@@ -1,6 +1,8 @@
 import { Hero } from "@/components/Hero";
-import { Features } from "@/components/Features";
-import { Structure } from "@/components/Structure";
+import { Keybindings } from "@/components/Keybindings";
+import { Terminals } from "@/components/Terminals";
+import { DevTools } from "@/components/DevTools";
+import { Tmux } from "@/components/Tmux";
 import { Install } from "@/components/Install";
 import { Footer } from "@/components/Footer";
 
@@ -8,8 +10,10 @@ export default function Home() {
   return (
     <main className="min-h-screen">
       <Hero />
-      <Features />
-      <Structure />
+      <Keybindings />
+      <Terminals />
+      <DevTools />
+      <Tmux />
       <Install />
       <Footer />
     </main>
