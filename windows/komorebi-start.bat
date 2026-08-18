@@ -1,6 +1,9 @@
 @echo off
-:: komorebi-start.bat — Auto-start komorebi + whkd
+:: komorebi-start.bat — Auto-start komorebi + whkd + AHK
 :: Place in shell:startup or Task Scheduler
+
+:: Start AHK hyper key script (Right Alt as hyper)
+start "" "C:\Users\pkhac\dotfiles\windows\hyper-alt.ahk"
 
 :: Start whkd (hotkey daemon)
 start /b whkd
@@ -14,4 +17,4 @@ komorebic start --bar
 :: Wait for komorebi to be ready
 timeout /t 2 /nobreak >nul
 
-echo Komorebi + whkd started successfully.
+echo Komorebi + whkd + AHK started successfully.

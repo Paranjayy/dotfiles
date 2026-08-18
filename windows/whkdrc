@@ -1,53 +1,50 @@
 # whkd config — Match omniwm keybindings
-# Alt = Hyper key (like omniwm's Left Option)
-; Use ; as prefix for workspace commands
+; AHK sends Ctrl+Alt combos for Right-Alt-only triggers
+; Right Alt + WASD = Focus (right+opt+wasd)
+; Right Alt + Shift + WASD = Move (right+cmd+wasd)
+; Right Alt + 1-5 = Switch workspace (right+cmd+1-9)
+; Right Alt + Shift + 1-5 = Move to workspace
 
-; ── Window Focus (vim-style) ───────────────────────────────────
-alt + h         : komorebic focus left
-alt + j         : komorebic focus down
-alt + k         : komorebic focus up
-alt + l         : komorebic focus right
+; ── Focus Windows (Right Opt + WASD) ──────────────────────────
+ctrl + alt + w  : komorebic focus up
+ctrl + alt + a  : komorebic focus left
+ctrl + alt + s  : komorebic focus down
+ctrl + alt + d  : komorebic focus right
 
-; ── Window Move (vim-style) ────────────────────────────────────
-alt + shift + h : komorebic move left
-alt + shift + j : komorebic move down
-alt + shift + k : komorebic move up
-alt + shift + l : komorebic move right
+; ── Move Windows (Right Cmd + WASD) ───────────────────────────
+ctrl + shift + alt + w  : komorebic move up
+ctrl + shift + alt + a  : komorebic move left
+ctrl + shift + alt + s  : komorebic move down
+ctrl + shift + alt + d  : komorebic move right
 
-; ── Resize Windows ─────────────────────────────────────────────
-alt + ctrl + h  : komorebic resize-axis width increase
-alt + ctrl + j  : komorebic resize-axis height increase
-alt + ctrl + k  : komorebic resize-axis height decrease
-alt + ctrl + l  : komorebic resize-axis width decrease
+; ── Workspaces (Right Cmd + 1-5) ──────────────────────────────
+ctrl + alt + 1  : komorebic focus-workspace 0
+ctrl + alt + 2  : komorebic focus-workspace 1
+ctrl + alt + 3  : komorebic focus-workspace 2
+ctrl + alt + 4  : komorebic focus-workspace 3
+ctrl + alt + 5  : komorebic focus-workspace 4
 
-; ── Workspaces (like omniwm Hyper+1-9) ─────────────────────────
-alt + 1         : komorebic focus-workspace 0
-alt + 2         : komorebic focus-workspace 1
-alt + 3         : komorebic focus-workspace 2
-alt + 4         : komorebic focus-workspace 3
-alt + 5         : komorebic focus-workspace 4
-
-; ── Move to Workspace ──────────────────────────────────────────
-alt + shift + 1 : komorebic move-to-workspace 0
-alt + shift + 2 : komorebic move-to-workspace 1
-alt + shift + 3 : komorebic move-to-workspace 2
-alt + shift + 4 : komorebic move-to-workspace 3
-alt + shift + 5 : komorebic move-to-workspace 4
+; ── Move to Workspace (Right Cmd + Shift + 1-5) ───────────────
+ctrl + shift + alt + 1  : komorebic move-to-workspace 0
+ctrl + shift + alt + 2  : komorebic move-to-workspace 1
+ctrl + shift + alt + 3  : komorebic move-to-workspace 2
+ctrl + shift + alt + 4  : komorebic move-to-workspace 3
+ctrl + shift + alt + 5  : komorebic move-to-workspace 4
 
 ; ── Window Actions ─────────────────────────────────────────────
-alt + shift + f : komorebic toggle-float
-alt + shift + m : komorebic toggle-monocle
-alt + shift + x : komorebic close
-alt + return    : komorebic toggle-fullscreen
+ctrl + alt + g  : komorebic toggle-float
+ctrl + alt + f  : komorebic toggle-fullscreen
+ctrl + alt + q  : komorebic toggle-quake-console
+ctrl + alt + `  : komorebic toggle-quake-console
+ctrl + shift + alt + x  : komorebic close
+
+; ── Resize ─────────────────────────────────────────────────────
+ctrl + alt + up    : komorebic resize-axis height decrease
+ctrl + alt + down  : komorebic resize-axis height increase
+ctrl + alt + left  : komorebic resize-axis width decrease
+ctrl + alt + right : komorebic resize-axis width increase
 
 ; ── Layout ─────────────────────────────────────────────────────
-alt + shift + l : komorebic cycle-layout
-alt + shift + b : komorebic balance-ratio
-alt + shift + r : komorebic reload-config
-
-; ── Quake Terminal (like omniwm Hyper+Grave) ───────────────────
-alt + grave     : komorebic toggle-quake-console
-
-; ── Quick Actions ──────────────────────────────────────────────
-alt + shift + s : komorebic quick-start
-alt + shift + q : komorebic quick-close
+ctrl + shift + alt + l  : komorebic cycle-layout
+ctrl + shift + alt + b  : komorebic balance-ratio
+ctrl + shift + alt + r  : komorebic reload-config
