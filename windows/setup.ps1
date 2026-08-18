@@ -1,119 +1,109 @@
-#Requires -Version 5.1
-<#
-.SYNOPSIS
-    Paranjay's Windows Setup Script
-.DESCRIPTION
-    Sets up a fresh Windows installation with dev tools, terminal config, and dotfiles.
-    Run as Administrator: irm https://raw.githubusercontent.com/Paranjayy/dotfiles/main/windows/setup.ps1 | iex
-#>
+# Windows Dev Environment Bootstrap
+# Run: irm https://raw.githubusercontent.com/Paranjayy/dotfiles/main/windows/setup.ps1 | iex
+# Or: .\windows\setup.ps1
 
-$ErrorActionPreference = "Stop"
-$ProgressPreference = "SilentlyContinue"
-
-Write-Host "`n==> Paranjay's Windows Setup" -ForegroundColor Cyan
-
-# ── winget Packages ────────────────────────────────────────────
-$Packages = @(
-    # Terminals
-    "Microsoft.WindowsTerminal"
-    "JanDeDobbeleer.OhMyPosh"
-
-    # Dev Tools
-    "Git.Git"
-    "GitHub.cli"
-    "Microsoft.VisualStudioCode"
-    "Microsoft.PowerShell"
-
-    # Browsers
-    "Google.Chrome"
-    "Mozilla.Firefox"
-
-    # CLI Tools
-    "sharkdp.bat"
-    "junegunn.fzf"
-    "BurntSushi.ripgrep.MSVC"
-    "sharkdp.fd"
-    "jqlang.jq"
-    "ajeetdsouza.zoxide"
-    "junegunn.fzf"
-
-    # Dev Runtimes
-    "OpenJS.NodeJS.LTS"
-    "Python.Python.3.12"
-    "Rustlang.Rust.MSVC"
-    "GoLang.Go"
-
-    # Apps
-    "Obsidian.Obsidian"
-    "Typora.Typora"
-    "Spotify.Spotify"
-    "1Password.1Password"
-
-    # Utilities
-    "Microsoft.PowerToys"
-    "voidtools.Everything"
-    "Obsidian.Obsidian"
+param(
+    [switch]$Minimal
 )
 
-Write-Host "==> Installing packages via winget..." -ForegroundColor Yellow
-foreach ($pkg in $Packages) {
-    Write-Host "  Installing $pkg..." -ForegroundColor Gray
-    winget install --id $pkg --accept-package-agreements --accept-source-agreements --silent 2>$null
-}
+$ESC = [char]27
+function Write-Step { param($msg) Write-Host "$ESC[1;36m→ $msg$ESC[0m" }
+function Write-Ok { param($msg) Write-Host "$ESC[1;32m✓ $msg$ESC[0m" }
+function Write-Warn { param($msg) Write-Host "$ESC[1;33m! $msg$ESC[0m" }
 
-# ── Scoop (fallback for packages not in winget) ────────────────
+Write-Host ""
+Write-Host "$ESC[1;35m╔══════════════════════════════════════╗$ESC[0m"
+Write-Host "$ESC[1;35m║   Windows Dev Environment Setup      ║$ESC[0m"
+Write-Host "$ESC[1;35m╚══════════════════════════════════════╝$ESC[0m"
+Write-Host ""
+
+# ── Scoop ──────────────────────────────────────────────────────
 if (-not (Get-Command scoop -ErrorAction SilentlyContinue)) {
-    Write-Host "==> Installing Scoop..." -ForegroundColor Yellow
+    Write-Step "Installing Scoop..."
     Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
     Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
+} else {
+    Write-Ok "Scoop already installed"
 }
 
-Write-Host "==> Installing scoop packages..." -ForegroundColor Yellow
-scoop install lazygit lazydocker btop nvm
+# ── Core Tools ─────────────────────────────────────────────────
+$coreTools = @(
+    "git", "nodejs", "neovim", "fzf", "fd", "ripgrep",
+    "bat", "eza", "zoxide", "7zip", "curl"
+)
 
-# ── NVM + Node ─────────────────────────────────────────────────
-if (Get-Command nvm -ErrorAction SilentlyContinue) {
-    Write-Host "==> Installing Node.js LTS..." -ForegroundColor Yellow
-    nvm install lts
-    nvm use lts
+Write-Step "Installing core tools..."
+foreach ($tool in $coreTools) {
+    if (-not (scoop list $tool 2>$null | Select-String $tool)) {
+        scoop install $tool
+    } else {
+        Write-Ok "$tool already installed"
+    }
 }
 
-# ── PowerShell Profile ─────────────────────────────────────────
-Write-Host "==> Setting up PowerShell profile..." -ForegroundColor Yellow
-$ProfileDir = Split-Path -Parent $PROFILE
-if (-not (Test-Path $ProfileDir)) { New-Item -ItemType Directory -Path $ProfileDir -Force | Out-Null }
+# ── Extra Tools (skip with -Minimal) ──────────────────────────
+if (-not $Minimal) {
+    $extraTools = @(
+        "lazygit", "dust", "duf", "bottom", "starship",
+        "gcc", "alacritty"
+    )
 
-$DotfilesDir = "$env:USERPROFILE\dotfiles"
-if (Test-Path $DotfilesDir) {
-    Copy-Item "$DotfilesDir\windows\Microsoft.PowerShell_profile.ps1" $PROFILE -Force
-    Write-Host "  Profile copied to $PROFILE" -ForegroundColor Gray
+    Write-Step "Installing extra tools..."
+    foreach ($tool in $extraTools) {
+        if (-not (scoop list $tool 2>$null | Select-String $tool)) {
+            scoop install $tool
+        } else {
+            Write-Ok "$tool already installed"
+        }
+    }
 }
+
+# ── Time Sync ──────────────────────────────────────────────────
+Write-Step "Configuring time sync..."
+Start-Service w32time -ErrorAction SilentlyContinue
+w32tm /config /manualpeerlist:"time.windows.com pool.ntp.org" /syncfromflags:manual /reliable:no /update 2>$null
+w32tm /resync /force 2>$null
+schtasks /create /tn "NTP_Sync" /tr "w32tm /resync /force" /sc minute /mo 30 /ru SYSTEM /rl HIGHEST /f 2>$null | Out-Null
+Write-Ok "Time sync configured (every 30 min)"
 
 # ── Git Config ─────────────────────────────────────────────────
-Write-Host "==> Setting up Git..." -ForegroundColor Yellow
-git config --global user.name "Paranjay"
-git config --global user.email "paranjayy@users.noreply.github.com"
-git config --global init.defaultBranch main
-git config --global pull.rebase true
-git config --global core.autocrlf input
+Write-Step "Checking git config..."
+$name = git config --global user.name 2>$null
+$email = git config --global user.email 2>$null
+if (-not $name -or -not $email) {
+    Write-Warn "Git user.name or user.email not set. Set them with:"
+    Write-Host "  git config --global user.name 'Your Name'"
+    Write-Host "  git config --global user.email 'you@email.com'"
+} else {
+    Write-Ok "Git configured: $name <$email>"
+}
 
-# ── Windows Settings ───────────────────────────────────────────
-Write-Host "==> Applying Windows settings..." -ForegroundColor Yellow
+# ── Symlink Dotfiles ──────────────────────────────────────────
+Write-Step "Linking dotfiles..."
+$dotfilesDir = "$env:USERPROFILE\dotfiles"
 
-# Show file extensions
-Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "HideFileExt" -Value 0
+# PowerShell profile
+if (Test-Path "$dotfilesDir\PowerShell\Microsoft.PowerShell_profile.ps1") {
+    $profileDir = Split-Path $PROFILE
+    if (-not (Test-Path $profileDir)) { New-Item -ItemType Directory -Path $profileDir -Force | Out-Null }
+    Copy-Item "$dotfilesDir\PowerShell\Microsoft.PowerShell_profile.ps1" $PROFILE -Force
+    Write-Ok "PowerShell profile linked"
+}
 
-# Show hidden files
-Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "Hidden" -Value 1
+# Ghostty config
+if (Test-Path "$dotfilesDir\ghostty\config") {
+    $ghosttyDir = "$env:APPDATA\ghostty"
+    if (-not (Test-Path $ghosttyDir)) { New-Item -ItemType Directory -Path $ghosttyDir -Force | Out-Null }
+    Copy-Item "$dotfilesDir\ghostty\config" "$ghosttyDir\config" -Force
+    Write-Ok "Ghostty config linked"
+}
 
-# Dark mode
-Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name "AppsUseLightTheme" -Value 0
-Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name "SystemUsesLightTheme" -Value 0
+# Starship config
+if (Test-Path "$dotfilesDir\starship.toml") {
+    Copy-Item "$dotfilesDir\starship.toml" "$env:USERPROFILE\.config\starship.toml" -Force
+    Write-Ok "Starship config linked"
+}
 
-# ── Restart Explorer ───────────────────────────────────────────
-Stop-Process -Name explorer -Force
-Start-Process explorer
-
-Write-Host "`n==> Setup complete!" -ForegroundColor Green
-Write-Host "    Restart your terminal to pick up changes." -ForegroundColor Cyan
-Write-Host "    Run 'oh-my-posh init pwsh' to verify Oh My Posh." -ForegroundColor Cyan
+Write-Host ""
+Write-Host "$ESC[1;32mSetup complete! Restart your terminal.$ESC[0m"
+Write-Host ""

@@ -97,6 +97,11 @@ function ports {
 $env:EDITOR = if (Get-Command nvim -ErrorAction SilentlyContinue) { "nvim" } else { "vim" }
 $env:GIT_EDITOR = $env:EDITOR
 
+# ── Zoxide (smart cd) ─────────────────────────────────────────
+if (Get-Command zoxide -ErrorAction SilentlyContinue) {
+    Invoke-Expression (& { (zoxide init powershell | Out-String) })
+}
+
 # ── PATH Helper ────────────────────────────────────────────────
 function Add-ToPath {
     param([string]$Dir)
