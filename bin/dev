@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# dev — Quick dev workspace with tmux or just cd
+# Usage: dev [project]
+
+DEV_DIR="${DEV_DIR:-$HOME/Developer}"
+
+if [ -n "$1" ]; then
+    target="$DEV_DIR/$1"
+    if [ -d "$target" ]; then
+        cd "$target" || exit
+        if command -v tmux &>/dev/null && [ -z "$TMUX" ]; then
+            tmux new-session -As "$1" 2>/dev/null || tmux new-session -s "$1"
+        fi
+    else
+        echo "Project '$1' not found in $DEV_DIR"
+        ls "$DEV_DIR" 2>/dev/null
+    fi
+else
+    cd "$DEV_DIR" || exit
+    if command -v tmux &>/dev/null && [ -z "$TMUX" ]; then
+        tmux new-session -As dev 2>/dev/null || tmux new-session -s dev
+    fi
+fi

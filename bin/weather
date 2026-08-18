@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# weather — Quick weather check
+
+city="${1:-auto}"
+curl -s "wttr.in/$city?format=3" 2>/dev/null || echo "Could not fetch weather"

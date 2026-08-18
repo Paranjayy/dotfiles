@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# ports — Show listening ports
+
+if command -v ss &>/dev/null; then
+    ss -tlnp
+elif command -v netstat &>/dev/null; then
+    netstat -ano | grep LISTEN
+elif command -v powershell.exe &>/dev/null; then
+    powershell.exe -Command "netstat -ano | Select-String LISTENING"
+else
+    echo "No port listing tool found"
+fi
