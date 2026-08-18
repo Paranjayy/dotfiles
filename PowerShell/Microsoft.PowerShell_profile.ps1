@@ -81,6 +81,13 @@ if (Get-Command bat -ErrorAction SilentlyContinue) {
     function cat { bat @args }
 }
 
+# Fun tool aliases
+function ff { fastfetch @args }
+function md { glow @args }
+function top { btop @args }
+function bench { hyperfine @args }
+function loc { tokei @args }
+
 # ── Utilities ──────────────────────────────────────────────────
 function mkcd { param($d) New-Item -ItemType Directory -Path $d -Force; Set-Location $d }
 function Touch { param($f) New-Item -ItemType File -Path $f -Force }
