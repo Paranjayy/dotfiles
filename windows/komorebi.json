@@ -1,0 +1,30 @@
+{
+  "$schema": "https://raw.githubusercontent.com/LGUG2Z/komorebi/v0.1.41/schema.json",
+  "app_specific_configuration_path": "$Env:USERPROFILE/applications.json",
+  "window_hiding_behaviour": "Cloak",
+  "cross_monitor_move_behaviour": "Insert",
+  "default_workspace_padding": 12,
+  "default_container_padding": 12,
+  "border": true,
+  "border_width": 4,
+  "border_offset": -2,
+  "float_rules": [
+    { "kind": "Class", "id": "TaskManagerWindow", "atching": true },
+    { "kind": "Title", "id": "Microsoft PowerToys Settings", "atching": true },
+    { "kind": "Title", "id": "Settings", "atching": true },
+    { "kind": "Title", "id": "Run", "atching": true },
+    { "kind": "Title", "id": "Save As", "atching": true },
+    { "kind": "Title", "id": "Open", "atching": true }
+  ],
+  "monitors": [
+    {
+      "workspaces": [
+        { "name": "term", "layout": "VerticalStack" },
+        { "name": "code", "layout": "BSP" },
+        { "name": "web", "layout": "HorizontalStack" },
+        { "name": "chat", "layout": "RightMainVerticalStack" },
+        { "name": "misc", "layout": "Grid" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# work — Quick work workspace
+# Usage: work [project]
+
+WORK_DIR="${WORK_DIR:-$HOME/work}"
+
+if [ -n "$1" ]; then
+    target="$WORK_DIR/$1"
+    if [ -d "$target" ]; then
+        cd "$target" || exit
+        if command -v tmux &>/dev/null && [ -z "$TMUX" ]; then
+            tmux new-session -As "$1" 2>/dev/null || tmux new-session -s "$1"
+        fi
+    else
+        echo "Project '$1' not found in $WORK_DIR"
+        ls "$WORK_DIR" 2>/dev/null
+    fi
+else
+    cd "$WORK_DIR" || exit
+    if command -v tmux &>/dev/null && [ -z "$TMUX" ]; then
+        tmux new-session -As work 2>/dev/null || tmux new-session -s work
+    fi
+fi

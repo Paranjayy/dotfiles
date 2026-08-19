@@ -1,0 +1,14 @@
+#!/bin/bash
+# Toggle Scroll Lock LED (RGB keyboard backlight)
+
+LED="input4::scrolllock"
+LOG="/tmp/scrolllock.log"
+
+CURRENT=$(/usr/bin/brightnessctl --device "$LED" get 2>/dev/null)
+echo "$(date): toggle from $CURRENT" >> "$LOG"
+
+if [ "$CURRENT" -eq 0 ]; then
+    /usr/bin/brightnessctl --device "$LED" set 1 2>/dev/null
+else
+    /usr/bin/brightnessctl --device "$LED" set 0 2>/dev/null
+fi

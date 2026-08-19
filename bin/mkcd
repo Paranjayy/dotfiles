@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# mkcd — Make directory and cd into it
+
+if [ -z "$1" ]; then
+    echo "Usage: mkcd <directory>"
+    exit 1
+fi
+
+mkdir -p "$1" && cd "$1"
