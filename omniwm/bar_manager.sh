@@ -1,37 +1,48 @@
 #!/bin/bash
 
-# OmniWM Dynamic Bar Manager (Official App Compatibility)
-# Implementation: Show while holding, Hide 5s after release.
-# This script uses idempotent logic (check-then-toggle) to work 
-# flawlessly with the official OmniWM binary.
+# Dynamic workspace-bar helper for OmniWM and Nehir.
+# Implementation: show while holding, hide 5s after release.
+# This script uses idempotent logic (check-then-toggle) with whichever
+# window manager binary is available.
 
 LOCK_FILE="/tmp/omniwm_bar_hold.lock" # Present while holding
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# Find the best omniwmctl binary
-if [ -f "/Applications/OmniWM.app/Contents/MacOS/omniwmctl" ]; then
-    CTL_BIN="/Applications/OmniWM.app/Contents/MacOS/omniwmctl"
-elif [ -f "$(dirname "$0")/../.build/arm64-apple-macosx/debug/omniwmctl" ]; then
-    CTL_BIN="$(dirname "$0")/../.build/arm64-apple-macosx/debug/omniwmctl"
-elif [ -f "$(dirname "$0")/../.build/arm64-apple-macosx/release/omniwmctl" ]; then
-    CTL_BIN="$(dirname "$0")/../.build/arm64-apple-macosx/release/omniwmctl"
-else
-    CTL_BIN="omniwmctl" # Fallback to PATH
-fi
+# Prefer OmniWM when available, then fall back to Nehir.
+find_ctl_bin() {
+    for candidate in \
+        "/Applications/OmniWM.app/Contents/MacOS/omniwmctl" \
+        "$(command -v omniwmctl 2>/dev/null)" \
+        "/Applications/Nehir.app/Contents/MacOS/nehirctl" \
+        "$(command -v nehirctl 2>/dev/null)" \
+        "$SCRIPT_DIR/../.build/arm64-apple-macosx/debug/omniwmctl" \
+        "$SCRIPT_DIR/../.build/arm64-apple-macosx/release/omniwmctl"
+    do
+        if [ -n "$candidate" ] && [ -x "$candidate" ]; then
+            printf '%s\n' "$candidate"
+            return 0
+        fi
+    done
+
+    printf '%s\n' "omniwmctl"
+}
+
+CTL_BIN="$(find_ctl_bin)"
 
 is_visible() {
     # Check if ANY monitor has isVisible: true
-    $CTL_BIN query workspace-bar --format json | jq '.result.payload.monitors[].isVisible' 2>/dev/null | grep -q true
+    "$CTL_BIN" query workspace-bar --format json | jq '.result.payload.monitors[].isVisible' 2>/dev/null | grep -q true
 }
 
 ensure_visible() {
     if ! is_visible; then
-        $CTL_BIN command toggle-workspace-bar
+        "$CTL_BIN" command toggle-workspace-bar
     fi
 }
 
 ensure_hidden() {
     if is_visible; then
-        $CTL_BIN command toggle-workspace-bar
+        "$CTL_BIN" command toggle-workspace-bar
     fi
 }
 
@@ -52,7 +63,7 @@ case "$1" in
         ) &
         ;;
     --toggle)
-        $CTL_BIN command toggle-workspace-bar
+        "$CTL_BIN" command toggle-workspace-bar
         ;;
     --reset)
         rm -f "$LOCK_FILE"
