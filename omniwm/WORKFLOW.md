@@ -1,5 +1,7 @@
 # OmniWM & Karabiner System Configuration & Workflow
 
+*Verified compatible and functional with: OmniWM v0.6.2*
+
 This document details your complete window management, keyboard layout, macros, and shortcut configuration. It acts as a guide to understand the current setup or to port it to other tiling window managers (like Niri on Linux, or GlazeWM / Komorebi on Windows).
 
 ---

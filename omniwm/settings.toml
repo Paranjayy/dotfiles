@@ -1,3 +1,7 @@
+# OmniWM Configuration File
+# Compatible and tested with: OmniWM v0.6.2
+# Backup created on: Wed Aug 19 2026
+
 monitorBarOverrides = []
 monitorDwindleOverrides = []
 monitorGapOverrides = []
