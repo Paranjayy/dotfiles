@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../Developer/Omniwm/extensions/omniwm/src/toggle-bar.tsx"],
+  "sourcesContent": ["import { showHUD, showToast, Toast } from \"@raycast/api\";\nimport { exec } from \"child_process\";\nimport { promisify } from \"util\";\n\nconst execPromise = promisify(exec);\nconst CTL_BIN = \"/opt/homebrew/bin/omniwmctl\";\n\nexport default async function Command() {\n  try {\n    await execPromise(`${CTL_BIN} command toggle-workspace-bar`);\n    await showHUD(\"Toggled Workspace Bar\");\n  } catch (error: any) {\n    await showToast({\n      style: Toast.Style.Failure,\n      title: \"Failed to toggle workspace bar\",\n      message: error.message,\n    });\n  }\n}\n"],
+  "mappings": "yaAAA,IAAAA,EAAA,GAAAC,EAAAD,EAAA,aAAAE,IAAA,eAAAC,EAAAH,GAAA,IAAAI,EAA0C,wBAC1CC,EAAqB,yBACrBC,EAA0B,gBAEpBC,KAAc,aAAU,MAAI,EAC5BC,EAAU,8BAEhB,eAAON,GAAiC,CACtC,GAAI,CACF,MAAMK,EAAY,GAAGC,CAAO,+BAA+B,EAC3D,QAAM,WAAQ,uBAAuB,CACvC,OAASC,EAAY,CACnB,QAAM,aAAU,CACd,MAAO,QAAM,MAAM,QACnB,MAAO,iCACP,QAASA,EAAM,OACjB,CAAC,CACH,CACF",
+  "names": ["toggle_bar_exports", "__export", "Command", "__toCommonJS", "import_api", "import_child_process", "import_util", "execPromise", "CTL_BIN", "error"]
+}

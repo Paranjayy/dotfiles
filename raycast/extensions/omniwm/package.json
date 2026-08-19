@@ -7,52 +7,22 @@
   "license": "MIT",
   "commands": [
     {
-      "name": "run-command",
-      "title": "Run OmniWM Command",
-      "description": "Execute any native OmniWM command",
-      "mode": "view"
-    },
-    {
-      "name": "visualize-shortcuts",
-      "title": "Visualize Shortcuts",
-      "description": "Display keyboard shortcuts parsed from Karabiner",
-      "mode": "view"
-    },
-    {
-      "name": "search-windows",
-      "title": "Search Windows",
-      "description": "List and focus managed windows",
-      "mode": "view"
-    },
-    {
-      "name": "switch-workspace",
-      "title": "Switch Workspace",
-      "description": "Switch to a specific workspace",
+      "name": "controller",
+      "title": "OmniWM Controller",
+      "description": "All-in-one dashboard to manage windows, workspaces, sizing, and VCS backup",
       "mode": "view"
     },
     {
       "name": "toggle-bar",
       "title": "Toggle Workspace Bar",
-      "description": "Toggle the visibility of the OmniWM bar",
+      "description": "Quickly show or hide the workspace bar panel",
       "mode": "no-view"
     },
     {
-      "name": "settings",
-      "title": "Manage Settings",
-      "description": "Configure OmniWM behaviors",
-      "mode": "view"
-    },
-    {
-      "name": "backup-configs",
-      "title": "Backup Dotfiles Configs",
-      "description": "Stash, commit, and push OmniWM/Karabiner settings to dotfiles repo",
-      "mode": "no-view"
-    },
-    {
-      "name": "restore-configs",
-      "title": "Restore Dotfiles Configs",
-      "description": "Pull latest configs from dotfiles repo and reload services",
-      "mode": "no-view"
+      "name": "menu-bar",
+      "title": "OmniWM Menu Bar",
+      "description": "Active workspace indicators, layouts, and window switcher in the macOS menu bar",
+      "mode": "menu-bar"
     }
   ],
   "dependencies": {
