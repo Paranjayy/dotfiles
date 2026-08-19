@@ -853,7 +853,7 @@ binding = "Control+Option+Grave"
 id = "toggleQuakeTerminal"
 
 [[hotkeys]]
-binding = "Control+Shift+Command+V"
+binding = "Control+Shift+Command+L"
 id = "toggleWorkspaceLayout"
 
 [[hotkeys]]
