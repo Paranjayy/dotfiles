@@ -20,7 +20,7 @@
                                         }
                                     },
                                     { "shell_command": "/Users/paranjay/.config/omniwm/bar_manager.sh --hold" },
-                                    { "key_code": "left_option" }
+                                    { "key_code": "vk_none" }
                                 ],
                                 "to_after_key_up": [
                                     {
@@ -48,7 +48,7 @@
                                         }
                                     },
                                     { "shell_command": "/Users/paranjay/.config/omniwm/bar_manager.sh --hold" },
-                                    { "key_code": "left_command" }
+                                    { "key_code": "vk_none" }
                                 ],
                                 "to_after_key_up": [
                                     {
