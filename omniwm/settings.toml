@@ -733,7 +733,15 @@ binding = "Control+Shift+Command+Minus"
 id = "setContainerPrimarySpan.decrease10Percent"
 
 [[hotkeys]]
+binding = "Control+Option+Shift+Command+Minus"
+id = "setContainerPrimarySpan.decrease10Percent"
+
+[[hotkeys]]
 binding = "Control+Shift+Command+Equal"
+id = "setContainerPrimarySpan.increase10Percent"
+
+[[hotkeys]]
+binding = "Control+Option+Shift+Command+Equal"
 id = "setContainerPrimarySpan.increase10Percent"
 
 [[hotkeys]]
@@ -745,11 +753,11 @@ binding = "Unassigned"
 id = "setWindowPrimarySpan.increase10Percent"
 
 [[hotkeys]]
-binding = "Control+Option+Shift+Command+Minus"
+binding = "Unassigned"
 id = "setWindowSecondarySpan.decrease10Percent"
 
 [[hotkeys]]
-binding = "Control+Option+Shift+Command+Equal"
+binding = "Unassigned"
 id = "setWindowSecondarySpan.increase10Percent"
 
 [[hotkeys]]
