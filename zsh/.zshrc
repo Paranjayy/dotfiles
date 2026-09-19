@@ -18,13 +18,17 @@ export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
 export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
 
 # Path configuration
-HOMEBREW_PREFIX="$HOME/homebrew"
+# Apple Silicon Homebrew lives here.  The old `$HOME/homebrew` prefix was
+# putting stale shims ahead of the working Homebrew installation.
+HOMEBREW_PREFIX="/opt/homebrew"
 BUN_INSTALL="$HOME/.bun"
 LOCAL_BIN="$HOME/.local/bin"
+BIN_DIR="$HOME/.config/bin"
 
 # Create necessary directories
-mkdir -p "$XDG_CONFIG_HOME/zsh"
-mkdir -p "$LOCAL_BIN"
+# Keep PATH deterministic and free of duplicate entries.  A surprising number
+# of CLI issues come from an old shim winning the PATH race.
+typeset -U path PATH
 
 # ============================================
 # HISTORY CONFIGURATION
@@ -33,6 +37,11 @@ mkdir -p "$LOCAL_BIN"
 HISTSIZE=10000
 SAVEHIST=$HISTSIZE
 HISTFILE="$XDG_CONFIG_HOME/zsh/.zsh_history"
+
+# Keep completion cache in one stable location. This must be set before compinit.
+export ZSH_CACHE_DIR="$HOME/.cache/zsh"
+export ZSH_COMPDUMP="$ZSH_CACHE_DIR/.zcompdump-${HOST}-${ZSH_VERSION}"
+mkdir -p "$ZSH_CACHE_DIR"
 
 # History options
 setopt APPEND_HISTORY           # Append to history file
@@ -51,20 +60,13 @@ setopt HIST_VERIFY              # Show command with history expansion before run
 
 ZINIT_HOME="$XDG_DATA_HOME/zinit/zinit.git"
 
-# Install Zinit if not present
-install_zinit() {
-    echo "Installing Zinit..."
-    mkdir -p "$(dirname "$ZINIT_HOME")"
-    git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
-}
-
-# Check and install Zinit
-if [[ ! -d "$ZINIT_HOME" ]]; then
-    install_zinit
+# Plugins are nice, but cloning/loading them during shell startup makes a
+# shell depend on the network and costs noticeable time on this Mac.  Opt in
+# for a session with `ZSH_ENABLE_PLUGINS=1 zsh`.
+if [[ "${ZSH_ENABLE_PLUGINS:-0}" == "1" && -r "$ZINIT_HOME/zinit.zsh" ]]; then
+    source "$ZINIT_HOME/zinit.zsh"
+    ZSH_PLUGINS_ENABLED=1
 fi
-
-# Source Zinit
-source "$ZINIT_HOME/zinit.zsh"
 
 # You Should Use configuration (MUST be before loading the plugin)
 unset YSU_HARDCORE  # Don't block commands, just remind
@@ -75,6 +77,7 @@ export YSU_MESSAGE_POSITION="after"  # Show message after command
 # ============================================
 
 # Syntax highlighting (load first for better performance)
+if [[ -n "${ZSH_PLUGINS_ENABLED:-}" ]]; then
 zinit light zsh-users/zsh-syntax-highlighting
 
 # Completions
@@ -105,13 +108,15 @@ zinit snippet OMZP::command-not-found
 zinit snippet OMZP::extract       # Universal extract command
 zinit snippet OMZP::copyfile      # Copy file contents to clipboard
 zinit snippet OMZP::copypath      # Copy current path to clipboard
+fi
 
 # ============================================
 # TMUX AUTO-START
 # ============================================
 
-# Auto-start tmux ONLY in the first Ghostty window
-if [[ -z "$TMUX" && -t 1 ]]; then
+# Keep tmux available without forcing every terminal (including IDE terminals)
+# into an existing session.  Use `tms`, `tmux`, or set TMUX_AUTOSTART=1.
+if [[ "${TMUX_AUTOSTART:-0}" == "1" ]] && (( $+commands[tmux] )) && [[ -z "$TMUX" && -t 1 ]]; then
     # Only attach if no one else is currently attached to 'main'
     if ! tmux list-sessions 2>/dev/null | grep -q "main:.*(attached)"; then
         tmux attach-session -t main 2>/dev/null || tmux new-session -s main
@@ -138,15 +143,15 @@ export AUTO_NOTIFY_EXPIRE_TIME=3000  # Notification expires after 3 seconds
 autoload -Uz compinit
 
 # Only regenerate compdump once per day
-typeset -i updated_at=$(date +'%j' -r ~/.zcompdump 2>/dev/null || stat -f '%Sm' -t '%j' ~/.zcompdump 2>/dev/null)
+typeset -i updated_at=$(date +'%j' -r "$ZSH_COMPDUMP" 2>/dev/null || stat -f '%Sm' -t '%j' "$ZSH_COMPDUMP" 2>/dev/null)
 if [ $(date +'%j') != $updated_at ]; then
-    compinit -i
+    compinit -d "$ZSH_COMPDUMP" -i
 else
-    compinit -C -i
+    compinit -C -d "$ZSH_COMPDUMP" -i
 fi
 
 # Replay cached completions
-zinit cdreplay -q
+[[ -n "${ZSH_PLUGINS_ENABLED:-}" ]] && zinit cdreplay -q
 
 # Completion styling
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'  # Case insensitive
@@ -156,8 +161,8 @@ zstyle ':completion:*' rehash true                       # Auto rehash commands
 zstyle ':completion::complete:*' gain-privileges 1       # Privilege completion
 
 # FZF tab completion styling
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza --color=always --icons $realpath 2>/dev/null || ls --color=always $realpath'
-zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza --color=always --icons $realpath 2>/dev/null || ls --color=always $realpath'
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza --color=always --icons $realpath 2>/dev/null || command ls -G $realpath'
+zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza --color=always --icons $realpath 2>/dev/null || command ls -G $realpath'
 
 # Enable approximate completion
 zstyle ':completion:*' completer _complete _match _approximate
@@ -198,7 +203,7 @@ remaining_days() {
     # Calculate days remaining
     local TODAY=$(date +%s)
     local TARGET
-    
+
     # Portable date parsing (macOS/BSD vs GNU)
     if date --version >/dev/null 2>&1; then
         # GNU date
@@ -216,7 +221,7 @@ remaining_days() {
 
     local SECONDS_REMAINING=$(( TARGET - TODAY ))
     local DAYS_REMAINING=$(( SECONDS_REMAINING / 86400 ))
-    
+
     # Format the target date nicely
     local PRETTY_DATE
     if date --version >/dev/null 2>&1; then
@@ -224,7 +229,7 @@ remaining_days() {
     else
         PRETTY_DATE=$(date -j -f "%Y-%m-%d" "$CUSTOM_DATE" "+%A, %B %d, %Y")
     fi
-    
+
     # Don't allow negative days
     if (( DAYS_REMAINING < 0 )); then
         DAYS_REMAINING=0
@@ -239,7 +244,7 @@ remaining_days() {
     # Custom motivational message (customize these variables in ~/.zshrc.local)
     local quote="${FASTFETCH_QUOTE:-"Build something that matters today."}"
     local author="${FASTFETCH_QUOTE_AUTHOR:-"Anonymous"}"
-    
+
     if [[ -n "$quote" ]]; then
         printf "${ITALIC_CYAN}\t\"$quote\"\n"
         printf "${ITALIC_YELLOW}\t— $author${RESET}\n"
@@ -294,7 +299,7 @@ fi
 # FZF fuzzy finder (check if installed)
 if command_exists fzf; then
     eval "$(fzf --zsh)"
-    
+
     # FZF configuration
     export FZF_DEFAULT_OPTS="
         --height 40%
@@ -305,7 +310,7 @@ if command_exists fzf; then
         --color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9
         --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6
         --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4"
-    
+
     # Use fd instead of find if available
     if command_exists fd; then
         export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
@@ -328,7 +333,6 @@ if [[ -d "$HOME/.asdf" ]]; then
     . "$HOME/.asdf/asdf.sh"
     # Completions
     fpath=(${ASDF_DIR}/completions $fpath)
-    autoload -Uz compinit && compinit
 fi
 
 # ============================================
@@ -344,6 +348,7 @@ add_to_path() {
 
 # Add directories to PATH
 add_to_path "$LOCAL_BIN"
+add_to_path "$BIN_DIR"
 add_to_path "$HOMEBREW_PREFIX/bin"
 add_to_path "$HOMEBREW_PREFIX/sbin"
 add_to_path "$BUN_INSTALL/bin"
@@ -414,7 +419,7 @@ if command_exists bun; then
 fi
 
 # ============================================
-# INTERACTIVE SCRIPT RUNNER 
+# INTERACTIVE SCRIPT RUNNER
 # ============================================
 
 # Search and run scripts from package.json using a cool FZF interface!
@@ -462,7 +467,7 @@ alias glog='git log --oneline --graph --decorate'
 
 # GitHub TUI
 alias pr='ghui'
-alias ship='~/.local/bin/ship'
+alias ship='~/.config/bin/ship'
 
 # Dotfiles management
 dots() {
@@ -495,6 +500,51 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias ~='cd ~'
+
+# Fast interactive navigation.  `fcd` searches directories with fd + fzf and
+# enters the one you choose; `z` is supplied by zoxide when it is installed.
+fcd() {
+    command_exists fzf || { echo "fcd needs fzf" >&2; return 1; }
+    command_exists fd || { echo "fcd needs fd" >&2; return 1; }
+    local dir
+    dir=$(fd --type d --hidden --follow --exclude .git 2>/dev/null | fzf --prompt='📁 cd > ' --height=45% --reverse) || return
+    [[ -n "$dir" ]] && cd -- "$dir"
+}
+
+# A compact reference for the features that are intentionally always handy.
+shell-help() {
+    print -P '%F{cyan}Terminal quick keys%f'
+    print '  daily               restart the balanced, feature-rich shell'
+    print '  lite / vanilla      restart with optional shell extras disabled'
+    print '  stats / stats-safe  detailed system dashboard'
+    print '  cmd                 fuzzy command palette (raycast-style)'
+    print '  fcd                 fuzzy-find and enter a directory'
+    print '  z <name>            jump to a frecent directory (zoxide)'
+    print '  Ctrl-R              fuzzy command-history search'
+    print '  Tab                 fuzzy completion picker (fzf-tab)'
+    print '  glass on|off        toggle Ghostty Tokyo Night glass theme'
+    print '  tmux / tms          start or attach the main workspace'
+    print '  Ctrl-b v            open dashboard in tmux'
+}
+alias help-shell='shell-help'
+
+# Ghostty theme toggle: `glass on` swaps in the Tokyo Night glass config,
+# `glass off` restores the minimal default. Ghostty reloads live on save.
+glass() {
+    local gh_dir="$HOME/.config/ghostty"
+    case "$1" in
+        on) cp "$gh_dir/config.glass" "$gh_dir/config" && echo "glass: ON (Tokyo Night)" ;;
+        off) cp "$gh_dir/config.minimal" "$gh_dir/config" && echo "glass: OFF (minimal)" ;;
+        status) cmp -s "$gh_dir/config" "$gh_dir/config.glass" && echo "glass: ON" || echo "glass: OFF" ;;
+        *) echo "Usage: glass [on|off|status]" ;;
+    esac
+}
+
+# Shell modes: normal daily use stays polished and light; `lite` retains PATH,
+# history, completions, and the prompt while disabling optional UI plugins.
+daily() { exec /bin/zsh -l; }
+lite() { exec env FAST_SHELL_EXTRAS=0 ZSH_ENABLE_PLUGINS=0 /bin/zsh -l; }
+alias vanilla='lite'
 
 # Safety nets
 alias rm='rm -i'
@@ -536,14 +586,8 @@ add_to_path "/Users/paranjay/.lmstudio/bin"
 
 add_to_path "/Users/paranjay/.antigravity/antigravity/bin"
 
-# Bun completions
-[ -s "$BUN_INSTALL/_bun" ] && source "$BUN_INSTALL/_bun"
-
-# NVM bash completion
-[ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion"
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-eval "$(/opt/homebrew/bin/brew shellenv)"
+# Avoid re-sourcing Bun, NVM, fzf, and Homebrew here: each was already loaded
+# above, and the duplicate initialization could replace working commands.
 
 # ============================================
 # TMUX SHORTCUTS & WORKSPACES
@@ -571,19 +615,42 @@ alias dlraw='cd ~/Downloads/2work/raw'
 alias proj='cd ~/Developer'
 alias downloads='cd ~/Downloads'
 
-# Load tmux workspace manager
-[ -f ~/.tmux/workspace.sh ] && source ~/.tmux/workspace.sh
+# Load the tracked XDG tmux workspace manager, with the old location retained
+# as a fallback for existing installations.
+if [[ -r "$HOME/.config/tmux/scripts/workspace.sh" ]]; then
+    source "$HOME/.config/tmux/scripts/workspace.sh"
+elif [[ -r "$HOME/.tmux/workspace.sh" ]]; then
+    source "$HOME/.tmux/workspace.sh"
+fi
 # ============================================
 # FINAL OVERRIDES (AESTHETIC & UTILITY)
 # ============================================
 
-# Starship prompt with git counts and command timing.
-eval "$(starship init zsh)"
+# Starship prompt with git counts and command timing (when installed).
+if (( $+commands[starship] )); then
+    eval "$(starship init zsh)"
+fi
 
-# Only show startup info in interactive terminals
-if [[ -t 1 ]]; then
+# Dashboard commands are kept, but no longer run for every new shell.  This
+# preserves the detailed view without making normal terminals sluggish.
+if [[ -o interactive ]]; then
     # Force Emacs mode (disables that accidental "vimish mode")
     bindkey -e
+
+    # ──── Terminal Color Palette Display ────
+    _stats_color_palette() {
+        # 16 ANSI colors displayed as block characters
+        local RST='\033[0m'
+        printf "\n"
+        printf "  Terminal Colors:\n"
+        printf "  "
+        # Normal colors (0-7)
+        printf "\033[40m  \033[41m  \033[42m  \033[43m  \033[44m  \033[45m  \033[46m  \033[47m  ${RST}"
+        printf "\n  "
+        # Bright colors (8-15)
+        printf "\033[100m  \033[101m  \033[102m  \033[103m  \033[104m  \033[105m  \033[106m  \033[107m  ${RST}"
+        printf "\n"
+    }
 
     # Function to show system info (Coffee Cat in Zsh, ASCII in Tmux)
     function show_stats() {
@@ -592,28 +659,22 @@ if [[ -t 1 ]]; then
             config="$HOME/.config/fastfetch/config-private.jsonc"
         fi
 
-        # Seasonal/Time-based Banners logic
         local current_month=$(date +%m)
         local current_hour=$(date +%H)
         local ff_color="magenta"
-        
+
         if [[ $current_month == "04" ]]; then
-            # April: Sakura Theme (Pink/Magenta)
             ff_color="magenta"
         elif [[ $current_hour -ge 18 || $current_hour -lt 6 ]]; then
-            # Evening: Cyber-Neon
             ff_color="cyan"
         else
-            # Work hours: Minimal
             ff_color="white"
         fi
 
         if command_exists fastfetch; then
             if [[ -n "$TMUX" ]]; then
-                # Inside Tmux: Apple ASCII
                 fastfetch --config "$config" --logo-type builtin --color "$ff_color"
             else
-                # Base Ghostty shell
                 fastfetch --config "$config" \
                           --logo /Users/paranjay/.config/fastfetch/avatar.png \
                           --logo-type kitty \
@@ -622,13 +683,12 @@ if [[ -t 1 ]]; then
                           --color "$ff_color"
             fi
         fi
-        # Display Quote and Countdown
         remaining_days "${FASTFETCH_COUNTDOWN_DATE:-2026-08-13}"
+        _stats_color_palette
     }
 
-    # Stats Mode Switching
-    alias stats="export STATS_MODE='normal'; clear"
-    alias stats-safe="export STATS_MODE='privacy'; clear"
+    stats() { STATS_MODE='normal' show_stats; }
+    stats-safe() { STATS_MODE='privacy' show_stats; }
 
     # Total Clear: Clears view + scrollback + tmux history
     function clear() {
@@ -640,25 +700,15 @@ if [[ -t 1 ]]; then
              # Base Shell Total Wipe (including scrollback)
              printf '\033[2J\033[3J\033[H'
         fi
-        show_stats
     }
-    
+
     # Brute-force kill the 'you-should-use' nag
     alias clear='clear'
     alias c='clear'
     unalias clear 2>/dev/null
     unset -f ysu 2>/dev/null
-    
-    # Run the startup display (Stats + Avatar + Quote)
-    show_stats
-fi
 
-# Clean up zsh completion cache from root
-export ZSH_CACHE_DIR="$HOME/.cache/zsh"
-export ZSH_COMPDUMP="$ZSH_CACHE_DIR/.zcompdump-${HOST}-${ZSH_VERSION}"
-mkdir -p "$ZSH_CACHE_DIR"
-# Only move if they exist in root
-ls $HOME/.zcompdump* >/dev/null 2>&1 && mv $HOME/.zcompdump* "$ZSH_CACHE_DIR/"
+fi
 
 add_to_path "$HOME/.antigravity/antigravity/bin"
 
@@ -684,7 +734,7 @@ add-zsh-hook chpwd prod_guard
 prod_guard
 
 # Load Gauntlet Vault terminal enhancements (Peek, Haptics, Undo, Start Here)
-source ~/.vault_zsh_hooks.zsh
+[[ -r ~/.vault_zsh_hooks.zsh ]] && source ~/.vault_zsh_hooks.zsh
 
 # Added by Antigravity
 export PATH="/Users/paranjay/.antigravity/antigravity/bin:$PATH"
@@ -692,5 +742,77 @@ export PATH="/Users/paranjay/.antigravity/antigravity/bin:$PATH"
 # Added by Antigravity
 export PATH="/Users/paranjay/.antigravity/antigravity/bin:$PATH"
 
-# Entire CLI shell completion
-autoload -Uz compinit && compinit && source <(entire completion zsh)
+# Entire CLI shell completion is optional; generating it at every shell startup is slow.
+# Enable it explicitly when needed: `export ENTIRE_ENABLE_COMPLETION=1`.
+if [[ "${ENTIRE_ENABLE_COMPLETION:-0}" == "1" ]]; then
+    source <(entire completion zsh)
+fi
+
+# Added by Antigravity IDE
+export PATH="/Users/paranjay/.antigravity-ide/antigravity-ide/bin:$PATH"
+
+# Keep local shims ahead of vendor-managed CLI wrappers.
+export PATH="$HOME/.local/bin:$PATH"
+
+# Turso
+export PATH="$PATH:/Users/paranjay/.turso"
+
+# Added by Devin
+export PATH="/Users/paranjay/.codeium/windsurf/bin:$PATH"
+
+# Provider-specific aliases and credentials stay local; this prevents a dotfiles
+# backup from publishing API keys.  Put them in ~/.zshrc.providers.zsh.
+[[ -r "$HOME/.zshrc.providers.zsh" ]] && source "$HOME/.zshrc.providers.zsh"
+
+# Local, Oh-My-Zsh-style polish without a framework or network work at startup.
+# Disable the extra widgets for a troubleshooting session with
+# `FAST_SHELL_EXTRAS=0 zsh`.
+if [[ "${FAST_SHELL_EXTRAS:-1}" != "0" ]]; then
+    _zsh_plugin_root="$XDG_DATA_HOME/zinit/plugins"
+    # fzf-tab + auto-notify + OMZ snippets, sourced directly from the local
+    # zinit cache (no network, ~0.05s). Skipped when full zinit plugin mode
+    # is on, since zinit loads them there instead. fzf-tab must load after
+    # compinit (above) and before syntax-highlighting (below).
+    if [[ -z "${ZSH_PLUGINS_ENABLED:-}" ]]; then
+        _fzf_tab="$_zsh_plugin_root/Aloxaf---fzf-tab/fzf-tab.plugin.zsh"
+        [[ -r "$_fzf_tab" ]] && source "$_fzf_tab"
+        _auto_notify="$_zsh_plugin_root/MichaelAquilina---zsh-auto-notify/auto-notify.plugin.zsh"
+        [[ -r "$_auto_notify" ]] && source "$_auto_notify"
+        _zsh_snippet_root="$XDG_DATA_HOME/zinit/snippets"
+        for _snip in sudo copyfile copypath command-not-found; do
+            _snip_file="$_zsh_snippet_root/OMZP::$_snip/OMZP::$_snip"
+            [[ -r "$_snip_file" ]] && source "$_snip_file"
+        done
+        unset _snip _snip_file _zsh_snippet_root
+    fi
+    _autosuggest="/opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+    [[ -r "$_autosuggest" ]] || _autosuggest="$_zsh_plugin_root/zsh-users---zsh-autosuggestions/zsh-autosuggestions.zsh"
+    [[ -r "$_autosuggest" ]] && source "$_autosuggest"
+    _history_search="/opt/homebrew/share/zsh-history-substring-search/zsh-history-substring-search.zsh"
+    [[ -r "$_history_search" ]] || _history_search="$_zsh_plugin_root/zsh-users---zsh-history-substring-search/zsh-history-substring-search.zsh"
+    [[ -r "$_history_search" ]] && {
+        source "$_history_search"
+        bindkey '^[[A' history-substring-search-up
+        bindkey '^[[B' history-substring-search-down
+    }
+    # Syntax highlighting must load after other widgets.
+    _syntax_highlight="/opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+    [[ -r "$_syntax_highlight" ]] || _syntax_highlight="$_zsh_plugin_root/zsh-users---zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+    [[ -r "$_syntax_highlight" ]] && source "$_syntax_highlight"
+    unset _zsh_plugin_root _autosuggest _history_search _syntax_highlight _fzf_tab _auto_notify
+fi
+
+# opencode
+export PATH=/Users/paranjay/.opencode/bin:$PATH
+
+# cmdpal — raycast-style fuzzy command palette (cmd)
+[[ -r "$HOME/Developer/cmdpal/cmdpal.zsh" ]] && source "$HOME/Developer/cmdpal/cmdpal.zsh"
+
+# >>> grok installer >>>
+export PATH="$HOME/.grok/bin:$PATH"
+fpath=(~/.grok/completions/zsh $fpath)
+autoload -Uz compinit && compinit -C
+# <<< grok installer <<<
+
+# Added by cua-driver-rs installer — see https://github.com/trycua/cua
+export PATH="/Users/paranjay/.local/bin:$PATH"
