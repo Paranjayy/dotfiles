@@ -163,6 +163,14 @@ zstyle ':completion::complete:*' gain-privileges 1       # Privilege completion
 # FZF tab completion styling
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza --color=always --icons $realpath 2>/dev/null || command ls -G $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza --color=always --icons $realpath 2>/dev/null || command ls -G $realpath'
+# Process preview for kill completion
+zstyle ':fzf-tab:complete:kill:argument-rest' fzf-preview 'ps -p $word -o pid,etime,args 2>/dev/null'
+zstyle ':fzf-tab:complete:kill:*' fzf-flags '--preview-window=down:3:wrap'
+# Branch log preview for checkout/switch
+zstyle ':fzf-tab:complete:git-checkout:*' fzf-preview 'git log --oneline --graph --color=always -20 $word 2>/dev/null'
+zstyle ':fzf-tab:complete:git-switch:*' fzf-preview 'git log --oneline --graph --color=always -20 $word 2>/dev/null'
+# tldr page preview (only when tldr is installed)
+(( $+commands[tldr] )) && zstyle ':fzf-tab:complete:tldr:argument-1' fzf-preview 'tldr --color always $word 2>/dev/null'
 
 # Enable approximate completion
 zstyle ':completion:*' completer _complete _match _approximate
@@ -316,6 +324,10 @@ if command_exists fzf; then
         export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
         export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
     fi
+
+    # File/dir picker previews (bat → eza → ls fallback chain)
+    export FZF_CTRL_T_OPTS="--preview 'bat --color=always --style=numbers --line-range=:100 {} 2>/dev/null || eza --color=always --icons -la {} 2>/dev/null || command ls -G {}'"
+    export FZF_ALT_C_OPTS="--preview 'eza --color=always --icons {} 2>/dev/null || command ls -G {}'"
 fi
 
 # Zoxide smart directory jumper (check if installed)
@@ -500,6 +512,7 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias ~='cd ~'
+alias d='dirs -v'  # show AUTO_PUSHD stack; jump back with cd -<n>
 
 # Fast interactive navigation.  `fcd` searches directories with fd + fzf and
 # enters the one you choose; `z` is supplied by zoxide when it is installed.
