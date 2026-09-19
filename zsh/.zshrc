@@ -330,19 +330,9 @@ if command_exists fzf; then
     export FZF_ALT_C_OPTS="--preview 'eza --color=always --icons {} 2>/dev/null || command ls -G {}'"
 fi
 
-# TV launcher: one-shortcut Raycast-style palette (Ctrl-Space).
-# Deliberately NOT using `tv init zsh` — its Ctrl-T/Ctrl-R would clobber
-# the fzf bindings above. One key to learn, same on mac/Linux/Windows.
-if command_exists tv; then
-    tv-palette() {
-        local sel
-        sel=$(tv 2>/dev/null) || return
-        [[ -n "$sel" ]] && LBUFFER+="$sel"
-    }
-    zle -N tv-palette
-    bindkey '^ ' tv-palette   # Ctrl-Space (may be swallowed by macOS, see below)
-    bindkey '^_' tv-palette   # Ctrl-/ fallback — same palette, guaranteed delivery
-fi
+# BEAM: guided action palette (Ctrl-Space / Ctrl-/). Source of truth in
+# ~/Developer/beam. tv stays available as a command for data search.
+[[ -r "$HOME/Developer/beam/beam.zsh" ]] && source "$HOME/Developer/beam/beam.zsh"
 
 # Zoxide smart directory jumper (check if installed)
 if command_exists zoxide; then
@@ -549,6 +539,7 @@ shell-help() {
     print '  z <name>            jump to a frecent directory (zoxide)'
     print '  Ctrl-R              fuzzy command-history search'
     print '  Tab                 fuzzy completion picker (fzf-tab)'
+    print '  Ctrl-Space          guided action palette (beam)'
     print '  glass on|off        toggle Ghostty Tokyo Night glass theme'
     print '  tmux / tms          start or attach the main workspace'
     print '  Ctrl-b v            open dashboard in tmux'
