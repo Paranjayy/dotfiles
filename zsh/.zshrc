@@ -330,6 +330,19 @@ if command_exists fzf; then
     export FZF_ALT_C_OPTS="--preview 'eza --color=always --icons {} 2>/dev/null || command ls -G {}'"
 fi
 
+# TV launcher: one-shortcut Raycast-style palette (Ctrl-Space).
+# Deliberately NOT using `tv init zsh` — its Ctrl-T/Ctrl-R would clobber
+# the fzf bindings above. One key to learn, same on mac/Linux/Windows.
+if command_exists tv; then
+    tv-palette() {
+        local sel
+        sel=$(tv 2>/dev/null) || return
+        [[ -n "$sel" ]] && LBUFFER+="$sel"
+    }
+    zle -N tv-palette
+    bindkey '^ ' tv-palette
+fi
+
 # Zoxide smart directory jumper (check if installed)
 if command_exists zoxide; then
     eval "$(zoxide init --cmd cd zsh)"
