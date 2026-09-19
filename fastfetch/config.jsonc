@@ -16,6 +16,31 @@
         "os",
         "kernel",
         "uptime",
+        {
+            "type": "command",
+            "key": "Booted",
+            "text": "date -r \"$(sysctl -n kern.boottime | awk '{print $4}' | tr -d ',')\" '+%a %b %d, %I:%M %p'"
+        },
+        {
+            "type": "command",
+            "key": "Prev Boot",
+            "text": "out=$(last reboot 2>/dev/null | sed -n 's/^reboot *time *//p' | sed -n '2p'); [ -n \"$out\" ] && echo \"$out\" || echo Unknown"
+        },
+        {
+            "type": "command",
+            "key": "Installed",
+            "text": "birth_time=$(stat -f %B /); current_time=$(date +%s); echo \"$(date -r $birth_time '+%b %d %Y') ($(( (current_time - birth_time) / 86400 )) days)\""
+        },
+        {
+            "type": "command",
+            "key": "Updated",
+            "text": "plutil -p /Library/Receipts/InstallHistory.plist 2>/dev/null | awk '/\"date\" =>/ {d=$3} /\"displayName\" => \"macOS/ {v=$4; gsub(/\"/, \"\", v); last=\"macOS \"v\" (\"d\")\"} END {print last}'"
+        },
+        {
+            "type": "command",
+            "key": "First Setup",
+            "text": "stat -f '%SB' /var/db/.AppleSetupDone 2>/dev/null || echo Unknown"
+        },
         "packages",
         "shell",
         "terminal",

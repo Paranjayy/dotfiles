@@ -65,7 +65,7 @@
             "type": "command",
             "key": "Now Playing",
             "keyColor": "blue",
-            "text": "osascript -e 'set musicState to \"None\"' -e 'if application \"Music\" is running then tell application \"Music\" to set musicState to \"🎵 \" & name of current track & \" - \" & artist of current track' -e 'if application \"Spotify\" is running then tell application \"Spotify\" to set musicState to \"🎵 \" & name of current track & \" - \" & artist of current track' -e 'get musicState'"
+            "text": "/Users/paranjay/.config/fastfetch/now_playing.sh"
         },
         "separator",
         {
@@ -110,12 +110,36 @@
             "type": "command",
             "key": "OS Age",
             "keyColor": "blue",
-            "text": "birth_time=$(stat -f %B /); current_time=$(date +%s); echo \"$(( (current_time - birth_time) / 86400 )) days\""
+            "text": "birth_time=$(stat -f %B /); current_time=$(date +%s); echo \"$(date -r $birth_time '+%b %d %Y') ($(( (current_time - birth_time) / 86400 )) days)\""
         },
         {
             "type": "uptime",
             "key": "Uptime",
             "keyColor": "blue"
+        },
+        {
+            "type": "command",
+            "key": "Booted",
+            "keyColor": "blue",
+            "text": "date -r \"$(sysctl -n kern.boottime | awk '{print $4}' | tr -d ',')\" '+%a %b %d, %I:%M %p'"
+        },
+        {
+            "type": "command",
+            "key": "Prev Boot",
+            "keyColor": "blue",
+            "text": "out=$(last reboot 2>/dev/null | sed -n 's/^reboot *time *//p' | sed -n '2p'); [ -n \"$out\" ] && echo \"$out\" || echo Unknown"
+        },
+        {
+            "type": "command",
+            "key": "First Setup",
+            "keyColor": "blue",
+            "text": "stat -f '%SB' /var/db/.AppleSetupDone 2>/dev/null || echo Unknown"
+        },
+        {
+            "type": "command",
+            "key": "Updated",
+            "keyColor": "blue",
+            "text": "plutil -p /Library/Receipts/InstallHistory.plist 2>/dev/null | awk '/\"date\" =>/ {d=$3} /\"displayName\" => \"macOS/ {v=$4; gsub(/\"/, \"\", v); last=\"macOS \"v\" (\"d\")\"} END {print last}'"
         },
         {
             "type": "command",
