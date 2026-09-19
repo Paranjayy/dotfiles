@@ -340,7 +340,8 @@ if command_exists tv; then
         [[ -n "$sel" ]] && LBUFFER+="$sel"
     }
     zle -N tv-palette
-    bindkey '^ ' tv-palette
+    bindkey '^ ' tv-palette   # Ctrl-Space (may be swallowed by macOS, see below)
+    bindkey '^_' tv-palette   # Ctrl-/ fallback — same palette, guaranteed delivery
 fi
 
 # Zoxide smart directory jumper (check if installed)
