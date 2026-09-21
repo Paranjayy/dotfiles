@@ -1,0 +1,49 @@
+{
+  "title": "[FALLBACK - OFF by default] CapsLock Guard (tap=nothing, hold=Hyper, Shift+Caps=real Caps)",
+  "rules": [
+    {
+      "description": "[FALLBACK OFF] CapsLock -> Hyper guard. Tap alone = nothing (no more mispress). Hold + key = Hyper (shift+ctrl+opt+cmd). Shift+Caps = real CapsLock for rare ALL-CAPS use. ENABLE ONLY if you turn OFF Raycast Hyper Key.",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "caps_lock",
+            "modifiers": {
+              "optional": ["any"]
+            }
+          },
+          "to_if_alone": [
+            {
+              "key_code": "vk_none"
+            }
+          ],
+          "to": [
+            {
+              "key_code": "left_shift",
+              "modifiers": ["left_command", "left_control", "left_option"]
+            }
+          ],
+          "parameters": {
+            "basic.to_if_alone_timeout_milliseconds": 200
+          }
+        },
+        {
+          "type": "basic",
+          "description": "Shift+Caps -> real CapsLock (rare use escape hatch)",
+          "from": {
+            "key_code": "caps_lock",
+            "modifiers": {
+              "mandatory": ["left_shift"],
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "caps_lock"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
