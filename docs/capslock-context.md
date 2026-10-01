@@ -1,5 +1,10 @@
 # CapsLock / Hyper Key / Menubar Context — handoff for future agents
 
+> Historical September 21 notes. For the current keyboard setup and October 1
+> recovery, read [keyboard-etiquette.md](keyboard-etiquette.md) first. Caps Lock
+> mappings below are historical observations; F18 alone does not identify Raycast.
+> Formatting was discussed, not established as necessary or completed.
+
 Date: 2026-09-21. Owner formats Mac soon, then re-checks if LED bug is patched.
 Read this first so the user doesn't have to re-explain.
 

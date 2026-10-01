@@ -3,6 +3,17 @@
 Applies to human and AI maintainers. Goal: fast shell, reproducible setup,
 nothing lost, nothing leaked.
 
+## Keyboard and window-manager etiquette
+
+Read [docs/keyboard-etiquette.md](docs/keyboard-etiquette.md) before changing,
+restoring, deploying, or switching branches that affect Karabiner, OmniWM,
+Raycast, keyboard defaults, or their setup scripts. These files are live on
+this Mac. Preserve the documented modifier distinctions and give Caps Lock
+exactly one Hyper owner. An audio-config backup is not authorization to change
+keyboard or window-manager settings. Back up first, inspect scoped diffs, and
+verify normal typing and shortcuts as well as the custom layers. Do not reset
+the user's setup or restart OmniWM merely to perform an unrelated backup.
+
 ## Source-of-truth map
 
 | Live file | Tracked copy | Sync |

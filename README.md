@@ -2,6 +2,9 @@
 
 My complete system configuration across Arch Linux, Hyprland, Niri, KDE, macOS, and Windows.
 
+Before changing the Mac keyboard or window-manager setup, read
+[Keyboard and OmniWM etiquette](docs/keyboard-etiquette.md).
+
 ## Quick Install
 
 **Arch Linux:**
