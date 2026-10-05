@@ -11,7 +11,7 @@
                                     "key_code": "right_option",
                                     "modifiers": { "optional": ["any"] }
                                 },
-                                "parameters": { "basic.to_if_alone_timeout_milliseconds": 200 },
+                                "parameters": { "basic.to_if_alone_timeout_milliseconds": 300 },
                                 "to": [
                                     {
                                         "set_variable": {
@@ -19,7 +19,6 @@
                                             "value": 1
                                         }
                                     },
-                                    { "shell_command": "/Users/paranjay/.config/omniwm/bar_manager.sh --hold" },
                                     { "key_code": "vk_none" }
                                 ],
                                 "to_after_key_up": [
@@ -28,8 +27,7 @@
                                             "name": "right_opt_layer",
                                             "value": 0
                                         }
-                                    },
-                                    { "shell_command": "/Users/paranjay/.config/omniwm/bar_manager.sh --release" }
+                                    }
                                 ],
                                 "to_if_alone": [{ "key_code": "right_option" }],
                                 "type": "basic"
@@ -39,7 +37,7 @@
                                     "key_code": "right_command",
                                     "modifiers": { "optional": ["any"] }
                                 },
-                                "parameters": { "basic.to_if_alone_timeout_milliseconds": 200 },
+                                "parameters": { "basic.to_if_alone_timeout_milliseconds": 300 },
                                 "to": [
                                     {
                                         "set_variable": {
@@ -47,7 +45,6 @@
                                             "value": 1
                                         }
                                     },
-                                    { "shell_command": "/Users/paranjay/.config/omniwm/bar_manager.sh --hold" },
                                     { "key_code": "vk_none" }
                                 ],
                                 "to_after_key_up": [
@@ -56,8 +53,7 @@
                                             "name": "rcmd_layer",
                                             "value": 0
                                         }
-                                    },
-                                    { "shell_command": "/Users/paranjay/.config/omniwm/bar_manager.sh --release" }
+                                    }
                                 ],
                                 "to_if_alone": [{ "key_code": "right_command" }],
                                 "type": "basic"
@@ -1902,6 +1898,39 @@
                                             "value": 0
                                         }
                                     }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "[Safety] Escape resets stuck layers",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "escape",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "name": "right_opt_layer",
+                                            "value": 0
+                                        }
+                                    },
+                                    {
+                                        "set_variable": {
+                                            "name": "rcmd_layer",
+                                            "value": 0
+                                        }
+                                    },
+                                    {
+                                        "set_variable": {
+                                            "name": "launcher_mode",
+                                            "value": 0
+                                        }
+                                    },
+                                    { "key_code": "escape" }
                                 ],
                                 "type": "basic"
                             }
