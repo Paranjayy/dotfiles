@@ -13,6 +13,14 @@
                                 },
                                 "to": [{ "key_code": "vk_none" }],
                                 "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "right_shift",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "vk_none" }],
+                                "type": "basic"
                             }
                         ]
                     },
