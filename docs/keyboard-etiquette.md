@@ -123,3 +123,15 @@ Recovery references on this Mac:
 
 These notes guide future work; they do not automatically enforce settings or
 prevent apps from rewriting them.
+
+
+## October 5 workspace bar timer restoration
+
+The user's Right Command/Right Option bar behavior stopped because commit
+73942dc removed bar_manager.sh --hold and --release from both layer triggers.
+Restored only those four shell calls in the selected OmniWM Master Profile.
+Preserved Right Shift disabling, Escape layer reset, all layer bindings, and
+300ms tap timeout. Karabiner logged a live reload at 20:12:11 without restarting
+OmniWM. Direct helper verification passed: hold showed the bar; release kept it
+visible after 1s and hid it at 5.19s. Physical trigger testing remains for the user.
+Pre-change backup: ~/Library/Application Support/Keyboard-Recovery/20261005-201211-bar-timer/karabiner.json.

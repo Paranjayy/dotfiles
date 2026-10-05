@@ -32,6 +32,7 @@
                                             "value": 1
                                         }
                                     },
+                                    { "shell_command": "/Users/paranjay/.config/omniwm/bar_manager.sh --hold" },
                                     { "key_code": "vk_none" }
                                 ],
                                 "to_after_key_up": [
@@ -40,7 +41,8 @@
                                             "name": "right_opt_layer",
                                             "value": 0
                                         }
-                                    }
+                                    },
+                                    { "shell_command": "/Users/paranjay/.config/omniwm/bar_manager.sh --release" }
                                 ],
                                 "to_if_alone": [{ "key_code": "right_option" }],
                                 "type": "basic"
@@ -58,6 +60,7 @@
                                             "value": 1
                                         }
                                     },
+                                    { "shell_command": "/Users/paranjay/.config/omniwm/bar_manager.sh --hold" },
                                     { "key_code": "vk_none" }
                                 ],
                                 "to_after_key_up": [
@@ -66,7 +69,8 @@
                                             "name": "rcmd_layer",
                                             "value": 0
                                         }
-                                    }
+                                    },
+                                    { "shell_command": "/Users/paranjay/.config/omniwm/bar_manager.sh --release" }
                                 ],
                                 "to_if_alone": [{ "key_code": "right_command" }],
                                 "type": "basic"
