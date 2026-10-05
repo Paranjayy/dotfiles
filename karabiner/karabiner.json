@@ -4,27 +4,6 @@
             "complex_modifications": {
                 "rules": [
                     {
-                        "description": "[Emergency] Left Shift OFF (flaky key, use Right Shift)",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "left_shift",
-                                    "modifiers": { "optional": ["any"] }
-                                },
-                                "to": [{ "key_code": "vk_none" }],
-                                "type": "basic"
-                            },
-                            {
-                                "from": {
-                                    "key_code": "right_shift",
-                                    "modifiers": { "optional": ["any"] }
-                                },
-                                "to": [{ "key_code": "vk_none" }],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
                         "description": "[Trigger] Right Option & Right Command (Smart Bar Toggle: Hold to Show, Release to Hide)",
                         "manipulators": [
                             {
